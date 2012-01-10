@@ -2,7 +2,7 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 
 .row { clear:both; overflow:hidden; width:auto; }
 .col { float:left; width:49.8%; }
-.edged { border:1px solid #b5b5b5; }
+.edged { border:1px dotted #b5b5b5; }
 .edged.col { border-width:0 1px 0 0; }
 .pane { padding:15px; }
 
@@ -11,12 +11,14 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 #header { font-style:italic; text-align:center; }
 
 .carousel { clear:both; margin:0; overflow:hidden; position:relative; }
-.obj { background:#83878a; border:1px solid #b5b5b5; display:block; float:left; list-style-type:none; }
+.obj { border:1px solid #b5b5b5; display:block; float:left; list-style-type:none; position:relative; }
 .obj.active { background:none; }
 #img>.obj { margin-right:30px; }
 #txt>.obj { margin-right:20px; width:540px; }
 #txt>.obj.home { background:#9a283f; color:#fff; }
 .case { display:table-cell; height:126px; text-align:center; vertical-align:middle; width:126px; }
 .case>img { max-height:126px; max-width:126px; }
+.mask { background:#333340; height:100%; opacity:0.5; position:absolute; left:0; top:0; width:100%; }
+.active .mask { display:none; }
 
 
