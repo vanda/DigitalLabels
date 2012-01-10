@@ -11,11 +11,12 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 #header { font-style:italic; text-align:center; }
 
 .carousel { clear:both; margin:0; overflow:hidden; position:relative; }
-.carousel>li { background:#83878a; border:1px solid #b5b5b5; display:block; float:left; list-style-type:none; }
-.carousel>li.active { background:none; }
-.carousel>li.home { background:#9a283f; color:#fff; }
-#img>li { height:126px; margin-right:30px; text-align:center; vertical-align:middle; width:126px; }
-#img>li>img { max-height:126px; max-width:126px; vertical-align:middle; }
-#txt>li { margin-right:20px; width:540px; }
+.obj { background:#83878a; border:1px solid #b5b5b5; display:block; float:left; list-style-type:none; }
+.obj.active { background:none; }
+#img>.obj { margin-right:30px; }
+#txt>.obj { margin-right:20px; width:540px; }
+#txt>.obj.home { background:#9a283f; color:#fff; }
+.case { display:table-cell; height:126px; text-align:center; vertical-align:middle; width:126px; }
+.case>img { max-height:126px; max-width:126px; }
 
 
