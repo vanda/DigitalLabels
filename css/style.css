@@ -14,15 +14,16 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 .obj { border:1px solid #b5b5b5; display:block; float:left; list-style-type:none; margin-right:30px; position:relative; }
 .obj.active { background:none; }
 .label { margin-right:20px; padding:15px 20px; width:540px; }
-.label.home { background:#9a283f; color:#fff; }
 .case { display:table-cell; height:126px; text-align:center; vertical-align:middle; width:126px; }
 .case>img { max-height:126px; max-width:126px; }
 .mask { background:#292728; height:100%; opacity:0.5; left:0; position:absolute; top:0; width:100%; z-index:1; }
 .active .mask { display:none; }
-.title { border:solid #b5b5b5; border-width:0 0 1px; margin:0 0 15px; }
+.title { border-bottom:1px solid #b5b5b5; margin:0 0 15px; }
 .data { font-size:0.8em; position:absolute; bottom:0; }
 .data>.pane { padding:0 40px 0 0; }
 .prev, .next { background:transparent url(img/arrow.png) no-repeat -18px 50%; display:none; height:100%; position:absolute; top:0; width:18px; }
 .active>.prev, .active>.next { display:block; }
 .prev { background-position:0 50%; left:-18px; }
 .next { right:-18px; }
+.label.home { background:#9a283f; color:#fff; }
+.label.home .edged.col, .label.home .title { border-color:#fff; }
