@@ -16,8 +16,12 @@ jQuery(document).ready(function() {
         };
     });
     
-    $('#txt').each(function(){
-        
+    $('#txt').find('li').not(':first-child').each(function(){
+        $(this).append($('<div class="prev"></div>').click(function(){ $('#img, #txt').each(function(){ this.nudge(-1); }); return false; }));
+    });
+    
+    $('#txt').find('li').not(':last-child').each(function(){
+        $(this).append($('<div class="next"></div>').click(function(){ $('#img, #txt').each(function(){ this.nudge(1); }); return false; }));
     });
     
     $('#img, #txt').find('li').each(function(){
@@ -28,7 +32,7 @@ jQuery(document).ready(function() {
     });
     
     $('#img li.home').click();
-    $('#img, #txt').each(function(){ this.nudge(-1); });
+    
     
 }); //end doc.ready
 
