@@ -7,16 +7,21 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 .edged.col { border-right:1px solid #b5b5b5; }
 .edged.col>.pane { padding:0 7px 0 0; }
 
-.hi { background-color:#9a283f; color:#fff; }
-
-#header { font-style:italic; text-align:center; }
+#header { background-color:#9a283f; color:#fff; font-style:italic; line-height:1.9em; text-align:center; }
 
 .carousel { clear:both; margin:0; overflow:hidden; position:relative; }
-.obj { border:1px solid #b5b5b5; display:block; float:left; list-style-type:none; margin-right:30px; position:relative; }
-.obj.active { background:none; }
-.case { display:table-cell; height:126px; text-align:center; vertical-align:middle; width:126px; }
+#txt { position:absolute; bottom:0; }
+.obj { border:1px solid #b5b5b5; display:inline-block; list-style-type:none; margin-right:30px; position:relative; }
+.img { bottom:51px; }
+.case { display:table-cell; height:126px; text-align:center; vertical-align:middle; width:126px; position:relative; }
 .case>img { max-height:126px; max-width:126px; }
-.label { margin-right:20px; padding:15px 20px; width:540px; }
+.thumbs { border-top:1px solid #b5b5b5; display:none; padding:10px 0 10px 11px; overflow:hidden; text-align:left; }
+.thumbs>img { display:inline-block; height:30px; margin:0 11px 0 0; width:30px; }
+.active.img { bottom:0; }
+.active>.case { height:278px; vertical-align:bottom; width:222px; }
+.active>.case>img { max-height:222px; max-width:222px; }
+.active>.case>.thumbs { display:block; }
+.txt { margin-right:20px; padding:15px 20px; width:540px; }
 .title { border-bottom:1px solid #b5b5b5; margin:0 0 15px; }
 .data { font-size:0.8em; position:absolute; bottom:0; }
 .data>.pane { padding:0 40px 0 0; }
@@ -26,5 +31,5 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 .next { right:-18px; }
 .mask { background:#292728; height:100%; opacity:0.5; left:0; position:absolute; top:0; width:100%; z-index:1; }
 .active .mask { display:none; }
-.label.home { background:#9a283f; color:#fff; }
-.label.home .edged.col, .label.home .title { border-color:#fff; }
+.txt.home { background:#9a283f; color:#fff; }
+.txt.home .edged.col, .txt.home .title { border-color:#fff; }

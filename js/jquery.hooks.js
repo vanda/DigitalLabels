@@ -2,13 +2,15 @@ jQuery(document).ready(function() {
     
     
     $('#img, #txt').each(function(){
-        var w = $(this).find('li').outerWidth() + parseFloat($(this).find('li').css('margin-right'));
-        $(this).width(w*($(this).find('li:last-child').index()+1));
+        var wM = parseFloat($(this).find('li').css('margin-right')),
+            w = $(this).find('li').outerWidth() + wM,
+            wA = $(this).find('li.active').outerWidth() + wM;
+        $(this).width(w*($(this).find('li:last-child').index()+2));
         this.hit = function(i){
             var t = 1024;
-            $(this).animate({'left':$('body').width()/2-((i+0.5)*w)}, t);
             $(this).find('li').removeClass('active');
             $(this).find('li:nth-child('+(i+1)+')').addClass('active');
+            $(this).animate({'left':$('body').width()/2-((i*w)+(0.5*wA))}, t);
         };
         this.nudge = function(n){
             var i = $(this).find('.active').index() + n;
