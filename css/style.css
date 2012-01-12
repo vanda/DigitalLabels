@@ -2,9 +2,10 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 
 .row { display:table-row; margin:0 0 15px; }
 .col { display:table-cell; width:49.8%; }
-.pane { padding:0 0 0 20px; position:relative; }
+.row>.col { height:307px; }
+.pane { padding:0 0 0 7px; }
 .edged.col { border-right:1px solid #b5b5b5; }
-.edged.col>.pane { padding:0 20px 0 0; }
+.edged.col>.pane { padding:0 7px 0 0; }
 
 .hi { background-color:#9a283f; color:#fff; }
 
