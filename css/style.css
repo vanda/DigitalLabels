@@ -2,7 +2,7 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 
 .row { display:table-row; margin:0 0 15px; }
 .col { display:table-cell; width:49.8%; }
-.row>.col { height:307px; }
+.row>.col { height:356px; }
 .pane { padding:0 0 0 7px; }
 .edged.col { border-right:1px solid #b5b5b5; }
 .edged.col>.pane { padding:0 7px 0 0; }
@@ -21,7 +21,7 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 .active>.case { height:278px; vertical-align:bottom; width:222px; }
 .active>.case>img { max-height:222px; max-width:222px; }
 .active>.case>.thumbs { display:block; }
-.txt { margin-right:20px; padding:15px 20px; width:540px; }
+.txt { margin:0 20px 0 0; padding:15px 20px; width:540px; }
 .title { border-bottom:1px solid #b5b5b5; margin:0 0 15px; }
 .data { font-size:0.8em; position:absolute; bottom:0; }
 .data>.pane { padding:0 40px 0 0; }
