@@ -31,7 +31,8 @@ jQuery(document).ready(function() {
     });
     
     $('#txt').on('click', '.active', function(){
-        $('#txtpop').html($(this).html()).css({'left':($(window).width()-$('#txtpop').width())/2}).show().mouseTrap({'mask':1});
+        $('#txtpop').removeClass('home').html($(this).html()).css({'left':($(window).width()-$('#txtpop').width())/2}).show().mouseTrap({'mask':1});
+        if( $(this).hasClass('home') ) $('#txtpop').addClass('home');
     });
     
     $('#img li.home').trigger('click');

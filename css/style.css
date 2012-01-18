@@ -1,5 +1,3 @@
-body { font:15.5px/1.35 "V&A TheSansPlain", arial,helvetica,freesans,sans-serif; overflow:hidden; }
-
 .row { display:table-row; margin:0 0 15px; }
 .col { display:table-cell; width:49.8%; }
 .row>.col { height:356px; }
@@ -22,6 +20,7 @@ body { font:15.5px/1.35 "V&A TheSansPlain", arial,helvetica,freesans,sans-serif;
 .active>.case>img { max-height:222px; max-width:222px; }
 .active>.case>.thumbs { display:block; }
 .txt { background:#fff; margin:0 20px 0 0; padding:15px 20px; width:540px; }
+.txt .col { padding-top:-0.25em; }
 .title { border-bottom:1px solid #b5b5b5; margin:0 0 15px; }
 .data { font-size:0.8em; position:absolute; bottom:0; }
 .data>.pane { padding:0 40px 0 0; }
@@ -35,7 +34,7 @@ body { font:15.5px/1.35 "V&A TheSansPlain", arial,helvetica,freesans,sans-serif;
 .txt.home .edged.col, .txt.home .title { border-color:#fff; }
 .pop { display:none; bottom:56px; position:absolute; z-index:1; }
 .pop>.mask { display:none; }
-#txtpop { font-size:160%; width:800px; }
+#txtpop { font-size:160%; padding:30px; width:800px; }
 #txtpop .row>.col { height:528px; }
 
 #mousetrap { height:100%; left:0; position:absolute; top:0; width:100%; z-index:1; }
