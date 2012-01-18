@@ -21,7 +21,7 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 .active>.case { height:278px; vertical-align:bottom; width:222px; }
 .active>.case>img { max-height:222px; max-width:222px; }
 .active>.case>.thumbs { display:block; }
-.txt { margin:0 20px 0 0; padding:15px 20px; width:540px; }
+.txt { background:#fff; margin:0 20px 0 0; padding:15px 20px; width:540px; }
 .title { border-bottom:1px solid #b5b5b5; margin:0 0 15px; }
 .data { font-size:0.8em; position:absolute; bottom:0; }
 .data>.pane { padding:0 40px 0 0; }
@@ -33,3 +33,10 @@ body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
 .active .mask { display:none; }
 .txt.home { background:#9a283f; color:#fff; }
 .txt.home .edged.col, .txt.home .title { border-color:#fff; }
+.pop { display:none; bottom:56px; position:absolute; z-index:1; }
+.pop>.mask { display:none; }
+#txtpop { font-size:160%; width:800px; }
+#txtpop .row>.col { height:528px; }
+
+#mousetrap { height:100%; left:0; position:absolute; top:0; width:100%; z-index:1; }
+#mousetrap.mask { background:#292728; opacity:0.7; }

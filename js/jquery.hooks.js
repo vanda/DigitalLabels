@@ -10,7 +10,7 @@ jQuery(document).ready(function() {
             var t = 1024;
             $(this).find('li').removeClass('active');
             $(this).find('li:nth-child('+(i+1)+')').addClass('active');
-            $(this).animate({'left':$('body').width()/2-((i*w)+(0.5*wA))}, t);
+            $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t);
         };
         this.nudge = function(n){
             var i = $(this).find('.active').index() + n;
@@ -21,36 +21,36 @@ jQuery(document).ready(function() {
     $('#txt').find('li').not(':first-child').each(function(){
         $(this).append($('<div class="prev"></div>').click(function(){ $('#img, #txt').each(function(){ this.nudge(-1); }); return false; }));
     });
-    
     $('#txt').find('li').not(':last-child').each(function(){
         $(this).append($('<div class="next"></div>').click(function(){ $('#img, #txt').each(function(){ this.nudge(1); }); return false; }));
     });
     
-    $('#img, #txt').find('li').each(function(){
-        $(this).click(function(){
-            var i = $(this).index();
-            $('#img, #txt').each(function(){ this.hit(i); });
-        });
+    $('#img, #txt').on('click', 'li', function(){
+        var i = $(this).index();
+        $('#img, #txt').each(function(){ this.hit(i); });
     });
     
-    $('#img li.home').click();
+    $('#txt').on('click', '.active', function(){
+        $('#txtpop').html($(this).html()).css({'left':($(window).width()-$('#txtpop').width())/2}).show().mouseTrap({'mask':1});
+    });
+    
+    $('#img li.home').trigger('click');
     
     
 }); //end doc.ready
 
 /* plugins + fns */
 
-/* Generic carini plugin for catching mouseclicks outside a JQ object */
+/* Generic carini plugin for catching mouseclicks outside a JQ el */
 (function($){
     $.fn.extend({
         mouseTrap: function(opt){
-            var def = { close:this, positionMe:1, mask:0 },
+            var def = { close:this, mask:0 },
                 opt = $.extend(def,opt);
             return this.each(function(){
                 var obj = $(this);
-                if( opt.positionMe ){ obj.css({'position':'relative'}); }
                 $('#mousetrap').remove();
-                obj.before($('<div id="mousetrap" class="'+(opt.mask?'mask':'')+'"/>').css({'height':$(window).height(),'width':$(window).width()}).click(function(){ $(opt.close).hide(); $('#mousetrap').remove(); }));
+                obj.before($('<div id="mousetrap" class="'+(opt.mask?'mask':'')+'"/>').click(function(){ $(opt.close).hide(); $('#mousetrap').remove(); }));
                 obj.click(function(){ if( $(opt.close).is(':hidden') ){ $('#mousetrap').remove(); } });
             });
         }
