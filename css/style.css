@@ -1,4 +1,4 @@
-body { font:15.5px/1.35 arial,helvetica,freesans,sans-serif; overflow:hidden; }
+body { font:15.5px/1.35 "V&A TheSansPlain", arial,helvetica,freesans,sans-serif; overflow:hidden; }
 
 .row { display:table-row; margin:0 0 15px; }
 .col { display:table-cell; width:49.8%; }
