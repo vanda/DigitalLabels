@@ -30,9 +30,14 @@ jQuery(document).ready(function() {
         $('#img, #txt').each(function(){ this.hit(i); });
     });
     
+    $('#img').on('click', '.active img', function(e){
+        $('#imgbig').attr('src',e.target.src.replace(/_.+\.(.+)$/,'\1'));
+        $('#imgpop').css({'left':($(window).width()-$('#imgpop').outerWidth())/2}).show().mouseTrap({'mask':1});
+    });
+    
     $('#txt').on('click', '.active', function(){
         $('#txtpop').removeClass('home').html($(this).html()).css({'left':($(window).width()-$('#txtpop').outerWidth())/2}).show().mouseTrap({'mask':1});
-        if( $(this).hasClass('home') ) $('#txtpop').addClass('home');
+        if( $(this).hasClass('home') ){ $('#txtpop').addClass('home'); }
     });
     
     $('#img li.home').trigger('click');

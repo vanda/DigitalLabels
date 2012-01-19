@@ -11,7 +11,7 @@
 #txt { position:absolute; bottom:0; }
 .obj { border:1px solid #b5b5b5; display:inline-block; list-style-type:none; margin-right:30px; position:relative; vertical-align:bottom; }
 .img { bottom:51px; }
-.case { display:table-cell; height:126px; text-align:center; vertical-align:middle; width:126px; position:relative; }
+.case { background:#fff url(img/spinner.gif) 50% 50% no-repeat; display:table-cell; height:126px; text-align:center; vertical-align:middle; width:126px; position:relative; }
 .case>img { max-height:126px; max-width:126px; }
 .thumbs { border-top:1px solid #b5b5b5; display:none; padding:10px 0 10px 11px; overflow:hidden; text-align:left; }
 .thumbs>img { display:inline-block; height:30px; margin:0 11px 0 0; width:30px; }
@@ -33,6 +33,8 @@
 .txt.home .edged.col, .txt.home .title { border-color:#fff; }
 .pop { display:none; bottom:56px; position:absolute; z-index:1; }
 .pop>.mask { display:none; }
+#imgbox { height:550px; width:590px; }
+#imgbig { max-height:525px; max-width:590px; }
 #txtpop { font-size:150%; padding:30px; width:800px; }
 #txtpop .row>.col { height:490px; }
 
