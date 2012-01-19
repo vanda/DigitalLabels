@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
         var wM = parseFloat($(this).find('li').css('margin-right')),
             w = $(this).find('li').outerWidth() + wM,
             wA = $(this).find('li.active').outerWidth() + wM;
-        $(this).width(w*($(this).find('li:last-child').index()+2));
+        $(this).width(w*($(this).find('li:last-child').index()+1)+wA);
         this.hit = function(i){
             var t = 1024;
             $(this).find('li').removeClass('active');
@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
     });
     
     $('#txt').on('click', '.active', function(){
-        $('#txtpop').removeClass('home').html($(this).html()).css({'left':($(window).width()-$('#txtpop').width())/2}).show().mouseTrap({'mask':1});
+        $('#txtpop').removeClass('home').html($(this).html()).css({'left':($(window).width()-$('#txtpop').outerWidth())/2}).show().mouseTrap({'mask':1});
         if( $(this).hasClass('home') ) $('#txtpop').addClass('home');
     });
     
