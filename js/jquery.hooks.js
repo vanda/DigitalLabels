@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
     });
     
     $('#img').on('click', '.active img', function(e){
-        $('#imgbig').attr('src',e.target.src.replace(/_.+\.(.+)$/,'\1'));
+        $('#imgbig').attr('src',e.target.src.replace(/_.+(\..+)$/,'$1'));
         $('#imgpop').css({'left':($(window).width()-$('#imgpop').outerWidth())/2}).show().mouseTrap({'mask':1});
     });
     
