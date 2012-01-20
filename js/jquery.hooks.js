@@ -42,6 +42,11 @@ jQuery(document).ready(function() {
         if( $(this).hasClass('home') ){ $('#txtpop').addClass('home'); }
     });
     
+    $('.pop').on('click', '.ctrl', function(){
+        $('.pop').hide();
+        $('#mousetrap').remove();
+    });
+    
     $('#img li.home').trigger('click');
     
     

@@ -23,8 +23,9 @@
 .active>.case>.thumbs { display:block; }
 .txt { background:#fff; margin:0 20px 0 0; padding:15px 20px; width:540px; }
 .title { border-bottom:1px solid #b5b5b5; margin:0 0 15px; }
-.data { font-size:0.8em; position:absolute; bottom:0; }
+.data, .ctrl { bottom:0; font-size:0.8em; position:absolute; }
 .data>.pane { padding:0 40px 0 0; }
+.ctrl { font-size:1em; margin:10px 15px; right:0; }
 .prev, .next { background:transparent url(img/arrow.png) no-repeat -18px 50%; display:none; height:100%; position:absolute; top:0; width:18px; }
 .active>.prev, .active>.next { display:block; }
 .prev { background-position:0 50%; left:-18px; }
