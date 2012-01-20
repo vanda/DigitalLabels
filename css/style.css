@@ -5,6 +5,8 @@
 .edged.col { border-right:1px solid #b5b5b5; }
 .edged.col>.pane { padding:0 7px 0 0; }
 
+.lfont { font-size:150%; }
+
 #header { background-color:#9a283f; color:#fff; font-style:italic; line-height:1.9em; text-align:center; }
 
 .carousel { clear:both; margin:0; position:relative; }
@@ -33,10 +35,11 @@
 .txt.home .edged.col, .txt.home .title { border-color:#fff; }
 .pop { display:none; bottom:56px; position:absolute; z-index:1; }
 .pop>.mask { display:none; }
-#imgbox { height:550px; width:590px; }
-#imgbig { max-height:525px; max-width:590px; }
-#txtpop { font-size:150%; padding:30px; width:800px; }
+#imgbox { height:545px; width:620px; }
+#imgbig { max-height:520px; max-width:620px; }
+#imgtxt { background:#6b6a6f; color:#fff; height:56px; padding:8px 15px 0; width:590px; }
+#txtpop { padding:30px; width:800px; }
 #txtpop .row>.col { height:490px; }
 
 #mousetrap { height:100%; left:0; position:absolute; top:0; width:100%; z-index:1; }
-#mousetrap.mask { background:#292728; opacity:0.7; }
+#mousetrap.mask { background:#292728; opacity:0.9; }
