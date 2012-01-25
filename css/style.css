@@ -11,7 +11,7 @@
 .carousel { clear:both; margin:0; position:relative; }
 #txt { position:absolute; bottom:0; }
 .obj { border:1px solid #b5b5b5; display:inline-block; list-style-type:none; margin-right:30px; position:relative; vertical-align:bottom; }
-.img { bottom:51px; }
+.img { bottom:53px; }
 .case { background:#fff url(img/spinner.gif) 50% 50% no-repeat; display:table-cell; height:126px; text-align:center; vertical-align:middle; width:126px; position:relative; }
 .case>img { max-height:126px; max-width:126px; }
 .thumbs { border-top:1px solid #b5b5b5; display:none; padding:10px 0 10px 10px; overflow:hidden; text-align:left; }
