@@ -42,7 +42,7 @@ jQuery(document).ready(function() {
         if( $(this).hasClass('home') ){ $('#txtpop').addClass('home'); }
     });
     
-    $('.pop').on('click', '.ctrl', function(){
+    $('.pop').on('click', function(){
         $('.pop').hide();
         $('#mousetrap').remove();
     });
