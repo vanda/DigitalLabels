@@ -40,9 +40,9 @@
 .active>.case>.ctrl, #imgbox>.ctrl { background:#fff url(img/zoomin.png) 50% 50% no-repeat; height:24px; margin:0; width:24px; }
 .ctrl>.lfont { margin:0 0 0 8px; text-decoration:underline; }
 #imgbox>.ctrl { background-image:url(img/zoomout.png); height:34px; width:34px; }
-#imgbox { border:0; line-height:545px; width:620px; }
-#imgbig { max-height:520px; max-width:620px; }
-#imgtxt { background:#6b6a6f; color:#fff; height:56px; padding:8px 15px 0; width:590px; }
+#imgbox { border:0; line-height:540px; width:540px; }
+#imgbig { max-height:540px; max-width:540px; }
+#imgtxt { background:#6b6a6f; color:#fff; height:56px; padding:8px 15px 0; width:510px; }
 #txtpop { padding:30px; width:800px; }
 #txtpop .txtl, #txtpop .txtr { height:490px; }
 #txtpop .ctrl>span { text-decoration:underline; }
