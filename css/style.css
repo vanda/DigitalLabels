@@ -35,14 +35,18 @@
 .txt.home .edged.col, .txt.home .title { border-color:#fff; }
 .pop { display:none; bottom:56px; position:absolute; z-index:1; }
 .pop>.mask { display:none; }
-.ctrl { font-size:1em; margin:10px 15px; right:0; }
+.ctrl { display:none; font-size:1em; margin:10px 15px; right:0; }
+.active .ctrl, .pop .ctrl { display:block; }
 .active>.case>.ctrl, #imgbox>.ctrl { background:#fff url(img/zoomin.png) 50% 50% no-repeat; height:24px; margin:0; width:24px; }
+.ctrl>.lfont { margin:0 0 0 8px; text-decoration:underline; }
 #imgbox>.ctrl { background-image:url(img/zoomout.png); height:34px; width:34px; }
 #imgbox { border:0; height:545px; width:620px; }
 #imgbig { max-height:520px; max-width:620px; }
 #imgtxt { background:#6b6a6f; color:#fff; height:56px; padding:8px 15px 0; width:590px; }
 #txtpop { padding:30px; width:800px; }
-#txtpop .row>.col { height:490px; }
+#txtpop .txtl, #txtpop .txtr { height:490px; }
+#txtpop .ctrl>span { text-decoration:underline; }
+#txtpop .ctrl>.lfont { text-decoration:none; }
 
 #mousetrap { height:100%; left:0; position:absolute; top:0; width:100%; z-index:1; }
 #mousetrap.mask { background:#292728; opacity:0.9; }
