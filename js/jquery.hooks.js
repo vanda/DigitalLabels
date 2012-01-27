@@ -2,9 +2,9 @@ jQuery(document).ready(function() {
     
     
     $('#img, #txt').each(function(){
-        var wM = parseFloat($(this).find('li').css('margin-right')),
-            w = $(this).find('li').outerWidth() + wM,
-            wA = $(this).find('li.active').outerWidth() + wM;
+        var s = parseFloat($(this).find('li').css('margin-left'))*2,
+            w = $(this).find('li').not('.active').outerWidth() + s,
+            wA = $(this).find('li.active').outerWidth() + s;
         $(this).width(w*($(this).find('li:last-child').index()+1)+wA);
         this.hit = function(i){
             var t = 1024;
@@ -30,7 +30,7 @@ jQuery(document).ready(function() {
         $('#img, #txt').each(function(){ this.hit(i); });
     });
     
-    $('#img').on('click', '.active', function(e){console.log(e.target);console.log(this);
+    $('#img').on('click', '.active', function(e){
         var pip = (e.target.tagName.toLowerCase()=='img')? e.target : $(this).find('img').get(0);
         $('#imgbig').attr('src',pip.src.replace(/_.+(\..+)$/,'$1'));
         $('#imgtxt').html(pip.title);
