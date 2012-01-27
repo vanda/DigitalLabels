@@ -33,7 +33,7 @@
 .active .mask { display:none; }
 .txt.home { background:#9a283f; color:#fff; }
 .txt.home .edged.col, .txt.home .title { border-color:#fff; }
-.pop { display:none; bottom:56px; position:absolute; z-index:1; }
+.pop { display:none; border:0; bottom:56px; position:absolute; z-index:1; }
 .pop>.mask { display:none; }
 .ctrl { display:none; font-size:1em; margin:10px 15px; right:0; }
 .active .ctrl, .pop .ctrl { display:block; }
