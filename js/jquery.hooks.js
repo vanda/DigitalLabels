@@ -30,8 +30,8 @@ jQuery(document).ready(function() {
         $('#img, #txt').each(function(){ this.hit(i); });
     });
     
-    $('#img').on('click', '.active img', function(e){
-        var pip = e.target;
+    $('#img').on('click', '.active', function(e){console.log(e.target);console.log(this);
+        var pip = (e.target.tagName.toLowerCase()=='img')? e.target : $(this).find('img').get(0);
         $('#imgbig').attr('src',pip.src.replace(/_.+(\..+)$/,'$1'));
         $('#imgtxt').html(pip.title);
         $('#imgpop').css({'left':($(window).width()-$('#imgpop').outerWidth())/2}).show().mouseTrap({'mask':1});

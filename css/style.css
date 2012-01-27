@@ -14,18 +14,17 @@
 .img { bottom:53px; }
 .case { background:#fff url(img/spinner.gif) 50% 50% no-repeat; display:table-cell; height:126px; text-align:center; vertical-align:middle; width:126px; position:relative; }
 .case>img { max-height:126px; max-width:126px; }
-.thumbs { border-top:1px solid #b5b5b5; display:none; padding:10px 0 10px 10px; overflow:hidden; text-align:left; }
+.thumbs { border:solid #b5b5b5; border-width:1px 0 0; display:none; padding:10px 0 10px 10px; text-align:left; }
 .thumbs>img { border:1px solid #b5b5b5; display:inline-block; height:30px; margin:0 10px 0 0; width:30px; }
 .active.img { bottom:0; }
-.active>.case { height:273px; vertical-align:bottom; width:222px; }
+.active>.case { height:222px; width:222px; }
 .active>.case>img { max-height:222px; max-width:222px; }
-.active>.case>.thumbs { display:block; }
-.txt { background:#fff; margin:0 20px 0 0; padding:15px 20px; width:540px; }
+.active>.thumbs { display:block; }
+.txt { background:#fff; border:1px solid #b5b5b5; margin:0 20px 0 0; padding:15px 20px; width:540px; }
 .title { border-bottom:1px solid #b5b5b5; margin:0 0 15px; }
 .txtl, .txtr { height:361px; }
 .data, .ctrl { bottom:0; font-size:0.8em; position:absolute; }
 .data>.pane { padding:0 40px 0 0; }
-.ctrl { font-size:1em; margin:10px 15px; right:0; }
 .prev, .next { background:transparent url(img/arrow.png) no-repeat -18px 50%; display:none; height:100%; position:absolute; top:0; width:18px; }
 .active>.prev, .active>.next { display:block; }
 .prev { background-position:0 50%; left:-18px; }
@@ -36,7 +35,10 @@
 .txt.home .edged.col, .txt.home .title { border-color:#fff; }
 .pop { display:none; bottom:56px; position:absolute; z-index:1; }
 .pop>.mask { display:none; }
-#imgbox { height:545px; width:620px; }
+.ctrl { font-size:1em; margin:10px 15px; right:0; }
+.active>.case>.ctrl, #imgbox>.ctrl { background:#fff url(img/zoomin.png) 50% 50% no-repeat; height:24px; margin:0; width:24px; }
+#imgbox>.ctrl { background-image:url(img/zoomout.png); height:34px; width:34px; }
+#imgbox { border:0; height:545px; width:620px; }
 #imgbig { max-height:520px; max-width:620px; }
 #imgtxt { background:#6b6a6f; color:#fff; height:56px; padding:8px 15px 0; width:590px; }
 #txtpop { padding:30px; width:800px; }
