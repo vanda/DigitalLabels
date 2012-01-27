@@ -2,9 +2,10 @@ jQuery(document).ready(function() {
     
     
     $('#img, #txt').each(function(){
-        var s = parseFloat($(this).find('li').css('margin-left'))*2,
-            w = $(this).find('li').not('.active').outerWidth() + s,
-            wA = $(this).find('li.active').outerWidth() + s;
+        var i = $(this).find('li').not('.active'),
+            w = i.outerWidth() + parseFloat(i.css('margin-left'))*2,
+            iA = $(this).find('li.active'),
+            wA = iA.outerWidth() + parseFloat(iA.css('margin-left'))*2;
         $(this).width(w*($(this).find('li:last-child').index()+1)+wA);
         this.hit = function(i){
             var t = 1024;
