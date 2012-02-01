@@ -42,9 +42,9 @@
 #imgbox>.ctrl { background-image:url(img/zoomout.png); height:34px; width:34px; }
 #imgbox { border:0; line-height:537px; width:542px; }
 #imgbig { max-height:540px; max-width:540px; }
-#imgtxt { background:#6b6a6f; color:#fff; display:table-cell; height:52px; padding:0 12px; vertical-align:middle; width:518px; }
+#imgtxt { background:#6b6a6f; color:#fff; display:table-cell; height:51px; padding:0 12px; vertical-align:middle; width:518px; }
 #txtpop { padding:12px 20px 20px; width:802px; }
-#txtpop .txtl, #txtpop .txtr { height:496px; }
+#txtpop .txtl, #txtpop .txtr { height:495px; }
 #txtpop .ctrl>span { text-decoration:underline; }
 #txtpop .ctrl>.lfont { text-decoration:none; }
 
