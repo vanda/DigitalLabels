@@ -17,7 +17,7 @@
 .thumbs { border:solid #b5b5b5; border-width:1px 0 0; display:none; padding:10px 0 10px 10px; text-align:left; }
 .thumbs>img { border:1px solid #b5b5b5; display:inline-block; height:30px; margin:0 10px 0 0; width:30px; }
 .active.img { border-top:0; margin:0 15px; top:0; }
-.active>.case { line-height:222px; width:222px; }
+.active>.case { line-height:219px; width:222px; }
 .active>.case>img { max-height:222px; max-width:222px; }
 .active>.thumbs { display:block; }
 .txt { background:#fff; border:1px solid #b5b5b5; padding:15px 20px; width:540px; }
@@ -40,7 +40,7 @@
 .active>.case>.ctrl, #imgbox>.ctrl { background:#fff url(img/zoomin.png) 50% 50% no-repeat; height:24px; margin:0; width:24px; }
 .ctrl>.lfont { margin:0 0 0 8px; text-decoration:underline; }
 #imgbox>.ctrl { background-image:url(img/zoomout.png); height:34px; width:34px; }
-#imgbox { border:0; line-height:540px; width:540px; }
+#imgbox { border:0; line-height:537px; width:540px; }
 #imgbig { max-height:540px; max-width:540px; }
 #imgtxt { background:#6b6a6f; color:#fff; height:56px; padding:8px 15px 0; width:510px; }
 #txtpop { padding:30px; width:800px; }
