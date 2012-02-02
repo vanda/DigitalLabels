@@ -17,7 +17,7 @@
 .thumbs { border:solid #b5b5b5; border-width:1px 0 0; display:none; padding:10px 0 10px 10px; text-align:left; }
 .thumbs>img { border:1px solid #b5b5b5; display:inline-block; height:30px; margin:0 10px 0 0; width:30px; }
 .active.img { border-top:0; margin:0 17px; top:0; }
-.selected.img { margin:0 64px; }
+/* .selected.img { margin:0 64px; } */
 .active>.case { line-height:219px; width:222px; }
 .active>.case>img { max-height:222px; max-width:222px; }
 .active>.thumbs { display:block; }
