@@ -21,8 +21,8 @@
 .active>.case { line-height:219px; width:222px; }
 .active>.case>img { max-height:222px; max-width:222px; }
 .active>.thumbs { display:block; }
-.txt { background:#fff; border:1px solid #b5b5b5; padding:8px 14px 14px; width:512px; }
-.title { border-bottom:1px solid #b5b5b5; margin:0 0 0.75em; }
+.txt { background:#fff; border:1px solid #b5b5b5; padding:10px 16px 16px; width:508px; }
+.title { border-bottom:1px solid #b5b5b5; margin:0 0 0.8em; }
 .txtl, .txtr { height:316px; }
 .data, .ctrl { bottom:0; font-size:0.8em; position:absolute; }
 .data>.pane { padding:0 40px 0 0; }
@@ -36,7 +36,7 @@
 .txt.home .edged.col, .txt.home .title { border-color:#fff; }
 .pop { display:none; border:0; bottom:58px; position:absolute; z-index:1; }
 .pop>.mask { display:none; }
-.ctrl { display:none; font-size:1em; margin:8px 14px; right:0; }
+.ctrl { display:none; font-size:1em; margin:10px 16px; right:0; }
 .active .ctrl, .pop .ctrl { display:block; }
 .active>.case>.ctrl, #imgbox>.ctrl { background:#fff url(img/zoomin.png) 50% 50% no-repeat; height:24px; margin:0; width:24px; }
 .ctrl>.lfont { margin:0 0 0 8px; text-decoration:underline; }
@@ -44,7 +44,7 @@
 #imgbox { border:0; line-height:537px; width:542px; }
 #imgbig { max-height:540px; max-width:540px; }
 #imgtxt { background:#6b6a6f; color:#fff; display:table-cell; height:51px; padding:0 12px; vertical-align:middle; width:518px; }
-#txtpop { padding:12px 20px 20px; width:802px; }
+#txtpop { padding:15px 24px 24px; width:794px; }
 #txtpop .txtl, #txtpop .txtr { height:495px; }
 #txtpop .ctrl>span { text-decoration:underline; }
 #txtpop .ctrl>.lfont { text-decoration:none; }
