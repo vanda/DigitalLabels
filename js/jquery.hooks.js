@@ -26,7 +26,7 @@ jQuery(document).ready(function() {
         $(this).append($('<div class="next"></div>').click(function(){ $('#img, #txt').each(function(){ this.nudge(1); }); return false; }));
     });
     
-    $('#img, #txt').on('click', 'li', function(){
+    $('#img, #txt').on('click', 'li:not(.active)', function(){
         var i = $(this).index();
         $('#img, #txt').each(function(){ this.hit(i); });
     });
@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
         $('#mousetrap').remove();
     });
     
-    $('#img li.home').trigger('click');
+    $('#img li.home').removeClass('active').trigger('click');
     
     
 }); //end doc.ready
