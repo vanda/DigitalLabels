@@ -45,7 +45,7 @@
 #imgbig { max-height:540px; max-width:540px; }
 #imgtxt { background:#6b6a6f; color:#fff; display:table-cell; height:51px; padding:0 12px; vertical-align:middle; width:518px; }
 #txtpop { padding:15px 24px 24px; width:794px; }
-#txtpop .txtl, #txtpop .txtr { height:495px; }
+#txtpop .txtl, #txtpop .txtr { height:487px; }
 #txtpop .ctrl>span { text-decoration:underline; }
 #txtpop .ctrl>.lfont { text-decoration:none; }
 
