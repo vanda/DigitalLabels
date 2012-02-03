@@ -34,7 +34,7 @@ jQuery(document).ready(function() {
     $('#img').on('click', '.active', function(e){
         var pip = (e.target.tagName.toLowerCase()=='img')? e.target : $(this).find('img').get(0);
         $('#imgbig').remove();
-        $('#imgbox').prepend('<img id="imgbig" src="'+ pip.src.replace(/_.+(\..+)$/,'$1') +'" alt=""/>');
+        $('#imgbox').prepend('<img id="imgbig" src="'+ pip.src.replace(/_[^_]+(\..+)$/,'_l$1') +'" alt=""/>');
         $('#imgtxt').html(pip.title);
         $('#imgpop').css({'left':($(window).width()-$('#imgpop').outerWidth())/2}).show().mouseTrap({'mask':1});
     });
