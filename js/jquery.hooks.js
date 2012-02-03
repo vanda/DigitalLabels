@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
             var t = 1024;
             $(this).find('li').removeClass('active');
             $(this).find('li:nth-child('+(i+1)+')').addClass('selected');
-            $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ $(this).find('li:nth-child('+(i+1)+')').removeClass('selected').addClass('active'); });
+            $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ $(this).find('li').removeClass('active'); $(this).find('li:nth-child('+(i+1)+')').removeClass('selected').addClass('active'); });
         };
         this.nudge = function(n){
             var i = $(this).find('.active').index() + n;
