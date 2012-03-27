@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
     
-    $(window).on('touchstart', function(e) {
+    $(window).on('touchmove', function(e) {
         e.preventDefault();
     });
     
