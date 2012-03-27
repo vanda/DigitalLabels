@@ -35,10 +35,16 @@ jQuery(document).ready(function() {
     }).find('li').each(function(c,li){
         $(this).touchwipe({ 
             wipeLeft:function(){ 
-                $('#img, #txt').each(function(){ if(!$(this).find('li').eq($(li).index()).is('.active')){ this.hit($(li).index()); } }); 
+                $('#img, #txt').each(function(){ 
+                    if( $(this).find('li').eq($(li).index()).is('.active') ){ if( $(li).index()<$(this).find('li').length-1 ) this.hit($(li).index()+1); }
+                    else{ this.hit($(li).index()); }
+                }); 
             },  
             wipeRight:function(){ 
-                $('#img, #txt').each(function(){ if(!$(this).find('li').eq($(li).index()).is('.active')){ this.hit($(li).index()); } }); 
+                $('#img, #txt').each(function(){ 
+                    if( $(this).find('li').eq($(li).index()).is('.active') ){ if( $(li).index()>0 ) this.hit($(li).index()-1); }
+                    else{ this.hit($(li).index()); }
+                }); 
             }, preventDefaultEvents:true 
         })
     });
