@@ -1,5 +1,8 @@
 jQuery(document).ready(function() {
     
+    $(window).on('touchstart', function(e) {
+        e.preventDefault();
+    });
     
     $('#img, #txt').each(function(){
         var i = $(this).find('li').not('.active'),
@@ -29,6 +32,15 @@ jQuery(document).ready(function() {
     $('#img, #txt').on('click', 'li:not(.active)', function(){
         var i = $(this).index();
         $('#img, #txt').each(function(){ this.hit(i); });
+    }).find('li').each(function(c,li){
+        $(this).touchwipe({ 
+            wipeLeft:function(){ 
+                $('#img, #txt').each(function(){ if(!$(this).find('li').eq($(li).index()).is('.active')){ this.hit($(li).index()); } }); 
+            },  
+            wipeRight:function(){ 
+                $('#img, #txt').each(function(){ if(!$(this).find('li').eq($(li).index()).is('.active')){ this.hit($(li).index()); } }); 
+            }, preventDefaultEvents:true 
+        })
     });
     
     $('#img').on('click', '.active', function(e){
