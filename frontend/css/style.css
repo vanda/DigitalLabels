@@ -17,7 +17,6 @@
 .thumbs { border:solid #b5b5b5; border-width:1px 0 0; display:none; overflow:hidden; padding:9px 0 9px 9px; text-align:left; }
 .thumbs>img { border:1px solid #b5b5b5; float:left; height:30px; margin:0 9px 0 0; width:30px; }
 .active.img { border-top:0; margin:0 17px; top:0; }
-/* .selected.img { margin:0 64px; } */
 .active>.case { line-height:219px; width:222px; }
 .active>.case>img { max-height:222px; max-width:222px; }
 .active>.thumbs { display:block; }
@@ -34,7 +33,7 @@
 .active .mask, .selected .mask { display:none; }
 .txt.home { background:#9a283f; color:#fff; }
 .txt.home .edged.col, .txt.home .title { border-color:#fff; }
-.pop { display:none; border:0; top:119px; position:absolute; z-index:1; }
+.pop { display:none; border:0; position:absolute; top:119px; z-index:1; }
 .pop>.mask { display:none; }
 .ctrl { display:none; font-size:1em; margin:10px 16px; right:0; }
 .active .ctrl, .pop .ctrl { display:block; }
