@@ -50,3 +50,13 @@
 
 #mousetrap { height:100%; left:0; position:absolute; top:0; width:100%; z-index:1; }
 #mousetrap.mask { background:#292728; opacity:0.9; }
+
+@media screen and (max-height:710px) {
+    .thumbs { padding:3px 0 3px 3px; }
+    .thumbs>img { height:42px; margin:0 3px 0 0; width:42px; }
+    .pop { left:0; top:0; }
+    .pop .data { position:relative; }
+    .pop .ctrl { background:#b5b5b5; border:1px solid #fff; border-radius:5px 5px 5px 5px; line-height:1.6em; padding:0 0.5em; position:fixed; }
+    #imgpop .ctrl { border-color:#b5b5b5; bottom:20px; right:20px; }
+    #txtpop.home .ctrl { background:#9a283f; }
+}
