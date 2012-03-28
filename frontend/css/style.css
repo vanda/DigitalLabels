@@ -7,7 +7,7 @@
 .lfont { font-size:156%; }
 
 #header { background-color:#9a283f; color:#fff; font-style:italic; line-height:28px; text-align:center; }
-
+.clip { overflow:hidden; }
 .carousel { clear:both; margin:0; position:relative; }
 #img { height:275px; margin:0 0 23px; }
 .obj { border:1px solid #b5b5b5; display:block; float:left; list-style-type:none; margin:0 12px; position:relative; vertical-align:top; }
