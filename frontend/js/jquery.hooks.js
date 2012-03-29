@@ -1,9 +1,5 @@
 jQuery(document).ready(function() {
     
-    $(window).on('touchmove', function(e) {
-        e.preventDefault();
-    });
-    
     $('#img, #txt').each(function(){
         var i = $(this).find('li').not('.active'),
             w = i.outerWidth() + parseFloat(i.css('margin-left'))*2,
@@ -45,8 +41,8 @@ jQuery(document).ready(function() {
                     if( $(this).find('li').eq($(li).index()).is('.active') ){ if( $(li).index()>0 ) this.hit($(li).index()-1); }
                     else{ this.hit($(li).index()); }
                 }); 
-            }, preventDefaultEvents:true 
-        })
+            } 
+        });
     });
     
     $('#img').on('click', '.active', function(e){
