@@ -3,7 +3,6 @@
 .pane { padding:0 0 0 0.5em; }
 .edged.col { border-right:1px solid #b5b5b5; }
 .edged.col>.pane { padding:0 0.5em 0 0; }
-
 .lfont { font-size:156%; }
 
 #header { background-color:#9a283f; color:#fff; font-style:italic; line-height:28px; text-align:center; }
