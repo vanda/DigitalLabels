@@ -1,5 +1,11 @@
 jQuery(document).ready(function() {
-    
+
+    if( $(window).height()<710 && window.devicePixelRatio>1 ){
+        var v = $('meta[name^="viewport"]'), 
+            c = v.attr('content');
+        v.attr('content', c.replace('initial-scale=1', 'initial-scale='+$(window).height()/710));
+    }
+
     $('#img, #txt').each(function(){
         var i = $(this).find('li').not('.active'),
             w = i.outerWidth() + parseFloat(i.css('margin-left'))*2,
@@ -30,13 +36,13 @@ jQuery(document).ready(function() {
         $('#img, #txt').each(function(){ this.hit(i); });
     }).find('li').each(function(c,li){
         $(this).touchwipe({ 
-            wipeLeft:function(){ 
+            wipeLeft:function(){
                 $('#img, #txt').each(function(){ 
                     if( $(this).find('li').eq($(li).index()).is('.active') ){ if( $(li).index()<$(this).find('li').length-1 ) this.hit($(li).index()+1); }
                     else{ this.hit($(li).index()); }
                 }); 
             },  
-            wipeRight:function(){ 
+            wipeRight:function(){
                 $('#img, #txt').each(function(){ 
                     if( $(this).find('li').eq($(li).index()).is('.active') ){ if( $(li).index()>0 ) this.hit($(li).index()-1); }
                     else{ this.hit($(li).index()); }
@@ -68,6 +74,9 @@ jQuery(document).ready(function() {
     });
     
     $('#img li.home').removeClass('active').trigger('click');
+    $(window).bind('load resize', function(){
+        $('#img li.active').removeClass('active').trigger('click');
+    });
     
     
 }); //end doc.ready
