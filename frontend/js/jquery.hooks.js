@@ -4,6 +4,9 @@ jQuery(document).ready(function() {
         var v = $('meta[name^="viewport"]'), 
             c = v.attr('content');
         v.attr('content', c.replace('initial-scale=1', 'initial-scale='+$(window).height()/710));
+        $(window).bind('load resize', function(){
+            $('#img li.active').removeClass('active').trigger('click');
+        });
     }
 
     $('#img, #txt').each(function(){
@@ -74,9 +77,6 @@ jQuery(document).ready(function() {
     });
     
     $('#img li.home').removeClass('active').trigger('click');
-    $(window).bind('load resize', function(){
-        $('#img li.active').removeClass('active').trigger('click');
-    });
     
     
 }); //end doc.ready
