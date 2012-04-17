@@ -147,3 +147,5 @@ LOGGING = {
         },
     }
 }
+
+COLLECTIONS_API_HOSTNAME = 'indigo.vam.ac.uk'
