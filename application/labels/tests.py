@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from digitallabels.labels.models import CMSLabel, DigitalLabel
+from labels.models import CMSLabel, DigitalLabel
 
 
 class SimpleTest(TestCase):

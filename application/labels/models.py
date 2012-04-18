@@ -30,8 +30,3 @@ class Group(models.Model):
 
     name = models.CharField(max_length=255, null=False)
     digitallabels = models.ManyToManyField(DigitalLabel)
-
-from django.db.models.signals import pre_save
-from digitallabels.labels.signals import get_cms_labels
-pre_save.connect(get_cms_labels, sender=DigitalLabel)
-
