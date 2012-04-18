@@ -1,5 +1,5 @@
 from django.contrib import admin
-from digitallabels.labels.models import DigitalLabel, CMSLabel, Image
+from labels.models import DigitalLabel, CMSLabel, Image
 
 class DigitalLabelAdmin(admin.ModelAdmin):
     pass
