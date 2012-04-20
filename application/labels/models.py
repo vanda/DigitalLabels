@@ -24,7 +24,8 @@ class DigitalLabel(models.Model):
                                          replace your existing content""")
     def __unicode__(self):
         if self.museum_number:
-            return u"%s (%s)" % (self.name, self.museum_number)
+            return u"%s %s (%s)" % (self.object_number,
+                                 self.name, self.museum_number)
         else:
             return self.name
 

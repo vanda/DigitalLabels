@@ -1,7 +1,7 @@
 from django.contrib import admin
-from labels.models import DigitalLabel, CMSLabel, Image
+from labels.models import DigitalLabel, CMSLabel, Image, Group
 
-class CMSLabelInline(admin.TabularInline):
+class CMSLabelInline(admin.StackedInline):
     model = CMSLabel
 
 class ImageInline(admin.TabularInline):
@@ -19,8 +19,11 @@ class CMSLabelAdmin(admin.ModelAdmin):
 class ImageAdmin(admin.ModelAdmin):
     pass
 
+class GroupAdmin(admin.ModelAdmin):
+    filter_horizontal = ("digitallabels",)
 
 
 admin.site.register(DigitalLabel, DigitalLabelAdmin)
-admin.site.register(CMSLabel, CMSLabelAdmin)
+#admin.site.register(CMSLabel, CMSLabelAdmin)
 admin.site.register(Image, ImageAdmin)
+admin.site.register(Group, GroupAdmin)
