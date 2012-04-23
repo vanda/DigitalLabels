@@ -110,6 +110,10 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    BASE_PATH + '/templates',
+    
+    
+    
 )
 
 INSTALLED_APPS = (
@@ -124,6 +128,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'labels',
+    'reversion',
+    'sorl.thumbnail',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -155,4 +161,4 @@ LOGGING = {
     }
 }
 
-COLLECTIONS_API_HOSTNAME = 'indigo.vam.ac.uk'
+COLLECTIONS_API_HOSTNAME = 'www.vam.ac.uk'

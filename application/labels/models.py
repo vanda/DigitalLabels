@@ -1,5 +1,5 @@
 from django.db import models
-
+from sorl.thumbnail import ImageField
 # Create your models here.
 
 class DigitalLabel(models.Model):
@@ -45,7 +45,7 @@ class Image(models.Model):
     image_id = models.CharField(max_length=16, null=False)
     caption = models.CharField(max_length=255, null=False)
     digitallabel = models.ForeignKey(DigitalLabel)
-    image_file = models.ImageField(upload_to="labels/images")
+    image_file = ImageField(upload_to="labels/images")
 
     def __unicode__(self):
         return u"%s for %s" % (self.image_id, self.digitallabel.museum_number)

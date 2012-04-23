@@ -1,25 +1,29 @@
 from django.contrib import admin
+import reversion
+from sorl.thumbnail.admin import AdminImageMixin
 from labels.models import DigitalLabel, CMSLabel, Image, Group
 
 class CMSLabelInline(admin.StackedInline):
     model = CMSLabel
 
-class ImageInline(admin.TabularInline):
+class ImageInline(AdminImageMixin, admin.TabularInline):
     model = Image
 
-class DigitalLabelAdmin(admin.ModelAdmin):
+class DigitalLabelAdmin(reversion.VersionAdmin):
+    save_on_top = True
     inlines = [
         CMSLabelInline,
         ImageInline,
     ]
 
-class CMSLabelAdmin(admin.ModelAdmin):
+class CMSLabelAdmin(reversion.VersionAdmin):
     pass
 
-class ImageAdmin(admin.ModelAdmin):
+class ImageAdmin(AdminImageMixin, reversion.VersionAdmin):
     pass
 
-class GroupAdmin(admin.ModelAdmin):
+class GroupAdmin(reversion.VersionAdmin):
+    save_on_top = True
     filter_horizontal = ("digitallabels",)
 
 
