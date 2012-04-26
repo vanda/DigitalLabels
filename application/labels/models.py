@@ -1,4 +1,7 @@
+import urllib2
+from django.conf import settings
 from django.db import models
+from django.utils import simplejson
 from sorl.thumbnail import ImageField
 # Create your models here.
 
@@ -22,6 +25,7 @@ class DigitalLabel(models.Model):
     main_text = models.TextField(blank=True)
     redownload = models.BooleanField(help_text="""WARNING: This may
                                          replace your existing content""")
+
     def __unicode__(self):
         if self.museum_number:
             return u"%s %s (%s)" % (self.object_number,
@@ -29,7 +33,61 @@ class DigitalLabel(models.Model):
         else:
             return self.name
 
+    __museumobject_json = None
 
+    @property
+    def museumobject_json(self):
+
+        if self.__museumobject_json == None:
+            item_url = 'http://%s/api/json/museumobject/%s/' % (
+                                        settings.COLLECTIONS_API_HOSTNAME,
+                                        self.object_number)
+            try:
+                response = urllib2.urlopen(item_url)
+                self.__museumobject_json = simplejson.load(response)[0]
+
+            except urllib2.HTTPError, e:
+                if e.code == 404:
+                    # Missing object
+                    pass
+                else:
+                    # other error
+                    pass
+
+        return self.__museumobject_json
+
+    def create_cms_labels(self):
+
+        museum_object = self.museumobject_json
+        if museum_object:
+            for l in museum_object['fields']['labels']:
+                cms_label = CMSLabel()
+                cms_label.date = l['fields']['date']
+                cms_label.text = l['fields']['label_text']
+                cms_label.digitallabel = self
+                cms_label.save()
+
+    def create_images(self):
+
+        museum_object = self.museumobject_json
+        if museum_object:
+            for i in museum_object['fields']['image_set']:
+                image_id = i['fields']['image_id']
+                try:
+                    image_url = \
+                        'http://%s/media/thira/collection_images/%s/%s.jpg' % \
+                            (settings.MEDIA_SERVER, image_id[:6], image_id)
+                    response = urllib2.urlopen(image_url)
+                    cms_image = Image()
+                    cms_image.image_id
+
+                except urllib2.HTTPError, e:
+                    if e.code == 404:
+                        # Missing object
+                        pass
+                    else:
+                        # other error
+                        pass
 
 class CMSLabel(models.Model):
 
@@ -56,9 +114,9 @@ class Group(models.Model):
     digitallabels = models.ManyToManyField(DigitalLabel)
 
 from django.db.models.signals import pre_save, post_save
-from labels.signals import get_cms_labels, get_api_data
+from labels.signals import get_api_data, get_related_api_data
 
 pre_save.connect(get_api_data, DigitalLabel)
-post_save.connect(get_cms_labels, DigitalLabel)
+post_save.connect(get_related_api_data, DigitalLabel)
 
 

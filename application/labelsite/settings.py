@@ -111,9 +111,9 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     BASE_PATH + '/templates',
-    
-    
-    
+
+
+
 )
 
 INSTALLED_APPS = (
@@ -161,4 +161,6 @@ LOGGING = {
     }
 }
 
+MEDIA_SERVER = 'media.vam.ac.uk'
 COLLECTIONS_API_HOSTNAME = 'www.vam.ac.uk'
+
