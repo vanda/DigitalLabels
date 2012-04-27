@@ -1,18 +1,13 @@
-import urllib2
-from django.utils import simplejson
-from django.conf import settings
-from labels.models import CMSLabel
+import os
+from sorl.thumbnail import get_thumbnail
+
 
 def get_api_data(sender, instance, **kwargs):
 
     if instance.id == None or instance.redownload == True:
-        item_url = 'http://%s/api/json/museumobject/%s/' % (
-                                    settings.COLLECTIONS_API_HOSTNAME,
-                                    instance.object_number)
-        try:
-            response = urllib2.urlopen(item_url)
-            museum_object = simplejson.load(response)[0]
 
+        museum_object = instance.museumobject_json
+        if museum_object:
             label_name = ''
             object_name = museum_object['fields']['object']
             object_title = museum_object['fields']['title']
@@ -32,15 +27,8 @@ def get_api_data(sender, instance, **kwargs):
             instance.date_text = museum_object['fields']['date_text']
             instance.credit_line = museum_object['fields']['credit']
 
-        except urllib2.HTTPError, e:
-            if e.code == 404:
-                # Missing object
-                pass
-            else:
-                # other HTTP error
-                pass
-
-            # record error in title
+        else:
+            # make note of error in title
             instance.name = "* UNABLE TO GET RECORD DATA FOR %s *" % (
                                                     instance.object_number)
 
@@ -50,34 +38,24 @@ def get_api_data(sender, instance, **kwargs):
         # prepare to redownload labels in post save
         instance.cmslabel_set.all().delete()
 
-def get_cms_labels(sender, instance, **kwargs):
+
+def get_related_api_data(sender, instance, **kwargs):
     """
     Retrieve current data from the API and use to populate label
+    Retrieve VADAR images as well
     """
 
     if instance.cmslabel_set.count() == 0:
-        item_url = 'http://%s/api/json/museumobject/%s/' % (
-                                    settings.COLLECTIONS_API_HOSTNAME,
-                                    instance.object_number)
-        try:
-            response = urllib2.urlopen(item_url)
-            museum_object = simplejson.load(response)[0]
-            for l in museum_object['fields']['labels']:
 
-                cms_label = CMSLabel()
-                cms_label.date = l['fields']['date']
-                cms_label.text = l['fields']['label_text']
-                cms_label.digitallabel = instance
-                cms_label.save()
+        instance.create_cms_labels()
 
-        except urllib2.HTTPError, e:
-            if e.code == 404:
-                # Missing object
-                pass
-            else:
-                # other error
-                pass
+    if instance.image_set.count() == 0:
+
+        instance.create_images()
 
 
+def create_thumbnails(sender, instance, **kwargs):
 
-
+    if os.path.exists(instance.local_file_name):
+        im = get_thumbnail(instance.local_file_name, '540x540',
+                                                    quality=80, pad=True)
