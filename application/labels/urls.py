@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
-    url(r'^$', 'labels.views.index'),  
+    url(r'^$', 'labels.views.index'),
     url(r'^group', 'labels.views.group'),
 )

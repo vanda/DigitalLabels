@@ -1,3 +1,7 @@
+import os
+from sorl.thumbnail import get_thumbnail
+
+
 def get_api_data(sender, instance, **kwargs):
 
     if instance.id == None or instance.redownload == True:
@@ -34,6 +38,7 @@ def get_api_data(sender, instance, **kwargs):
         # prepare to redownload labels in post save
         instance.cmslabel_set.all().delete()
 
+
 def get_related_api_data(sender, instance, **kwargs):
     """
     Retrieve current data from the API and use to populate label
@@ -49,6 +54,8 @@ def get_related_api_data(sender, instance, **kwargs):
         instance.create_images()
 
 
+def create_thumbnails(sender, instance, **kwargs):
 
-
-
+    if os.path.exists(instance.local_file_name):
+        im = get_thumbnail(instance.local_file_name, '540x540',
+                                                    quality=80, pad=True)
