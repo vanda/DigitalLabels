@@ -1,0 +1,17 @@
+body { color:#292728; font:16px/1.35 "V&A TheSansPlain", arial,helvetica,freesans,sans-serif; }
+img { vertical-align:bottom; }
+p, ol, ul { margin-bottom:1em; }
+a { color:#292728; text-decoration:underline; }
+a:active { color:#000; text-decoration:none; }
+h2, strong { font-weight:bold; }
+h2 { font-size:165%; line-height:1.1em; }
+abbr, acronym { border-bottom:1px dotted #b5b5b5; } 
+em { font-style:italic; }
+small, sub, sup { font-size:85%; }
+sub, sup { position:relative; vertical-align:baseline; }
+sub { bottom:-0.3em; }
+sup { top:-0.3em; }
+ol, ul { list-style-position:outside; margin-left:2.2em; }
+ol { list-style-type:decimal; }
+ul { list-style-type:disc; }
+li { margin:0 0 0.5em; }
