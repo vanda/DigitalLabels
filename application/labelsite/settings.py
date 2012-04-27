@@ -150,7 +150,12 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'file_labels': {        # define and name a handler
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler', # set the logging class to a file
+            'filename': os.path.join(BASE_PATH, 'log', 'labels.log') # log file
+        },
     },
     'loggers': {
         'django.request': {
@@ -158,9 +163,15 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'labels': {
+            'handlers': ['file_labels'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     }
 }
 
 MEDIA_SERVER = 'media.vam.ac.uk'
 COLLECTIONS_API_HOSTNAME = 'www.vam.ac.uk'
+THUMBNAIL_ENGINE = 'labels.thumbs.PadEngine'
 
