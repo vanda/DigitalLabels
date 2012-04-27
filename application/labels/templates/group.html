@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+    {% block content %}
+    <div id="header" class="hi">Touch an object to see its label or touch a label to see its object</div>
+
+    <div class="clip">
+        
+        <ul class="carousel" id="img">
+            {% for label in labels %}
+            <li class="img obj">
+                <div class="case">
+                    <div class="mask"></div>
+                    <img src="content/img/2006AM2005_jpg_ds.jpg" title="{{ label.name }} {{ label.date_text }}" alt="" />
+                    <div class="ctrl"></div>
+                </div>
+                <div class="thumbs">
+                    <img src="content/img/2006AM2005_jpg_s.jpg" title="Another view of the object." alt="" />
+                    <img src="content/img/2006AM2005_jpg_s.jpg" title="Another view of the object." alt="" />
+                    <img src="content/img/2006AM2005_jpg_s.jpg" title="Another view of the object." alt="" />
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <ul class="carousel" id="txt">
+            {% for label in labels %}
+            <li class="txt obj">
+                <div class="mask"></div>
+                <div class="title"><h2>{{ label.name }}</h2></div>
+                <div class="row">
+                    <div class="txtl edged col">
+                        <div class="pane"><p>{{ label.date_text }}</p></div>
+                        <div class="data col">
+                            <div class="pane">
+                                <p>{{ label.artist_maker }}</p>
+                                <p>{{ label.materials_techniques }}</p>
+                                <p><em>Museum no. {{ label.museum_number }}</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="txtr col">
+                        <div class="pane">{{ label.main_text }}</div>
+                        <div class="ctrl"><span>A</span><span class="lfont">A</span></div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        
+    </div>
+    
+    <div class="pop" id="imgpop"><div class="case" id="imgbox"><img id="imgbig" src="" alt="" /><div class="ctrl"></div></div><div id="imgtxt"></div></div>
+    <div class="txt pop lfont" id="txtpop"></div>
+    {% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" id="vam-ac-uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/reset.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/base.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css" media="all" />
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.hooks.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.touchwipe.min.js"></script>
+    <title>Digital Labels &mdash; Victoria and Albert Museum</title>
+</head>
+
+<body>
+
+    {% block content %}
+        <a href="{% url group 1 %}">Group 1</a>
+    {% endblock %}
+
+</body>
+</html>
