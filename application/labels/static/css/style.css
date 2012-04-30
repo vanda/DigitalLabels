@@ -1,5 +1,5 @@
-.row { display:table-row; margin:0 0 0.75em; }
-.col { display:table-cell; width:49.8%; }
+.row { clear:both; display:block; margin:0 0 0.75em; }
+.col { display:block; float:left; width:49.8%; }
 .pane { padding:0 0 0 0.5em; }
 .edged.col { border-right:1px solid #b5b5b5; }
 .edged.col>.pane { padding:0 0.5em 0 0; }
