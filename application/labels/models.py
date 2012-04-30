@@ -1,4 +1,5 @@
 import logging
+import os
 import urllib2
 from django.conf import settings
 from django.db import models
@@ -83,6 +84,10 @@ class DigitalLabel(models.Model):
                     cms_image, cr = Image.objects.get_or_create(
                                 digitallabel=self, image_id=image_id)
                     cms_image.store_vadar_image()
+                    cms_image.caption = image_id
+                    cms_image.image_file = os.path.join(
+                                    cms_image.image_file.field.upload_to,
+                                    unicode(cms_image.image_id) + '.jpg')
                     cms_image.save()
 
                 except urllib2.HTTPError, e:

@@ -58,4 +58,10 @@ def create_thumbnails(sender, instance, **kwargs):
 
     if os.path.exists(instance.local_file_name):
         im = get_thumbnail(instance.local_file_name, '540x540',
-                                                    quality=80, pad=True)
+                                                    quality=85, pad=True)
+        im = get_thumbnail(instance.local_file_name, '128x128',
+                                                    quality=85, pad=True)
+        im = get_thumbnail(instance.local_file_name, '222x222',
+                                                    quality=85, pad=True)
+        im = get_thumbnail(instance.local_file_name, '44x44',
+                                                    quality=85, pad=True)
