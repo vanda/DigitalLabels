@@ -12,7 +12,7 @@
                 <div class="case">
                     <div class="mask"></div>
                         {% thumbnail dl.image_set.all.0.image_file "128x128" pad=True as im %}
-                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" alt="" />
+                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" data-img-l="{% thumbnail dl.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                         {% endthumbnail %}
                     <div class="ctrl"></div>
                 </div>
@@ -20,7 +20,7 @@
                     {% for img in dl.image_set.all %}
                         {% if forloop.counter > 1 and forloop.counter < 6 %}
                             {% thumbnail img.image_file "30x30" pad=True as im %}
-                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" alt="" />
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                             {% endthumbnail %}
                         {% endif %}
                     {% endfor %}
