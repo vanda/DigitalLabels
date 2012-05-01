@@ -19,6 +19,7 @@
                         {% endthumbnail %}
                     <div class="ctrl"></div>
                 </div>
+                {% if dl.image_set.all|length > 1 %}
                 <div class="thumbs">
                     {% for img in dl.image_set.all %}
                         {% if forloop.counter > 1 and forloop.counter < 6 %}
@@ -28,6 +29,7 @@
                         {% endif %}
                     {% endfor %}
                 </div>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
