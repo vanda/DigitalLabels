@@ -59,7 +59,7 @@ jQuery(document).ready(function() {
             l = ($(window).width()-$('#imgpop').outerWidth())/2,
             l = l>0? l:0;
         $('#imgbig').remove();
-        $('#imgbox').prepend('<img id="imgbig" src="'+ pip.src.replace(/_[^_]+(\..+)$/,'_l$1') +'" alt=""/>');
+        $('#imgbox').prepend('<img id="imgbig" src="'+ $(pip).data('img-l') +'" alt=""/>');
         $('#imgtxt').html(pip.title);
         $('#imgpop').css({'left':l}).show().mouseTrap({'mask':1});
     });
