@@ -68,6 +68,8 @@ STATIC_ROOT = BASE_PATH + '/static/'
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -123,13 +125,14 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    'django.contrib.admindocs',
     'labels',
     'reversion',
     'sorl.thumbnail',
+    'grappelli',
+    # Uncomment the next line to enable the admin:
+    'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -171,7 +174,8 @@ LOGGING = {
     }
 }
 
+GRAPPELLI_ADMIN_TITLE = "V&A Digital Labels Administration"
+
 MEDIA_SERVER = 'media.vam.ac.uk'
 COLLECTIONS_API_HOSTNAME = 'www.vam.ac.uk'
 THUMBNAIL_ENGINE = 'labels.thumbs.PadEngine'
-

@@ -12,6 +12,15 @@ from sorl.thumbnail import ImageField
 logger = logging.getLogger('labels')
 
 
+class Group(models.Model):
+
+    name = models.CharField(max_length=255, null=False)
+
+    def __unicode__(self):
+
+        return self.name
+
+
 class DigitalLabel(models.Model):
     """
     A label describing an individual object
@@ -32,6 +41,12 @@ class DigitalLabel(models.Model):
     main_text = models.TextField(blank=True)
     redownload = models.BooleanField(help_text="""WARNING: This may
                                          replace your existing content""")
+    group = models.ForeignKey(Group, null=True, blank=True)
+    gateway_object = models.BooleanField(default=False)
+    position = models.PositiveIntegerField(null=False, default=0)
+
+    class Meta:
+        ordering = ['position']
 
     def __unicode__(self):
         if self.museum_number:
@@ -113,8 +128,12 @@ class Image(models.Model):
 
     image_id = models.CharField(max_length=16, null=False)
     caption = models.CharField(max_length=255, null=False)
-    digitallabel = models.ForeignKey(DigitalLabel)
     image_file = ImageField(upload_to="labels/images")
+    position = models.PositiveIntegerField(null=False, default=0)
+    digitallabel = models.ForeignKey(DigitalLabel)
+
+    class Meta:
+        ordering = ['position']
 
     def __unicode__(self):
         return u"%s for %s" % (self.image_id, self.digitallabel.museum_number)
@@ -158,11 +177,6 @@ class Image(models.Model):
             logging.error("URL Error: %s %s" % (e.reason, image_url))
             return False
 
-
-class Group(models.Model):
-
-    name = models.CharField(max_length=255, null=False)
-    digitallabels = models.ManyToManyField(DigitalLabel)
 
 from django.db.models.signals import pre_save, post_save
 from labels.signals import get_api_data, get_related_api_data, \
