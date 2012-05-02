@@ -35,9 +35,6 @@ def get_api_data(sender, instance, **kwargs):
         # don't redownload again
         instance.redownload = False
 
-        # prepare to redownload labels in post save
-        instance.cmslabel_set.all().delete()
-
 
 def get_related_api_data(sender, instance, **kwargs):
     """

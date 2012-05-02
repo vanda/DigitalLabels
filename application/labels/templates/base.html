@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <!DOCTYPE html>
 <html lang="en" id="vam-ac-uk">
 <head>
@@ -16,7 +17,14 @@
 <body>
 
     {% block content %}
+    
         <a href="{% url group 1 %}">Group 1</a>
+        <p>{{ dl }}</p>
+        {{dl.image_set.all.0}}
+        {% thumbnail dl.image_set.all.0.image_file "250x1250" pad=True as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% endthumbnail %}
+        </p>
     {% endblock %}
 
 </body>
