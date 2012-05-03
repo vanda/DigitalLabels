@@ -5,7 +5,7 @@ Sorl Thumbnail Engine that accepts background color
 Created on Sunday, February 2012 by Yuji Tomita
 """
 from math import floor
-from PIL import Image, ImageColor
+from PIL import Image
 from sorl.thumbnail.engines.pil_engine import Engine
 
 

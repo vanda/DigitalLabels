@@ -1,6 +1,6 @@
 # Create your views here.
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template import Context, loader, RequestContext
+from django.http import HttpResponse
+from django.template import loader, RequestContext
 from labels.models import Group, DigitalLabel
 
 

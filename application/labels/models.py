@@ -4,7 +4,8 @@ import urllib2
 from django.conf import settings
 from django.db import models
 from django.utils import simplejson
-from sorl.thumbnail import ImageField
+from django.utils.safestring import mark_safe
+from sorl.thumbnail import ImageField, get_thumbnail
 # Create your models here.
 # import the logging library
 
@@ -26,7 +27,7 @@ class DigitalLabel(models.Model):
     A label describing an individual object
     """
     name = models.CharField(max_length=255, null=False, blank=True)
-
+    group = models.ForeignKey(Group, null=True, blank=True)
     date_text = models.CharField(max_length=255, null=False, blank=True)
     artist_maker = models.CharField(max_length=255, null=False, blank=True)
     materials_techniques = models.CharField(max_length=255, null=False,
@@ -41,7 +42,8 @@ class DigitalLabel(models.Model):
     main_text = models.TextField(blank=True)
     redownload = models.BooleanField(help_text="""WARNING: This may
                                          replace your existing content""")
-    group = models.ForeignKey(Group, null=True, blank=True)
+    primary_image = models.ForeignKey("Image", null=True, blank=True,
+                                      related_name="primary_for")
     gateway_object = models.BooleanField(default=False)
     position = models.PositiveIntegerField(null=False, default=0)
 
@@ -55,18 +57,48 @@ class DigitalLabel(models.Model):
         else:
             return self.name
 
-    __museumobject_json = None
+    _museumobject_json = None
+    _thumbnail_url = None
+
+    @property
+    def thumbnail_url(self):
+
+        if not self._thumbnail_url:
+
+            if self.image_set.count() > 1:
+
+                if self.primary_image:
+                    image_file = self.primary_image
+                else:
+                    image_file = self.image_set.all()[0]
+
+                im = get_thumbnail(image_file.local_file_name, '100x100',
+                                                    quality=85, pad=True)
+
+                self._thumbnail_url = im.url
+
+        return self._thumbnail_url
+
+
+    def thumbnail_tag(self):
+
+        return mark_safe('<img alt="%s" src="%s" />' % (
+                                            self.name, self.thumbnail_url))
+
+    thumbnail_tag.allow_tags = True
+    thumbnail_tag.short_description = 'Thumb'
+
 
     @property
     def museumobject_json(self):
 
-        if self.__museumobject_json == None:
+        if self._museumobject_json == None:
             item_url = 'http://%s/api/json/museumobject/%s/' % (
                                         settings.COLLECTIONS_API_HOSTNAME,
                                         self.object_number)
             try:
                 response = urllib2.urlopen(item_url)
-                self.__museumobject_json = simplejson.load(response)[0]
+                self._museumobject_json = simplejson.load(response)[0]
 
             except urllib2.HTTPError, e:
                 if e.code == 404:
@@ -76,7 +108,7 @@ class DigitalLabel(models.Model):
                     # other error
                     pass
 
-        return self.__museumobject_json
+        return self._museumobject_json
 
     def create_cms_labels(self):
 
@@ -103,6 +135,8 @@ class DigitalLabel(models.Model):
                     cms_image.image_file = os.path.join(
                                     cms_image.image_file.field.upload_to,
                                     unicode(cms_image.image_id) + '.jpg')
+                    if image_id == museum_object['fields']['primary_image_id']:
+                        self.primary_image = cms_image
                     cms_image.save()
 
                 except urllib2.HTTPError, e:
@@ -112,6 +146,7 @@ class DigitalLabel(models.Model):
                     else:
                         # other error
                         pass
+            self.save()
 
 
 class CMSLabel(models.Model):
