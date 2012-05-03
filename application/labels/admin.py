@@ -27,6 +27,7 @@ class DigitalLabelInline(admin.TabularInline):
 
 
 class DigitalLabelAdmin(reversion.VersionAdmin):
+    list_display = ('thumbnail_tag', 'museum_number', 'name')
     save_on_top = True
     inlines = [
         CMSLabelInline,

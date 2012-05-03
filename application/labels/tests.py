@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from labels.models import CMSLabel, DigitalLabel, Image
+from labels.models import DigitalLabel, Image
 
 
 class SimpleTest(TestCase):
@@ -46,6 +46,13 @@ class LabelTest(TestCase):
         self.assertTrue(dl.name.find('UNABLE') > -1)
         # test the labels
         self.assertTrue(dl.cmslabel_set.count() == 0)
+
+    def test_thumbnail_url(self):
+
+        # get our label
+        dl = DigitalLabel.objects.get(id=1)
+        self.assertTrue(dl.thumbnail_url.endswith('jpg'))
+        self.assertTrue(dl.thumbnail_tag().find('cache') > -1)
 
     def test_redownload(self):
 
