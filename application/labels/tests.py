@@ -77,10 +77,16 @@ class LabelTest(TestCase):
     def test_download_image(self):
 
         # count image
-        ims = Image.objects.all()
+        dl = DigitalLabel.objects.get(id=1)
+
+        ims = dl.image_set.all()
         ic = ims.count()
         self.assertTrue(ic > 0)
 
         test_image = ims[0]
         self.assertEquals(
             unicode(test_image.image_file).find(test_image.image_id), 14)
+
+        # check primary image position
+        self.assertEquals(dl.image_set.filter(position=0).count(), 1)
+        self.assertTrue(dl.image_set.filter(position=1).count() > 0)
