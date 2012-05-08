@@ -36,7 +36,7 @@
         
         <ul class="carousel" id="txt">
             {% for dl in labels %}
-            <li class="{% if forloop.counter == 3 %}active home {% endif %}txt obj">
+            <li class="{% if dl.gateway_object %}active home {% endif %}txt obj">
                 <div class="mask"></div>
                 <div class="title"><h2>{{ dl.name }}</h2></div>
                 <div class="row">
