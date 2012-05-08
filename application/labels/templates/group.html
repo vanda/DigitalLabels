@@ -9,8 +9,8 @@
         <ul class="carousel" id="img">
             {% for dl in labels %}
             <li class="{% if forloop.counter == 3 %}active home {% endif %}img obj">
+                <div class="mask"></div>
                 <div class="case">
-                    <div class="mask"></div>
                     {% thumbnail dl.image_set.all.0.image_file "128x128" pad=True as im %}
                     <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" alt="" />
                     {% endthumbnail %}
