@@ -42,10 +42,8 @@ class DigitalLabel(models.Model):
     main_text = models.TextField(blank=True)
     redownload = models.BooleanField(help_text="""WARNING: This may
                                          replace your existing content""")
-    primary_image = models.ForeignKey("Image", null=True, blank=True,
-                                      related_name="primary_for")
     gateway_object = models.BooleanField(default=False)
-    position = models.PositiveIntegerField(null=False, default=0)
+    position = models.PositiveIntegerField(null=False, default=1)
 
     class Meta:
         ordering = ['position']
@@ -65,12 +63,10 @@ class DigitalLabel(models.Model):
 
         if not self._thumbnail_url:
 
-            if self.image_set.count() > 1:
+            if self.image_set.count() > 0:
 
-                if self.primary_image:
-                    image_file = self.primary_image
-                else:
-                    image_file = self.image_set.all()[0]
+                # images are sorted by priority, so take the first
+                image_file = self.image_set.all()[0]
 
                 im = get_thumbnail(image_file.local_file_name, '100x100',
                                                     quality=85, pad=True)
@@ -79,7 +75,6 @@ class DigitalLabel(models.Model):
 
         return self._thumbnail_url
 
-
     def thumbnail_tag(self):
 
         return mark_safe('<img alt="%s" src="%s" />' % (
@@ -87,7 +82,6 @@ class DigitalLabel(models.Model):
 
     thumbnail_tag.allow_tags = True
     thumbnail_tag.short_description = 'Thumb'
-
 
     @property
     def museumobject_json(self):
@@ -136,7 +130,7 @@ class DigitalLabel(models.Model):
                                     cms_image.image_file.field.upload_to,
                                     unicode(cms_image.image_id) + '.jpg')
                     if image_id == museum_object['fields']['primary_image_id']:
-                        self.primary_image = cms_image
+                        cms_image.position = 0
                     cms_image.save()
 
                 except urllib2.HTTPError, e:
@@ -164,7 +158,7 @@ class Image(models.Model):
     image_id = models.CharField(max_length=16, null=False)
     caption = models.CharField(max_length=255, null=False)
     image_file = ImageField(upload_to="labels/images")
-    position = models.PositiveIntegerField(null=False, default=0)
+    position = models.PositiveIntegerField(null=False, default=1)
     digitallabel = models.ForeignKey(DigitalLabel)
 
     class Meta:
