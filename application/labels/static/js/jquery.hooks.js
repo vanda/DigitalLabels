@@ -17,8 +17,8 @@ jQuery(document).ready(function() {
         $(this).width(w*($(this).find('li:last-child').index()+1)+wA);
         this.hit = function(i){
             var t = 1024;
-            $(this).find('.active>.mask').animate({'opacity':0.5}, t/10);
-            $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ $(this).find('li').removeClass('active'); $(this).find('li:nth-child('+(i+1)+')').addClass('active').find('.mask').animate({'opacity':0}, t/10); });
+            $(this).find('.active>.mask').animate({'opacity':0.5}, t/4);
+            $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ $(this).find('li').removeClass('active'); $(this).find('li:nth-child('+(i+1)+')').addClass('active').find('.mask').animate({'opacity':0}, t/4); })
         };
         this.nudge = function(n){
             var i = $(this).find('.active').index() + n;
