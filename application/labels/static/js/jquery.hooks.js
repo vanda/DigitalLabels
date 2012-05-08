@@ -17,7 +17,6 @@ jQuery(document).ready(function() {
         $(this).width(w*($(this).find('li:last-child').index()+1)+wA);
         this.hit = function(i){
             var t = 1024;
-            $(this).find('li').removeClass('active');
             $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ $(this).find('li').removeClass('active'); $(this).find('li:nth-child('+(i+1)+')').addClass('active'); });
         };
         this.nudge = function(n){
