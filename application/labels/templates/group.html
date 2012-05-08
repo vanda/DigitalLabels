@@ -11,12 +11,12 @@
             <li class="{% if forloop.counter == 3 %}active home {% endif %}img obj">
                 <div class="case">
                     <div class="mask"></div>
-                        {% thumbnail dl.image_set.all.0.image_file "128x128" pad=True as im %}
-                        <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" alt="" />
-                        {% endthumbnail %}
-                        {% thumbnail dl.image_set.all.0.image_file "222x222" pad=True as im %}
-                        <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" data-img-l="{% thumbnail dl.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
-                        {% endthumbnail %}
+                    {% thumbnail dl.image_set.all.0.image_file "128x128" pad=True as im %}
+                    <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" alt="" />
+                    {% endthumbnail %}
+                    {% thumbnail dl.image_set.all.0.image_file "222x222" pad=True as im %}
+                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" data-img-l="{% thumbnail dl.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                    {% endthumbnail %}
                     <div class="ctrl"></div>
                 </div>
                 {% if dl.image_set.all|length > 1 %}
