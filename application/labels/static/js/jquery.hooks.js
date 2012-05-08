@@ -20,17 +20,6 @@ jQuery(document).ready(function() {
             $(this).find('.active>.mask').animate({'opacity':0.5}, t/4);
             $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ $(this).find('li').removeClass('active'); $(this).find('li:nth-child('+(i+1)+')').addClass('active').find('.mask').animate({'opacity':0}, t/4); })
         };
-        this.nudge = function(n){
-            var i = $(this).find('.active').index() + n;
-            this.hit(i);
-        };
-    });
-    
-    $('#txt').find('li').not(':first-child').each(function(){
-        $(this).append($('<div class="prev"></div>').click(function(){ $('#img, #txt').each(function(){ this.nudge(-1); }); return false; }));
-    });
-    $('#txt').find('li').not(':last-child').each(function(){
-        $(this).append($('<div class="next"></div>').click(function(){ $('#img, #txt').each(function(){ this.nudge(1); }); return false; }));
     });
     
     $('#img, #txt').on('click', 'li:not(.active)', function(){
