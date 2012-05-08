@@ -29,7 +29,6 @@
 .prev { background-position:0 50%; left:-18px; }
 .next { right:-18px; }
 .mask { background:#292728; height:100%; opacity:0.5; left:0; position:absolute; top:0; width:100%; z-index:1; }
-.active .mask { display:none; }
 .txt.home { background:#9a283f; color:#fff; }
 .txt.home .edged.col, .txt.home .title { border-color:#fff; }
 .pop { display:none; border:0; position:absolute; top:119px; z-index:1; }
