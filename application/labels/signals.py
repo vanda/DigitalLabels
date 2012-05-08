@@ -1,6 +1,7 @@
 import os
 from sorl.thumbnail import get_thumbnail
 
+
 def get_api_data(sender, instance, **kwargs):
 
     if instance.id == None or instance.redownload == True:
