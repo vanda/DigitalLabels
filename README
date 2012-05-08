@@ -11,3 +11,9 @@ django-grappelli https://github.com/sehmaschine/django-grappelli [branch grappel
 
 Collate the static files by running:
     python manage.py collectstatic
+
+Once you've synced db
+    python manage.py syncdb
+
+Then populate it with some test data
+    python manage.py populatedb
