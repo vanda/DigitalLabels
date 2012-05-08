@@ -1,8 +1,6 @@
 """
-Sorl Thumbnail Engine that accepts background color
----------------------------------------------------
-
-Created on Sunday, February 2012 by Yuji Tomita
+Sorl Thumbnail Engine to pad non-square images to square with a white bg
+------------------------------------------------------------------------
 """
 from math import floor
 from PIL import Image

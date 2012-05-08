@@ -3,6 +3,7 @@ from labels.models import DigitalLabel, Group
 
 RECORDS = "O77488 O9253 O79056 O52823 O79053 O73631 O78977 O34066 O11451"
 
+
 class Command(BaseCommand):
 
     args = "<object_number object_number>"
@@ -24,4 +25,3 @@ class Command(BaseCommand):
                 dl, cr = DigitalLabel.objects.get_or_create(
                                             object_number=object_number)
                 dl.save()
-
