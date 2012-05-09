@@ -8,7 +8,7 @@
         
         <ul class="carousel" id="img">
             {% for dl in labels %}
-            <li class="{% if dl.gateway_object %}active home {% endif %}img obj">
+            <li class="{% if dl.gateway_object %}home {% endif %}img obj">
                 <div class="mask"></div>
                 <div class="case">
                     {% thumbnail dl.image_set.all.0.image_file "222x222" pad=True as im %}
@@ -36,7 +36,7 @@
         
         <ul class="carousel" id="txt">
             {% for dl in labels %}
-            <li class="{% if dl.gateway_object %}active home {% endif %}txt obj">
+            <li class="{% if dl.gateway_object %}home {% endif %}txt obj">
                 <div class="mask"></div>
                 <div class="title"><h2>{{ dl.name }}</h2></div>
                 <div class="row">
