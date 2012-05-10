@@ -17,7 +17,7 @@
                     {% thumbnail dl.image_set.all.0.image_file "128x128" pad=True as im %}
                     <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" alt="" />
                     {% endthumbnail %}
-                    <div class="ctrl"></div>
+                    <div class="zoom"></div>
                 </div>
                 {% if dl.image_set.all|length > 1 %}
                 <div class="thumbs">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="txtr col">
                         <div class="pane">{{ dl.main_text }}</div>
-                        <div class="ctrl"><span>A</span><span class="lfont">A</span></div>
+                        <div class="zoom"></div>
                     </div>
                 </div>
             </li>
@@ -61,6 +61,6 @@
         
     </div>
     
-    <div class="pop" id="imgpop"><div class="case" id="imgbox"><img id="imgbig" src="" alt="" /><div class="ctrl"></div></div><div id="imgtxt"></div></div>
-    <div class="txt pop lfont" id="txtpop"></div>
+    <div class="pop" id="imgpop"><div class="case" id="imgbox"><img id="imgbig" src="" alt="" /><div class="zoom"></div></div><div id="imgtxt"></div></div>
+    <div class="txt pop" id="txtpop"></div>
     {% endblock %}
