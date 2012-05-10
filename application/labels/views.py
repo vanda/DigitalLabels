@@ -4,7 +4,7 @@ from django.template import loader, RequestContext
 from labels.models import Group, DigitalLabel
 
 
-def group(request, group_id=None, format='html'):
+def group(request, group_id):
 
     group = Group.objects.get(id=group_id)
     labels = group.digitallabels.all()
