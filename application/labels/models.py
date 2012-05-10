@@ -27,7 +27,8 @@ class DigitalLabel(models.Model):
     A label describing an individual object
     """
     name = models.CharField(max_length=255, null=False, blank=True)
-    group = models.ForeignKey(Group, null=True, blank=True, related_name="digitallabels")
+    group = models.ForeignKey(Group, null=True, blank=True,
+                                                related_name="digitallabels")
     date_text = models.CharField(max_length=255, null=False, blank=True)
     artist_maker = models.CharField(max_length=255, null=False, blank=True)
     materials_techniques = models.CharField(max_length=255, null=False,
