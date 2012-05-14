@@ -1,4 +1,4 @@
-# Django settings for museumobjects project.
+# Django settings for V&A Digital Labels project.
 
 import os
 BASE_PATH = os.path.dirname(__file__)
