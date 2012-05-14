@@ -17,15 +17,21 @@
 <body>
 
     {% block content %}
-    
-        <a href="{% url group 1 %}">Group 1</a>
-        <p>{{ dl }}</p>
-        <p>
-        {{ dl.image_set.all.0 }}
-        {% thumbnail dl.image_set.all.0.image_file "250x250" pad=True as im %}
-        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-        {% endthumbnail %}
-        </p>
+        <h1>V&A Digital Labels</h1>
+        {% if labels %}
+            <ul>
+            {% for l in labels %}
+                <li>
+                {% if l.museumobjects.all.0.image_set.all %}
+                    {% thumbnail l.museumobjects.all.0.image_set.all.0.image_file "84x84" pad=True as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                    {% endthumbnail %}
+                    
+                {% endif %}
+                <a href="{% url digitallabel l.id %}">{{l}}</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
     {% endblock %}
 
 </body>

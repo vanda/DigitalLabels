@@ -5,12 +5,12 @@ from optparse import make_option
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.test.client import Client
-from labels.models import Group
+from labels.models import DigitalLabel
 
 
 class Command(BaseCommand):
 
-    args = "<group_id group_id>"
+    args = "<digitallabel_id digitallabel_id>"
     help = "Creates a static bundle of HTML, media and images for the labels"
     option_list = BaseCommand.option_list + (
         make_option('-o',
@@ -23,7 +23,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         destination = options['out']
         if not args:
-            g_ids = [g.id for g in Group.objects.all()]
+            g_ids = [g.id for g in DigitalLabel.objects.all()]
         else:
             g_ids = [int(a) for a in args]
 
@@ -47,9 +47,9 @@ class Command(BaseCommand):
         copy_tree(settings.STATIC_ROOT, static_build_dir)
         copy_tree(os.path.join(settings.MEDIA_ROOT, 'cache'), media_build_dir)
 
-    def save_html(self, group_id, destination):
+    def save_html(self, digitallabel_id, destination):
         cl = Client()
-        page_html = cl.get('/group/%d/' % group_id).content
+        page_html = cl.get('/digitallabel/%d/' % digitallabel_id).content
 
         # make img, css and js links relative
         page_html = page_html.replace('data-img-l="/', 'data-img-l="./'
@@ -61,7 +61,7 @@ class Command(BaseCommand):
             print 'Making %s' % (dest_abspath)
             os.mkdir(dest_abspath)
 
-        filename = os.path.join(destination, '%d.html' % (group_id))
+        filename = os.path.join(destination, '%d.html' % (digitallabel_id))
         f = codecs.open(filename, 'w', 'UTF-8')
         f.write(page_html)
 

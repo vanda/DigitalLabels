@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from labels.models import DigitalLabel, Group
+from labels.models import MuseumObject, DigitalLabel
 
 RECORDS = "O77488 O9253 O79056 O52823 O79053 O73631 O78977 O34066 O11451"
 
@@ -12,16 +12,19 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         if not args:
-            chip_grp, cr = Group.objects.get_or_create(name="Chippendale")
-            recs = RECORDS.split(' ')
-            for object_number in recs:
-                dl, cr = DigitalLabel.objects.get_or_create(
-                                            object_number=object_number)
-                dl.group = chip_grp
-                dl.save()
+            chip_grp, cr = DigitalLabel.objects.get_or_create(
+                                                        name="Chippendale")
+            object_nums = RECORDS.split(' ')
 
         else:
-            for object_number in args:
-                dl, cr = DigitalLabel.objects.get_or_create(
-                                            object_number=object_number)
-                dl.save()
+            chip_grp = None
+            object_nums = args
+
+        for object_number in object_nums:
+            print 'Downloading', object_number
+            dl, cr = MuseumObject.objects.get_or_create(
+                                        object_number=object_number)
+            if chip_grp:
+                dl.digitallabel = chip_grp
+
+            dl.save()
