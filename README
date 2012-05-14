@@ -12,8 +12,11 @@ django-grappelli https://github.com/sehmaschine/django-grappelli [branch grappel
 Collate the static files by running:
     python manage.py collectstatic
 
-Once you've synced db
+Create the database tables. This will also create superusers for staff.
     python manage.py syncdb
 
 Then populate it with some test data
     python manage.py populatedb
+    
+You can then create a static build of all or selected digital labels:
+    python manage.py build -o /Output/Directory <label_id> <label_id>
