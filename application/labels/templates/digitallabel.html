@@ -7,24 +7,24 @@
     <div class="clip">
         
         <ul class="carousel" id="img">
-            {% for dl in labels %}
-            <li class="{% if dl.gateway_object %}home {% endif %}img obj">
+            {% for mo in mobjects %}
+            <li class="{% if mo.gateway_object %}home {% endif %}img obj">
                 <div class="mask"></div>
                 <div class="case">
-                    {% thumbnail dl.image_set.all.0.image_file "222x222" pad=True as im %}
-                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" data-img-l="{% thumbnail dl.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                    {% thumbnail mo.image_set.all.0.image_file "222x222" pad=True as im %}
+                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail mo.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                     {% endthumbnail %}
-                    {% thumbnail dl.image_set.all.0.image_file "128x128" pad=True as im %}
-                    <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" alt="" />
+                    {% thumbnail mo.image_set.all.0.image_file "128x128" pad=True as im %}
+                    <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" alt="" />
                     {% endthumbnail %}
                     <div class="zoom"></div>
                 </div>
-                {% if dl.image_set.all|length > 1 %}
+                {% if mo.image_set.all|length > 1 %}
                 <div class="thumbs">
-                    {% for img in dl.image_set.all %}
+                    {% for img in mo.image_set.all %}
                         {% if forloop.counter > 1 and forloop.counter < 6 %}
                             {% thumbnail img.image_file "30x30" pad=True as im %}
-                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ dl.name }} {{ dl.date_text }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                             {% endthumbnail %}
                         {% endif %}
                     {% endfor %}
@@ -35,23 +35,23 @@
         </ul>
         
         <ul class="carousel" id="txt">
-            {% for dl in labels %}
-            <li class="{% if dl.gateway_object %}home {% endif %}txt obj">
+            {% for mo in mobjects %}
+            <li class="{% if mo.gateway_object %}home {% endif %}txt obj">
                 <div class="mask"></div>
-                <div class="title"><h2>{{ dl.name }}</h2></div>
+                <div class="title"><h2>{{ mo.name }}</h2></div>
                 <div class="row">
                     <div class="txtl edged col">
-                        <div class="pane"><p>{{ dl.date_text }}</p></div>
+                        <div class="pane"><p>{{ mo.date_text }}</p></div>
                         <div class="data col">
                             <div class="pane">
-                                <p>{{ dl.artist_maker }}</p>
-                                <p>{{ dl.materials_techniques }}</p>
-                                <p><em>Museum no. {{ dl.museum_number }}</em></p>
+                                <p>{{ mo.artist_maker }}</p>
+                                <p>{{ mo.materials_techniques }}</p>
+                                <p><em>Museum no. {{ mo.museum_number }}</em></p>
                             </div>
                         </div>
                     </div>
                     <div class="txtr col">
-                        <div class="pane">{{ dl.main_text }}</div>
+                        <div class="pane">{{ mo.main_text }}</div>
                         <div class="zoom"></div>
                     </div>
                 </div>

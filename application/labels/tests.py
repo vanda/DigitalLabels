@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from labels.models import DigitalLabel
+from labels.models import MuseumObject
 
 
 class SimpleTest(TestCase):
@@ -23,14 +23,14 @@ class LabelTest(TestCase):
     def setUp(self):
         """
         Tests that we can create a copy of the API data in the
-        DigitalLabel model
+        MuseumObject model
         """
-        dl, cr = DigitalLabel.objects.get_or_create(object_number='O7351')
+        dl, cr = MuseumObject.objects.get_or_create(object_number='O7351')
 
     def test_label_download(self):
 
         # get our label
-        dl = DigitalLabel.objects.get(id=1)
+        dl = MuseumObject.objects.get(id=1)
 
         # test the data fields
         self.assertTrue(len(dl.name) > 0)
@@ -41,7 +41,7 @@ class LabelTest(TestCase):
         self.assertTrue(dl.cmslabel_set.count() > 0)
 
     def test_missing_object(self):
-        dl, cr = DigitalLabel.objects.get_or_create(object_number='OMISSING')
+        dl, cr = MuseumObject.objects.get_or_create(object_number='OMISSING')
 
         self.assertTrue(dl.name.find('UNABLE') > -1)
         # test the labels
@@ -50,14 +50,14 @@ class LabelTest(TestCase):
     def test_thumbnail_url(self):
 
         # get our label
-        dl = DigitalLabel.objects.get(id=1)
+        dl = MuseumObject.objects.get(id=1)
         self.assertTrue(dl.thumbnail_url.endswith('jpg'))
         self.assertTrue(dl.thumbnail_tag().find('cache') > -1)
 
     def test_redownload(self):
 
         # get our label
-        dl = DigitalLabel.objects.get(id=1)
+        dl = MuseumObject.objects.get(id=1)
         original_name = dl.name
         replaced_name = 'Foo Bar Baz'
         self.assertNotEqual(dl.name, replaced_name)
@@ -77,7 +77,7 @@ class LabelTest(TestCase):
     def test_download_image(self):
 
         # count image
-        dl = DigitalLabel.objects.get(id=1)
+        dl = MuseumObject.objects.get(id=1)
 
         ims = dl.image_set.all()
         ic = ims.count()

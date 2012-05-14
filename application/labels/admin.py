@@ -1,11 +1,13 @@
 from django.contrib import admin
 import reversion
 from sorl.thumbnail.admin import AdminImageMixin
-from labels.models import DigitalLabel, CMSLabel, Image, Group
+from labels.models import MuseumObject, CMSLabel, Image, DigitalLabel
 
 
-class CMSLabelInline(admin.StackedInline):
+class CMSLabelInline(admin.TabularInline):
     model = CMSLabel
+    extra = 0
+    inline_classes = ('collapse open',)
 
 
 class ImageInline(AdminImageMixin, admin.TabularInline):
@@ -17,21 +19,21 @@ class ImageInline(AdminImageMixin, admin.TabularInline):
     sortable_field_name = "position"
 
 
-class DigitalLabelInline(admin.TabularInline):
+class MuseumObjectInline(admin.TabularInline):
     inline_classes = ('collapse open',)
     fields = ('museum_number', 'name', 'position',)
     extra = 0
-    model = DigitalLabel
+    model = MuseumObject
     # define the sortable
     sortable_field_name = "position"
 
 
-class DigitalLabelAdmin(reversion.VersionAdmin):
+class MuseumObjectAdmin(reversion.VersionAdmin):
     list_display = ('thumbnail_tag', 'museum_number', 'name')
     save_on_top = True
     inlines = [
-        CMSLabelInline,
         ImageInline,
+        CMSLabelInline,
     ]
 
 
@@ -43,13 +45,13 @@ class ImageAdmin(AdminImageMixin, reversion.VersionAdmin):
     pass
 
 
-class GroupAdmin(reversion.VersionAdmin):
+class DigitalLabelAdmin(reversion.VersionAdmin):
     save_on_top = True
     inlines = [
-        DigitalLabelInline,
+        MuseumObjectInline,
     ]
 
-admin.site.register(DigitalLabel, DigitalLabelAdmin)
+admin.site.register(MuseumObject, MuseumObjectAdmin)
 #admin.site.register(CMSLabel, CMSLabelAdmin)
 admin.site.register(Image, ImageAdmin)
-admin.site.register(Group, GroupAdmin)
+admin.site.register(DigitalLabel, DigitalLabelAdmin)

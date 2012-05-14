@@ -13,7 +13,7 @@ from sorl.thumbnail import ImageField, get_thumbnail
 logger = logging.getLogger('labels')
 
 
-class Group(models.Model):
+class DigitalLabel(models.Model):
 
     name = models.CharField(max_length=255, null=False)
 
@@ -22,13 +22,13 @@ class Group(models.Model):
         return self.name
 
 
-class DigitalLabel(models.Model):
+class MuseumObject(models.Model):
     """
     A label describing an individual object
     """
     name = models.CharField(max_length=255, null=False, blank=True)
-    group = models.ForeignKey(Group, null=True, blank=True,
-                                                related_name="digitallabels")
+    digitallabel = models.ForeignKey(DigitalLabel, null=True, blank=True,
+                                                related_name="museumobjects")
     date_text = models.CharField(max_length=255, null=False, blank=True)
     artist_maker = models.CharField(max_length=255, null=False, blank=True)
     materials_techniques = models.CharField(max_length=255, null=False,
@@ -48,6 +48,7 @@ class DigitalLabel(models.Model):
 
     class Meta:
         ordering = ['position']
+        verbose_name = "object"
 
     def __unicode__(self):
         if self.museum_number:
@@ -113,8 +114,13 @@ class DigitalLabel(models.Model):
                 cms_label = CMSLabel()
                 cms_label.date = l['fields']['date']
                 cms_label.text = l['fields']['label_text']
-                cms_label.digitallabel = self
+                cms_label.museumobject = self
                 cms_label.save()
+                self.main_text = cms_label.text
+
+        # save the label text onto the main object
+        if self.main_text:
+            self.save()
 
     def create_images(self):
 
@@ -124,7 +130,7 @@ class DigitalLabel(models.Model):
                 image_id = i['fields']['image_id']
                 try:
                     cms_image, cr = Image.objects.get_or_create(
-                                digitallabel=self, image_id=image_id)
+                                museumobject=self, image_id=image_id)
                     cms_image.store_vadar_image()
                     cms_image.caption = image_id
                     cms_image.image_file = os.path.join(
@@ -148,10 +154,10 @@ class CMSLabel(models.Model):
 
     date = models.CharField(max_length=255, null=False)
     text = models.TextField()
-    digitallabel = models.ForeignKey(DigitalLabel)
+    museumobject = models.ForeignKey(MuseumObject)
 
     def __unicode__(self):
-        return u"%s for %s" % (self.date, self.digitallabel.museum_number)
+        return u"%s for %s" % (self.date, self.museumobject.museum_number)
 
 
 class Image(models.Model):
@@ -160,13 +166,13 @@ class Image(models.Model):
     caption = models.CharField(max_length=255, null=False)
     image_file = ImageField(upload_to="labels/images")
     position = models.PositiveIntegerField(null=False, default=1)
-    digitallabel = models.ForeignKey(DigitalLabel)
+    museumobject = models.ForeignKey(MuseumObject)
 
     class Meta:
         ordering = ['position']
 
     def __unicode__(self):
-        return u"%s for %s" % (self.image_id, self.digitallabel.museum_number)
+        return u"%s for %s" % (self.image_id, self.museumobject.museum_number)
 
     @property
     def local_file_name(self):
@@ -212,6 +218,6 @@ from django.db.models.signals import pre_save, post_save
 from labels.signals import get_api_data, get_related_api_data, \
                                                         create_thumbnails
 
-pre_save.connect(get_api_data, DigitalLabel)
-post_save.connect(get_related_api_data, DigitalLabel)
+pre_save.connect(get_api_data, MuseumObject)
+post_save.connect(get_related_api_data, MuseumObject)
 post_save.connect(create_thumbnails, Image)
