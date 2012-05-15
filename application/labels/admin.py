@@ -26,10 +26,17 @@ class MuseumObjectInline(admin.TabularInline):
     model = MuseumObject
     # define the sortable
     sortable_field_name = "position"
+    template = 'admin/object_inline/tabular.html'
 
 
 class MuseumObjectAdmin(reversion.VersionAdmin):
-    list_display = ('thumbnail_tag', 'museum_number', 'name')
+    list_display = ('thumbnail_tag', 'object_number', 'museum_number',
+                                            'name', 'artist_maker', 'place')
+    list_display_links = ('object_number', 'museum_number', 'name',)
+    list_per_page = 25
+    list_selected_related = True
+    list_filter = ('digitallabel',)
+    search_fields = ['name', 'museum_number', 'object_number']
     save_on_top = True
     inlines = [
         ImageInline,

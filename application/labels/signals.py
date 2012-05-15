@@ -12,6 +12,9 @@ def get_api_data(sender, instance, **kwargs):
             object_name = museum_object['fields']['object']
             object_title = museum_object['fields']['title']
 
+            # Remove sort indicators
+            object_title = object_title.replace('^', '')
+
             if (object_name and object_title) and (object_name !=
                                                         object_title):
                 label_name = "%s (%s)" % (object_title, object_name)
@@ -24,8 +27,10 @@ def get_api_data(sender, instance, **kwargs):
                             museum_object['fields']['materials_techniques']
 
             instance.artist_maker = museum_object['fields']['artist']
+            instance.place = museum_object['fields']['place']
             instance.date_text = museum_object['fields']['date_text']
             instance.credit_line = museum_object['fields']['credit']
+
 
         else:
             # make note of error in title

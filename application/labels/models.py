@@ -31,6 +31,7 @@ class MuseumObject(models.Model):
                                                 related_name="museumobjects")
     date_text = models.CharField(max_length=255, null=False, blank=True)
     artist_maker = models.CharField(max_length=255, null=False, blank=True)
+    place = models.CharField(max_length=255, null=False, blank=True)
     materials_techniques = models.CharField(max_length=255, null=False,
                                                             blank=True)
     museum_number = models.CharField(max_length=255, null=False, blank=True)
@@ -70,7 +71,7 @@ class MuseumObject(models.Model):
                 # images are sorted by priority, so take the first
                 image_file = self.image_set.all()[0]
 
-                im = get_thumbnail(image_file.local_file_name, '100x100',
+                im = get_thumbnail(image_file.local_file_name, '44x44',
                                                     quality=85, pad=True)
 
                 self._thumbnail_url = im.url
