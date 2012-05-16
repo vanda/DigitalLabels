@@ -10,8 +10,11 @@ jQuery(document).ready(function() {
     }
 
     $('#img, #txt').each(function(){
-        if( $(this).find('li.home').length < 1 ){ $(this).find('li').eq(0).addClass('active'); }
-        else $(this).find('li.home').addClass('active');
+        if( $(this).find('li.home').length < 1 ){ 
+            $(this).find('li').eq(0).addClass('active'); 
+        }else{ 
+            $(this).find('li.home').addClass('active'); 
+        }
         var i = $(this).find('li').not('.active'),
             w = i.outerWidth() + parseFloat(i.css('margin-left'))*2,
             iA = $(this).find('li.active'),
@@ -21,7 +24,10 @@ jQuery(document).ready(function() {
         this.hit = function(i){
             var t = 1024;
             $(this).find('.active>.mask').animate({'opacity':'0.5'}, t/4, null, $(this).find('li>.mask').show());
-            $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ $(this).find('li').removeClass('active').find('.mask').css({'opacity':'0.5','display':'block'}); $(this).find('li:nth-child('+(i+1)+')').addClass('active').find('.mask').fadeToggle(t/4); })
+            $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ 
+                $(this).find('li').removeClass('active').find('.mask').css({'opacity':'0.5','display':'block'}); 
+                $(this).find('li:nth-child('+(i+1)+')').addClass('active').find('.mask').fadeToggle(t/4); 
+            });
         };
     });
     
@@ -32,23 +38,29 @@ jQuery(document).ready(function() {
         $(this).touchwipe({ 
             wipeLeft:function(){
                 $('#img, #txt').each(function(){ 
-                    if( $(this).find('li').eq($(li).index()).is('.active') ){ if( $(li).index()<$(this).find('li').length-1 ) this.hit($(li).index()+1); }
-                    else{ this.hit($(li).index()); }
+                    if( $(this).find('li').eq($(li).index()).is('.active') ){ 
+                        if( $(li).index()<$(this).find('li').length-1 ){ this.hit($(li).index()+1); }
+                    }else{ 
+                        this.hit($(li).index()); 
+                    }
                 }); 
             },  
             wipeRight:function(){
                 $('#img, #txt').each(function(){ 
-                    if( $(this).find('li').eq($(li).index()).is('.active') ){ if( $(li).index()>0 ) this.hit($(li).index()-1); }
-                    else{ this.hit($(li).index()); }
+                    if( $(this).find('li').eq($(li).index()).is('.active') ){ 
+                        if( $(li).index()>0 ){ this.hit($(li).index()-1); }
+                    }else{ 
+                        this.hit($(li).index()); 
+                    }
                 }); 
             } 
         });
     });
     
     $('#img').on('click', '.active', function(e){
-        var pip = (e.target.tagName.toLowerCase()=='img')? e.target : $(this).find('img').get(0),
-            l = ($(window).width()-$('#imgpop').outerWidth())/2,
-            l = l>0? l:0;
+        var pip = (e.target.tagName.toLowerCase()==='img')? e.target : $(this).find('img').get(0),
+            l = ($(window).width()-$('#imgpop').outerWidth())/2;
+        l = l>0? l:0;
         $('#imgbig').remove();
         $('#imgbox').prepend('<img id="imgbig" src="'+ $(pip).data('img-l') +'" alt=""/>');
         $('#imgtxt').html(pip.title);
@@ -68,8 +80,11 @@ jQuery(document).ready(function() {
     });
     
     $('#img').each(function(){
-        if( $(this).find('li.home').length < 1 ){ $(this).find('li').eq(Math.floor($(this).find('li').length/2)).trigger('click'); }
-        else $(this).find('li.home').trigger('click');
+        if( $(this).find('li.home').length < 1 ){ 
+            $(this).find('li').eq(Math.floor($(this).find('li').length/2)).trigger('click'); 
+        }else{ 
+            $(this).find('li.home').trigger('click');
+        }
     });
     
 }); //end doc.ready
@@ -80,8 +95,8 @@ jQuery(document).ready(function() {
 (function($){
     $.fn.extend({
         mouseTrap: function(opt){
-            var def = { close:this, mask:0 },
-                opt = $.extend(def,opt);
+            var def = { close:this, mask:0 };
+            opt = $.extend(def,opt);
             return this.each(function(){
                 var obj = $(this);
                 $('#mousetrap').remove();
