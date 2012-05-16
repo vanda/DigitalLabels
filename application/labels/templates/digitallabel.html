@@ -44,9 +44,9 @@
                         <div class="pane"><p>{{ mo.date_text }}</p></div>
                         <div class="data col">
                             <div class="pane">
-                                <p>{{ mo.artist_maker }}</p>
+                                <p>{{ mo.place }}<br />{{ mo.artist_maker }}</p>
                                 <p>{{ mo.materials_techniques }}</p>
-                                <p><em>Museum no. {{ mo.museum_number }}</em></p>
+                                <p>{{ mo.credit_line }}{% if mo.credit_line|length > 0 %}<br />{% endif %}<em>Museum no. {{ mo.museum_number }}</em></p>
                             </div>
                         </div>
                     </div>
