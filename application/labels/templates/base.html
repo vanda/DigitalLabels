@@ -20,21 +20,23 @@
 <body>
 
     {% block content %}
-        <h1>V&A Digital Labels</h1>
+    <div id="index">
+        <h1>V&amp;A Digital Labels</h1>
         {% if labels %}
-            <ul>
+        <ul>
             {% for l in labels %}
-                <li>
+            <li>
                 {% if l.museumobjects.all.0.image_set.all %}
-                    {% thumbnail l.museumobjects.all.0.image_set.all.0.image_file "84x84" pad=True as im %}
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                    {% endthumbnail %}
-                    
+                {% thumbnail l.museumobjects.all.0.image_set.all.0.image_file "84x84" pad=True as im %}
+                <a href="{% url digitallabel l.id %}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a><br />
+                {% endthumbnail %}
                 {% endif %}
-                <a href="{% url digitallabel l.id %}">{{l}}</a></li>
+                <a href="{% url digitallabel l.id %}">{{l}}</a>
+            </li>
             {% endfor %}
-            </ul>
+        </ul>
         {% endif %}
+    </div>
     {% endblock %}
 
 </body>
