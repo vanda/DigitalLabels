@@ -4,11 +4,19 @@ jQuery(document).ready(function() {
         var v = $('meta[name^="viewport"]'), 
             c = v.attr('content');
         v.attr('content', c.replace('initial-scale=1', 'initial-scale='+$(window).height()/710));
-        $(window).bind('load resize', function(){
-            $('#img li.active').removeClass('active').trigger('click');
-        });
     }
 
+    $(window).each(function(){
+        $(this).on('resize', function(){
+            $('#img li.active').removeClass('active').trigger('click');
+        });
+        if( $(this).height()>710 ){
+            $(this).on('touchmove', function(e){
+                e.preventDefault();
+            });
+        }
+    });
+    
     $('#img, #txt').each(function(){
         if( $(this).find('li.home').length < 1 ){ 
             $(this).find('li').eq(0).addClass('active'); 
