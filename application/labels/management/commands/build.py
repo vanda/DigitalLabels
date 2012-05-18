@@ -63,5 +63,6 @@ class Command(BaseCommand):
 
         filename = os.path.join(destination, '%d.html' % (digitallabel_id))
         f = codecs.open(filename, 'w', 'UTF-8')
-        f.write(page_html)
+        unicode_html = unicode(page_html, 'UTF-8')
+        f.write(unicode_html)
 
