@@ -84,6 +84,7 @@ class LabelTest(TestCase):
         self.assertTrue(ic > 0)
 
         test_image = ims[0]
+
         self.assertEquals(
             unicode(test_image.image_file).find(test_image.image_id), 14)
 

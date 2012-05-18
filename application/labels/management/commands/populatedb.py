@@ -25,7 +25,9 @@ class Command(BaseCommand):
 
         for identifier in identifiers:
 
-            if not identifier.startswith('O'):
+            if identifier.startswith('O'):
+                object_number = identifier
+            else:
                 # this is a museum number, exchange for O number
                 object_number = self.get_object_by_mn(identifier)
 

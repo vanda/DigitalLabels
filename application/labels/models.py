@@ -71,7 +71,7 @@ class MuseumObject(models.Model):
                 # images are sorted by priority, so take the first
                 image_file = self.image_set.all()[0]
 
-                im = get_thumbnail(image_file.local_file_name, '44x44',
+                im = get_thumbnail(image_file.local_filename, '44x44',
                                                     quality=85, pad=True)
 
                 self._thumbnail_url = im.url
@@ -165,8 +165,8 @@ class CMSLabel(models.Model):
 
 class Image(models.Model):
 
-    image_id = models.CharField(max_length=16, null=False)
-    caption = models.CharField(max_length=255, null=False)
+    image_id = models.CharField(max_length=16, null=False, blank=True)
+    caption = models.CharField(max_length=255, null=False, blank=True)
     image_file = ImageField(upload_to="labels/images")
     position = models.PositiveIntegerField(null=False, default=1)
     museumobject = models.ForeignKey(MuseumObject)
@@ -177,8 +177,20 @@ class Image(models.Model):
     def __unicode__(self):
         return u"%s for %s" % (self.image_id, self.museumobject.museum_number)
 
+
     @property
-    def local_file_name(self):
+    def local_filename(self):
+        """Where is the file stored regardless of source"""
+        if self.image_file:
+            return os.path.join(settings.MEDIA_ROOT,
+                                self.image_file.field.upload_to,
+                                unicode(self.image_file.file))
+        else:
+            return None
+
+
+    @property
+    def local_vadar_filename(self):
         """Where should this image be stored if it can be retrieved?"""
         if self.image_id:
             return "%s%s/%s.jpg" % (settings.MEDIA_ROOT,
@@ -200,7 +212,7 @@ class Image(models.Model):
             meta = f.info()
             if meta.type == 'image/jpeg':
                 # Open our local file for writing
-                local_file = open(self.local_file_name, "wb")
+                local_file = open(self.local_vadar_filename, "wb")
                 #Write to our local file
                 local_file.write(f.read())
                 local_file.close()
