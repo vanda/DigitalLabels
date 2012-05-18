@@ -25,61 +25,61 @@ class LabelTest(TestCase):
         Tests that we can create a copy of the API data in the
         MuseumObject model
         """
-        dl, cr = MuseumObject.objects.get_or_create(object_number='O7351')
+        mo, cr = MuseumObject.objects.get_or_create(object_number='O7351')
 
     def test_label_download(self):
 
         # get our label
-        dl = MuseumObject.objects.get(id=1)
+        mo = MuseumObject.objects.get(id=1)
 
         # test the data fields
-        self.assertTrue(len(dl.name) > 0)
-        self.assertTrue(len(dl.museum_number) > 0)
-        self.assertTrue(len(dl.artist_maker) > 0)
+        self.assertTrue(len(mo.name) > 0)
+        self.assertTrue(len(mo.museum_number) > 0)
+        self.assertTrue(len(mo.artist_maker) > 0)
 
         # test the labels
-        self.assertTrue(dl.cmslabel_set.count() > 0)
+        self.assertTrue(mo.cmslabel_set.count() > 0)
 
     def test_missing_object(self):
-        dl, cr = MuseumObject.objects.get_or_create(object_number='OMISSING')
+        mo, cr = MuseumObject.objects.get_or_create(object_number='OMISSING')
 
-        self.assertTrue(dl.name.find('UNABLE') > -1)
+        self.assertTrue(mo.name.find('UNABLE') > -1)
         # test the labels
-        self.assertTrue(dl.cmslabel_set.count() == 0)
+        self.assertTrue(mo.cmslabel_set.count() == 0)
 
     def test_thumbnail_url(self):
 
         # get our label
-        dl = MuseumObject.objects.get(id=1)
-        self.assertTrue(dl.thumbnail_url.endswith('jpg'))
-        self.assertTrue(dl.thumbnail_tag().find('cache') > -1)
+        mo = MuseumObject.objects.get(id=1)
+        self.assertTrue(mo.thumbnail_url.endswith('jpg'))
+        self.assertTrue(mo.thumbnail_tag().find('cache') > -1)
 
     def test_redownload(self):
 
         # get our label
-        dl = MuseumObject.objects.get(id=1)
-        original_name = dl.name
+        mo = MuseumObject.objects.get(id=1)
+        original_name = mo.name
         replaced_name = 'Foo Bar Baz'
-        self.assertNotEqual(dl.name, replaced_name)
+        self.assertNotEqual(mo.name, replaced_name)
 
         # change the name
-        dl.name = replaced_name
-        dl.save()
-        self.assertEqual(dl.name, replaced_name)
+        mo.name = replaced_name
+        mo.save()
+        self.assertEqual(mo.name, replaced_name)
 
-        dl.redownload = True
-        dl.save()
+        mo.redownload = True
+        mo.save()
 
         # ensure original name was redownloaded
-        self.assertEqual(dl.name, original_name)
-        self.assertFalse(dl.redownload)
+        self.assertEqual(mo.name, original_name)
+        self.assertFalse(mo.redownload)
 
     def test_download_image(self):
 
         # count image
-        dl = MuseumObject.objects.get(id=1)
+        mo = MuseumObject.objects.get(id=1)
 
-        ims = dl.image_set.all()
+        ims = mo.image_set.all()
         ic = ims.count()
         self.assertTrue(ic > 0)
 
@@ -88,5 +88,5 @@ class LabelTest(TestCase):
             unicode(test_image.image_file).find(test_image.image_id), 14)
 
         # check primary image position
-        self.assertEquals(dl.image_set.filter(position=0).count(), 1)
-        self.assertTrue(dl.image_set.filter(position=1).count() > 0)
+        self.assertEquals(mo.image_set.filter(position=0).count(), 1)
+        self.assertTrue(mo.image_set.filter(position=1).count() > 0)

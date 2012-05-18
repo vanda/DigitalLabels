@@ -80,8 +80,11 @@ class MuseumObject(models.Model):
 
     def thumbnail_tag(self):
 
-        return mark_safe('<img alt="%s" src="%s" />' % (
+        if self.thumbnail_url:
+            return mark_safe('<img alt="%s" src="%s" />' % (
                                             self.name, self.thumbnail_url))
+        else:
+            return mark_safe('<em>No Images</em>')
 
     thumbnail_tag.allow_tags = True
     thumbnail_tag.short_description = 'Thumb'
@@ -148,7 +151,6 @@ class MuseumObject(models.Model):
                     else:
                         # other error
                         pass
-            self.save()
 
 
 class CMSLabel(models.Model):
