@@ -31,7 +31,6 @@ def get_api_data(sender, instance, **kwargs):
             instance.date_text = museum_object['fields']['date_text']
             instance.credit_line = museum_object['fields']['credit']
 
-
         else:
             # make note of error in title
             instance.name = "* UNABLE TO GET RECORD DATA FOR %s *" % (
