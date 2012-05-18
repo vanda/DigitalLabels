@@ -9,6 +9,11 @@ jQuery(document).ready(function() {
     $(window).each(function(){
         $(this).on('resize', function(){
             $('#img li.active').removeClass('active').trigger('click');
+            $('.pop').each(function(){
+                var l = ($(window).width()-$(this).outerWidth())/2;
+                l = l>0? l:0;
+                $(this).css('left',l);
+            });
         });
         if( $(this).height()>710 ){
             $(this).on('touchmove', function(e){
@@ -72,13 +77,13 @@ jQuery(document).ready(function() {
         $('#imgbig').remove();
         $('#imgbox').prepend('<img id="imgbig" src="'+ $(pip).data('img-l') +'" alt=""/>');
         $('#imgtxt').html(pip.title);
-        $('#imgpop').css({'left':l}).show().mouseTrap({'mask':1});
+        $('#imgpop').css('left',l).show().mouseTrap({'mask':1});
     });
     
     $('#txt').on('click', '.active', function(){
         var l = ($(window).width()-$('#txtpop').outerWidth())/2;
         l = l>0? l:0;
-        $('#txtpop').removeClass('home').html($(this).html()).css({'left':l}).show().mouseTrap({'mask':1});
+        $('#txtpop').removeClass('home').html($(this).html()).css('left',l).show().mouseTrap({'mask':1});
         if( $(this).hasClass('home') ){ $('#txtpop').addClass('home'); }
     });
     
