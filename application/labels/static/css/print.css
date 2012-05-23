@@ -1,0 +1,4 @@
+body { height:100%; overflow:hidden; position:absolute; width:100%; }
+#header { display:none; }
+#mousetrap.mask { background:#fff; opacity:1; }
+.pop { border:1px solid #b5b5b5; left:0!important; top:0!important; }
