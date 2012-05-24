@@ -15,11 +15,6 @@ jQuery(document).ready(function() {
                 $(this).css('left',l);
             });
         });
-        if( $(this).height()>710 ){
-            $(this).on('touchmove', function(e){
-                e.preventDefault();
-            });
-        }
     });
     
     $('#img, #txt').each(function(){
@@ -47,26 +42,20 @@ jQuery(document).ready(function() {
     $('#img, #txt').on('click', 'li:not(.active)', function(){
         var i = $(this).index();
         $('#img, #txt').each(function(){ this.hit(i); });
-    }).find('li').each(function(c,li){
-        $(this).touchwipe({ 
-            wipeLeft:function(){
+    });
+    $('#img, #txt').find('li').each(function(){
+        $(this).hammer({prevent_default:true, css_hacks:false, drag_vertical:false, swipe_min_distance:0}).on('swipe', function(e){
+            var li = $(this);
+            if( li.is('.active') ){
                 $('#img, #txt').each(function(){ 
-                    if( $(this).find('li').eq($(li).index()).is('.active') ){ 
-                        if( $(li).index()<$(this).find('li').length-1 ){ this.hit($(li).index()+1); }
-                    }else{ 
-                        this.hit($(li).index()); 
+                    var n = li.index() + (e.direction=='left' ? 1:-1);
+                    if( n>-1 && n<$(this).find('li').length){
+                        this.hit(n);
                     }
-                }); 
-            },  
-            wipeRight:function(){
-                $('#img, #txt').each(function(){ 
-                    if( $(this).find('li').eq($(li).index()).is('.active') ){ 
-                        if( $(li).index()>0 ){ this.hit($(li).index()-1); }
-                    }else{ 
-                        this.hit($(li).index()); 
-                    }
-                }); 
-            } 
+                });
+            }else{
+                $('#img, #txt').each(function(){ this.hit($(li).index()); });
+            }
         });
     });
     
