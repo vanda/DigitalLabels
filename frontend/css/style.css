@@ -35,13 +35,16 @@ li.img .zoom { margin:4px; }
 .active .zoom, .pop .zoom { display:block; }
 li.home.txt .zoom { background-image:url(img/zoomin_ht.png); }
 #txtpop.home .zoom { background-image:url(img/zoomout_ht.png); }
-#imgbox { border:0; }
+#imgbox { border:0; height:542px; width:542px; }
 #imgtxt { background:#6b6a6f; color:#fff; display:table-cell; height:51px; padding:0 12px; vertical-align:middle; width:518px; }
 #txtpop { font-size:156%; padding:15px 24px 24px; width:794px; }
 #txtpop .txtl, #txtpop .txtr { height:484px; }
 
 #mousetrap { height:100%; left:0; position:absolute; top:0; width:100%; z-index:1; }
 #mousetrap.mask { background:#292728; opacity:0.9; }
+
+#index { margin:0 10px; }
+#index li { border:1px solid #b5b5b5; display:inline-block; list-style-type:none; margin:0 5px 5px 0; padding:10px; text-align:center; }
 
 @media screen and (max-height:710px) {
     .thumbs { padding:3px 0 3px 3px; }
