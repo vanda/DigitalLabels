@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
         if( $(this).find('li.home').length < 1 ){ 
             $(this).find('li').eq(0).addClass('active'); 
         }else{ 
-            $(this).find('li.home').addClass('active'); 
+            $(this).find('li.home').eq(0).addClass('active'); 
         }
         var i = $(this).find('li').not('.active'),
             w = i.outerWidth() + parseFloat(i.css('margin-left'))*2,
@@ -89,7 +89,7 @@ jQuery(document).ready(function() {
         if( $(this).find('li.home').length < 1 ){ 
             $(this).find('li').eq(Math.floor($(this).find('li').length/2)).trigger('click'); 
         }else{ 
-            $(this).find('li.home').trigger('click');
+            $(this).find('li.home').eq(0).trigger('click');
         }
     });
     
