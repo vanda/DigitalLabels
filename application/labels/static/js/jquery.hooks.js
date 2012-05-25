@@ -44,17 +44,21 @@ jQuery(document).ready(function() {
         $('#img, #txt').each(function(){ this.hit(i); });
     });
     $('#img, #txt').find('li').each(function(){
-        $(this).hammer({prevent_default:true, css_hacks:false, drag_vertical:false, swipe_min_distance:0}).on('swipe', function(e){
-            var li = $(this);
-            if( li.is('.active') ){
-                $('#img, #txt').each(function(){ 
-                    var n = li.index() + (e.direction=='left' ? 1:-1);
-                    if( n>-1 && n<$(this).find('li').length){
-                        this.hit(n);
-                    }
-                });
-            }else{
-                $('#img, #txt').each(function(){ this.hit($(li).index()); });
+        $(this).hammer({css_hacks:false, swipe:false}).on('dragstart', function(e){
+            var li = $(this),
+                a = Math.abs(e.angle);
+            if( a<60 || a>150 ){
+                if( li.is('.active') ){
+                    $('#img, #txt').each(function(){
+                        var d = (a<60? 1:-1);
+                        var n = li.index() - d;
+                        if( n>-1 && n<$(this).find('li').length){
+                            this.hit(n);
+                        }
+                    });
+                }else{
+                    $('#img, #txt').each(function(){ this.hit($(li).index()); });
+                }
             }
         });
     });
