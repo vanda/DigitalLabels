@@ -4,7 +4,7 @@
 .edged.col { border-right:1px solid #b5b5b5; }
 .edged.col>.pane { padding:0 0.5em 0 0; }
 
-#header { background-color:#d4006e; color:#fff; font-style:italic; line-height:28px; text-align:center; }
+#header { background-color:#d4006e; color:#fff; line-height:28px; text-align:center; }
 .clip { overflow:hidden; }
 .carousel { clear:both; margin:0; position:relative; }
 #img { height:303px; margin:0 0 23px; }
