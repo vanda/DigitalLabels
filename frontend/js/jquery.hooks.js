@@ -15,18 +15,13 @@ jQuery(document).ready(function() {
                 $(this).css('left',l);
             });
         });
-        if( $(this).height()>710 ){
-            $(this).on('touchmove', function(e){
-                e.preventDefault();
-            });
-        }
     });
     
     $('#img, #txt').each(function(){
         if( $(this).find('li.home').length < 1 ){ 
             $(this).find('li').eq(0).addClass('active'); 
         }else{ 
-            $(this).find('li.home').addClass('active'); 
+            $(this).find('li.home').eq(0).addClass('active'); 
         }
         var i = $(this).find('li').not('.active'),
             w = i.outerWidth() + parseFloat(i.css('margin-left'))*2,
@@ -47,26 +42,24 @@ jQuery(document).ready(function() {
     $('#img, #txt').on('click', 'li:not(.active)', function(){
         var i = $(this).index();
         $('#img, #txt').each(function(){ this.hit(i); });
-    }).find('li').each(function(c,li){
-        $(this).touchwipe({ 
-            wipeLeft:function(){
-                $('#img, #txt').each(function(){ 
-                    if( $(this).find('li').eq($(li).index()).is('.active') ){ 
-                        if( $(li).index()<$(this).find('li').length-1 ){ this.hit($(li).index()+1); }
-                    }else{ 
-                        this.hit($(li).index()); 
-                    }
-                }); 
-            },  
-            wipeRight:function(){
-                $('#img, #txt').each(function(){ 
-                    if( $(this).find('li').eq($(li).index()).is('.active') ){ 
-                        if( $(li).index()>0 ){ this.hit($(li).index()-1); }
-                    }else{ 
-                        this.hit($(li).index()); 
-                    }
-                }); 
-            } 
+    });
+    $('#img, #txt').find('li').each(function(){
+        $(this).hammer({css_hacks:false, swipe:false}).on('dragstart', function(e){
+            var li = $(this),
+                a = Math.abs(e.angle);
+            if( a<60 || a>150 ){
+                if( li.is('.active') ){
+                    $('#img, #txt').each(function(){
+                        var d = (a<60? 1:-1);
+                        var n = li.index() - d;
+                        if( n>-1 && n<$(this).find('li').length){
+                            this.hit(n);
+                        }
+                    });
+                }else{
+                    $('#img, #txt').each(function(){ this.hit($(li).index()); });
+                }
+            }
         });
     });
     
@@ -96,7 +89,7 @@ jQuery(document).ready(function() {
         if( $(this).find('li.home').length < 1 ){ 
             $(this).find('li').eq(Math.floor($(this).find('li').length/2)).trigger('click'); 
         }else{ 
-            $(this).find('li.home').trigger('click');
+            $(this).find('li.home').eq(0).trigger('click');
         }
     });
     
