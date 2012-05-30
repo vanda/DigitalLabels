@@ -47,7 +47,7 @@ li.home.txt .zoom { background-image:url(img/zoomin_ht.png); }
 #index li { border:1px solid #b5b5b5; display:inline-block; list-style-type:none; margin:0 5px 5px 0; padding:10px; text-align:center; }
 
 @media screen and (max-height:710px) {
-    .pop { left:0; top:0; }
+    .pop { top:28px; }
     .pop .zoom { background-color:#fff; border:1px solid #b5b5b5; border-radius:5px 5px 5px 5px; bottom:10px; padding:4px; position:fixed; right:10px; }
     #txtpop.home .zoom { background-color:#d4006e; border-color:#fff; }
 }
