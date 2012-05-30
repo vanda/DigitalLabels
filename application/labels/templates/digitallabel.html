@@ -20,10 +20,10 @@
                     <div class="zoom"></div>
                 </div>
                 {% if mo.image_set.all|length > 1 %}
-                <div class="thumbs">
+                <div class="thumbs">Supporting images&hellip;<br />
                     {% for img in mo.image_set.all %}
                         {% if forloop.counter > 1 and forloop.counter < 6 %}
-                            {% thumbnail img.image_file "30x30" pad=True as im %}
+                            {% thumbnail img.image_file "48x48" pad=True as im %}
                             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                             {% endthumbnail %}
                         {% endif %}
