@@ -27,7 +27,7 @@
 .mask { background:#292728; height:100%; opacity:0.5; left:0; position:absolute; top:0; width:100%; z-index:1; }
 .home.txt { background:#d4006e; color:#fff; }
 .home.txt .edged.col, .home.txt .title { border-color:#fff; }
-.pop { display:none; border:0; position:absolute; top:119px; z-index:1; }
+.pop { display:none; border:0; position:absolute; top:121px; z-index:1; }
 .pop>.mask { display:none; }
 .zoom { background:url(img/zoomin.png) 50% 50% no-repeat; display:none; height:22px; margin:10px; right:0; width:22px; }
 .pop .zoom { background-image:url(img/zoomout.png); height:32px; width:32px; }
@@ -36,9 +36,9 @@ li.img .zoom { margin:4px; }
 li.home.txt .zoom { background-image:url(img/zoomin_ht.png); }
 #txtpop.home .zoom { background-image:url(img/zoomout_ht.png); }
 #imgbox { border:0; height:542px; width:542px; }
-#imgtxt { background:#6b6a6f; color:#fff; display:table-cell; height:51px; padding:0 12px; vertical-align:middle; width:518px; }
+#imgtxt { background:#6b6a6f; color:#fff; display:table-cell; height:77px; padding:0 12px; vertical-align:middle; width:518px; }
 #txtpop { font-size:156%; padding:15px 24px 24px; width:794px; }
-#txtpop .txtl, #txtpop .txtr { height:484px; }
+#txtpop .txtl, #txtpop .txtr { height:511px; }
 
 #mousetrap { height:100%; left:0; position:absolute; top:0; width:100%; z-index:1; }
 #mousetrap.mask { background:#292728; opacity:0.9; }
