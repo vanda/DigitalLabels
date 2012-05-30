@@ -14,6 +14,7 @@ jQuery(document).ready(function() {
                 l = l>0? l:0;
                 $(this).css('left',l);
             });
+            $('#mousetrap').height($(document).height()).width($(document).width());
         });
     });
     
@@ -106,7 +107,7 @@ jQuery(document).ready(function() {
             return this.each(function(){
                 var obj = $(this);
                 $('#mousetrap').remove();
-                obj.before($('<div id="mousetrap" class="'+(opt.mask?'mask':'')+'"/>').height($(document).height()*2).width($(document).width()*2).click(function(){ $(opt.close).hide(); $('#mousetrap').remove(); }));
+                obj.before($('<div id="mousetrap" class="'+(opt.mask?'mask':'')+'"/>').height($(document).height()).width($(document).width()).on('click', function(){ $(opt.close).hide(); $('#mousetrap').remove(); }));
                 obj.click(function(){ if( $(opt.close).is(':hidden') ){ $('#mousetrap').remove(); } });
             });
         }
