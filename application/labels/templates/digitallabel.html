@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load thumbnail %}
+{% load replace %}
 
     {% block content %}
     <div id="header" class="hi">Touch an object or its label</div>
@@ -46,7 +47,7 @@
                             <div class="pane">
                                 <p>{{ mo.place }}<br />{{ mo.artist_maker }}</p>
                                 <p>{{ mo.materials_techniques }}</p>
-                                <p>{{ mo.credit_line }}{% if mo.credit_line|length > 0 %}<br />{% endif %}<em>Museum no. {{ mo.museum_number }}</em></p>
+                                <p>{{ mo.credit_line|replace:'/-/&dash;'|safe }}{% if mo.credit_line|length > 0 %}<br />{% endif %}<em>Museum no. {{ mo.museum_number }}</em></p>
                             </div>
                         </div>
                     </div>
