@@ -48,6 +48,8 @@ li.home.txt .zoom { background-image:url(img/zoomin_ht.png); }
 
 @media screen and (max-height:710px) {
     .pop { top:28px; }
+}
+@media screen and (max-height:650px) {
     .pop .zoom { background-color:#fff; border:1px solid #b5b5b5; border-radius:5px 5px 5px 5px; bottom:10px; padding:4px; position:fixed; right:10px; }
     #txtpop.home .zoom { background-color:#d4006e; border-color:#fff; }
 }
