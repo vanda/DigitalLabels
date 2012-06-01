@@ -61,6 +61,8 @@ jQuery(document).ready(function() {
                     $('#img, #txt').each(function(){ this.hit($(li).index()); });
                 }
             }
+        }).on('transformstart', function(e){
+            if( $(this).is('.active') ){ $(this).trigger('click') };
         });
     });
     
