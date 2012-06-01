@@ -62,7 +62,7 @@ jQuery(document).ready(function() {
                 }
             }
         }).on('transformstart', function(e){
-            if( $(this).is('.active') ){ $(this).trigger('click') };
+            if( $(this).is('.active') ){ $(this).trigger('click'); }
         });
     });
     
