@@ -31,6 +31,7 @@ jQuery(document).ready(function() {
         $(this).find('li.active').removeClass('active');
         $(this).width(w*($(this).find('li:last-child').index()+1)+wA);
         this.hit = function(i){
+            $(this).stop();
             var t = 1024;
             $(this).find('.active>.mask').animate({'opacity':'0.5'}, t/4, null, $(this).find('li>.mask').show());
             $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ 
