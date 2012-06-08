@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | V&amp;A Digital Labels administration{% endblock %}
+{% block extrastyle %}
+<style type="text/css">
+
+    body { 
+        color:#292728; 
+        font-family: "V&A TheSansPlain", "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    }
+    
+    #header {
+        background-color:#9a283f; color:#fff;
+    }
+    
+     .grp-tabular .grp-table .grp-td.position,
+     .grp-tabular .grp-table .grp-th.position {
+        display:none;
+    }
+</style>
+{% endblock %}
+{% block branding %} 
+<h1 id="site-name"> V&amp;A Digital Labels administration</h1> 
+{% endblock %} 
+  
+{% block nav-global %}{% endblock %} 

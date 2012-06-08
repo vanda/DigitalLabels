@@ -7,15 +7,17 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/base.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.hooks.js"></script>
-    <script type="text/javascript" src="js/jquery.touchwipe.min.js"></script>
-    <title>Digital Labels &mdash; Victoria and Albert Museum</title>
+    <script type="text/javascript" src="js/hammer.js"></script>
+    <script type="text/javascript" src="js/jquery.hammer.js"></script>
+    <title>V&amp;A Labels</title>
 </head>
 
 <body>
 
-    <div id="header" class="hi">Touch an object to see its label or touch a label to see its object</div>
+    <div id="header" class="hi">Touch an object or its label</div>
 
     <div class="clip">
     
@@ -25,12 +27,12 @@
             <div class="case">
                 <img class="active" src="content/img/2006AM2005_jpg_ds.jpg" width="222" height="222" title="Shelved cabinet. About 1850." data-img-l="content/img/2006AM2005_jpg_l.jpg" alt="" />
                 <img class="inactive" src="content/img/2006AM2005_jpg_ds.jpg" width="128" height="128" title="Shelved cabinet. About 1850." alt="" />
-                <div class="ctrl"></div>
+                <div class="zoom"></div>
             </div>
-            <div class="thumbs">
-                <img src="content/img/2006AM2005_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2006AM2005_jpg_l.jpg" alt="" />
-                <img src="content/img/2006AM2005_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2006AM2005_jpg_l.jpg" alt="" />
-                <img src="content/img/2006AM2005_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2006AM2005_jpg_l.jpg" alt="" />
+            <div class="thumbs">Supporting images&hellip;<br />
+                <img src="content/img/2006AM2005_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2006AM2005_jpg_l.jpg" alt="" />
+                <img src="content/img/2006AM2005_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2006AM2005_jpg_l.jpg" alt="" />
+                <img src="content/img/2006AM2005_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2006AM2005_jpg_l.jpg" alt="" />
             </div>
         </li>
         
@@ -38,13 +40,13 @@
             <div class="case">
                 <img class="active" src="content/img/2006AJ8625_jpg_ds.jpg" width="222" height="222" title="Folding screen. About 1928." data-img-l="content/img/2006AJ8625_jpg_l.jpg" alt="" />
                 <img class="inactive" src="content/img/2006AJ8625_jpg_ds.jpg" width="128" height="128" title="Folding screen. About 1928." alt="" />
-                <div class="ctrl"></div>
+                <div class="zoom"></div>
             </div>
-            <div class="thumbs">
-                <img src="content/img/2006AJ8625_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2006AJ8625_jpg_l.jpg" alt="" />
-                <img src="content/img/2006AJ8625_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2006AJ8625_jpg_l.jpg" alt="" />
-                <img src="content/img/2006AJ8625_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2006AJ8625_jpg_l.jpg" alt="" />
-                <img src="content/img/2006AJ8625_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2006AJ8625_jpg_l.jpg" alt="" />
+            <div class="thumbs">Supporting images&hellip;<br />
+                <img src="content/img/2006AJ8625_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2006AJ8625_jpg_l.jpg" alt="" />
+                <img src="content/img/2006AJ8625_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2006AJ8625_jpg_l.jpg" alt="" />
+                <img src="content/img/2006AJ8625_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2006AJ8625_jpg_l.jpg" alt="" />
+                <img src="content/img/2006AJ8625_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2006AJ8625_jpg_l.jpg" alt="" />
             </div>
         </li>
         
@@ -52,12 +54,12 @@
             <div class="case">
                 <img class="active" src="content/img/2011EX8898_jpg_ds.jpg" width="222" height="222" title="Hall chair. About 1725-30 (overpainting after 1762)" data-img-l="content/img/2011EX8898_jpg_l.jpg" alt="" />
                 <img class="inactive" src="content/img/2011EX8898_jpg_ds.jpg" width="128" height="128" title="Hall chair. About 1725-30 (overpainting after 1762)" alt="" />
-                <div class="ctrl"></div>
+                <div class="zoom"></div>
             </div>
-            <div class="thumbs">
-                <img src="content/img/2011EX8901_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011EX8901_jpg_l.jpg" alt="" />
-                <img src="content/img/2011EX8899_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011EX8899_jpg_l.jpg" alt="" />
-                <img src="content/img/2011EX8902_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011EX8902_jpg_l.jpg" alt="" />
+            <div class="thumbs">Supporting images&hellip;<br />
+                <img src="content/img/2011EX8901_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011EX8901_jpg_l.jpg" alt="" />
+                <img src="content/img/2011EX8899_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011EX8899_jpg_l.jpg" alt="" />
+                <img src="content/img/2011EX8902_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011EX8902_jpg_l.jpg" alt="" />
             </div>
         </li>
         
@@ -65,12 +67,12 @@
             <div class="case">
                 <img class="active" src="content/img/2006BB2859_jpg_ds.jpg" width="222" height="222" title="Commode (chest of drawers). About 1760-65, using Japanese panels made in the 1670s." data-img-l="content/img/2006BB2859_jpg_l.jpg" alt="" />
                 <img class="inactive" src="content/img/2006BB2859_jpg_ds.jpg" width="128" height="128" title="Commode (chest of drawers). About 1760-65, using Japanese panels made in the 1670s." alt="" />
-                <div class="ctrl"></div>
+                <div class="zoom"></div>
             </div>
-            <div class="thumbs">
-                <img src="content/img/2010EB0863_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2010EB0863_jpg_l.jpg" alt="" />
-                <img src="content/img/2010EB0864_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2010EB0864_jpg_l.jpg" alt="" />
-                <img src="content/img/2010EB0895_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2010EB0895_jpg_l.jpg" alt="" />
+            <div class="thumbs">Supporting images&hellip;<br />
+                <img src="content/img/2010EB0863_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2010EB0863_jpg_l.jpg" alt="" />
+                <img src="content/img/2010EB0864_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2010EB0864_jpg_l.jpg" alt="" />
+                <img src="content/img/2010EB0895_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2010EB0895_jpg_l.jpg" alt="" />
             </div>
         </li>
         
@@ -78,14 +80,14 @@
             <div class="case">
                 <img class="active" src="content/img/2011EX8494_jpg_ds.jpg" width="222" height="222" title="Bureau cabinet. About 1735" data-img-l="content/img/2011EX8494_jpg_l.jpg" alt="" />
                 <img class="inactive" src="content/img/2011EX8494_jpg_ds.jpg" width="128" height="128" title="Bureau cabinet. About 1735" alt="" />
-                <div class="ctrl"></div>
+                <div class="zoom"></div>
             </div>
-            <div class="thumbs">
-                <img src="content/img/2011EX8492_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011EX8492_jpg_l.jpg" alt="" />
-                <img src="content/img/2011EX8495_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011EX8495_jpg_l.jpg" alt="" />
-                <img src="content/img/2011EX8488_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011EX8488_jpg_l.jpg" alt="" />
-                <img src="content/img/2011FC2345_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011FC2345_jpg_l.jpg" alt="" />
-                <img src="content/img/2006AF6873_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2006AF6873_jpg_l.jpg" alt="" />
+            <div class="thumbs">Supporting images&hellip;<br />
+                <img src="content/img/2011EX8492_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011EX8492_jpg_l.jpg" alt="" />
+                <img src="content/img/2011EX8495_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011EX8495_jpg_l.jpg" alt="" />
+                <img src="content/img/2011EX8488_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011EX8488_jpg_l.jpg" alt="" />
+                <img src="content/img/2011FC2345_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011FC2345_jpg_l.jpg" alt="" />
+                <img src="content/img/2006AF6873_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2006AF6873_jpg_l.jpg" alt="" />
             </div>
         </li>
         
@@ -93,53 +95,108 @@
             <div class="case">
                 <img class="active" src="content/img/2006AM8064_jpg_ds.jpg" width="222" height="222" title="Table cabinet. About 1620" data-img-l="content/img/2006AM8064_jpg_l.jpg" alt="" />
                 <img class="inactive" src="content/img/2006AM8064_jpg_ds.jpg" width="128" height="128" title="Table cabinet. About 1620" alt="" />
-                <div class="ctrl"></div>
+                <div class="zoom"></div>
             </div>
-            <div class="thumbs">
-                <img src="content/img/2011FC2480_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011FC2480_jpg_l.jpg" alt="" />
-                <img src="content/img/2011FC2482_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011FC2482_jpg_l.jpg" alt="" />
-                <img src="content/img/2011FC2438_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011FC2438_jpg_l.jpg" alt="" />
-                <img src="content/img/2011FC2437_jpg_s.jpg" width="30" height="30" title="Another view." data-img-l="content/img/2011FC2437_jpg_l.jpg" alt="" />
+            <div class="thumbs">Supporting images&hellip;<br />
+                <img src="content/img/2011FC2480_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011FC2480_jpg_l.jpg" alt="" />
+                <img src="content/img/2011FC2482_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011FC2482_jpg_l.jpg" alt="" />
+                <img src="content/img/2011FC2438_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011FC2438_jpg_l.jpg" alt="" />
+                <img src="content/img/2011FC2437_jpg_s.jpg" width="48" height="48" title="Another view." data-img-l="content/img/2011FC2437_jpg_l.jpg" alt="" />
             </div>
         </li>
         
     </ul>
     
     <ul class="carousel" id="txt">
-        <li class="txt obj"><div class="mask"></div><div class="title"><h2>Shelved cabinet</h2></div><div class="row">
-            <div class="txtl edged col"><div class="pane"><p>About 1850</p></div>
-            <div class="data col"><div class="pane"><p>Japan</p><p>Wood covered in black lacquer with takamaki-e (raised sprinkled picture), hiramaki-e (low sprinkled picture) and nashi-ji (pear-skin ground) lacquer, and kirikane (cut gold foil) inlay decoration, with metal fittings.</p><p><em>Museum no. W.350-1916</em></p></div></div></div>
-            <div class="txtr col"><div class="pane"><p>Several urushi techniques have been used in combination on this piece. As the many lacquer layers were built up, varieties of gold powder were sprinkled on wet lacquer. The underlying relief designs were worked in various lacquer and powder pastes. This was the most ornate type of shelved cabinet traditionally owned by Japanese noble families, and containing numerous small matching boxes.</p></div><div class="ctrl"><span>A</span><span class="lfont">A</span></div></div></div>
+        
+        <li class="txt obj"><div class="mask"></div>
+            <div class="title"><h2>Shelved cabinet</h2></div>
+            <div class="row">
+                <div class="txtl edged col">
+                    <div class="pane"><p>About 1850</p></div>
+                    <div class="data col"><div class="pane"><p>Japan</p><p>Wood covered in black lacquer with takamaki-e (raised sprinkled picture), hiramaki-e (low sprinkled picture) and nashi-ji (pear-skin ground) lacquer, and kirikane (cut gold foil) inlay decoration, with metal fittings.</p><p><em>Museum no. W.350-1916</em></p></div></div>
+                </div>
+                <div class="txtr col">
+                    <div class="pane"><p>Several urushi techniques have been used in combination on this piece. As the many lacquer layers were built up, varieties of gold powder were sprinkled on wet lacquer. The underlying relief designs were worked in various lacquer and powder pastes. This was the most ornate type of shelved cabinet traditionally owned by Japanese noble families, and containing numerous small matching boxes.</p></div>
+                    <div class="zoom"></div>
+                </div>
+            </div>
         </li>
-        <li class="txt obj"><div class="mask"></div><div class="title"><h2>Folding screen</h2></div><div class="row">
-            <div class="txtl edged col"><div class="pane"><p>About 1928</p></div>
-            <div class="data col"><div class="pane"><p>France (Paris)<br />Designed and made by Eileen Gray (1879-1976), restored and altered by Prunella Clough in about 19xx</p><p>Wood with at least two types of black lacquer and red lacquer, with silver leaf and composite decoration; brass hinges.</p><p>Given by Prunella Clough<br /><em>Museum no. W.40-1977</em></p></div></div></div>
-            <div class="txtr col"><div class="pane"><p>Eileen Gray learned the highly specialised craft of lacquer in Paris, under a Japanese master, Seizo Sugawara. On this folding screen, a Japanese furniture form, she applied lacquer using standard methods but omitted the traditional, varied and complex decorative techniques.  The resulting aesthetic was very un-Japanese with geometric panels of coarse stucco boldly contrast with flat, mirror-like surfaces.</p></div><div class="ctrl"><span>A</span><span class="lfont">A</span></div></div></div>
+        
+        <li class="txt obj"><div class="mask"></div>
+            <div class="title"><h2>Folding screen</h2></div>
+            <div class="row">
+                <div class="txtl edged col">
+                    <div class="pane"><p>About 1928</p></div>
+                    <div class="data col"><div class="pane"><p>France (Paris)<br />Designed and made by Eileen Gray (1879-1976), restored and altered by Prunella Clough in about 19xx</p><p>Wood with at least two types of black lacquer and red lacquer, with silver leaf and composite decoration; brass hinges.</p><p>Given by Prunella Clough<br /><em>Museum no. W.40-1977</em></p></div></div>
+                </div>
+                <div class="txtr col">
+                    <div class="pane"><p>Eileen Gray learned the highly specialised craft of lacquer in Paris, under a Japanese master, Seizo Sugawara. On this folding screen, a Japanese furniture form, she applied lacquer using standard methods but omitted the traditional, varied and complex decorative techniques.  The resulting aesthetic was very un-Japanese with geometric panels of coarse stucco boldly contrast with flat, mirror-like surfaces.</p></div>
+                    <div class="zoom"></div>
+                </div>
+            </div>
         </li>
-        <li class="home txt obj"><div class="mask"></div><div class="title"><h2>Hall chair</h2></div><div class="row">
-            <div class="txtl edged col"><div class="pane"><p>About 1725-30 (overpainting after 1762)</p></div>
-            <div class="data col"><div class="pane"><p>Back and seat board: China (Canton)<br />Seat rails and legs: England (probably London)</p><p>Chinese lacquer on a Chinese hardwood, with legs and seat rails decorated with japanning probably on beech; some decoration repainted in oils.</p><p>Gift of Brigadier W. E. Clark CMG, DSO through the Art Fund<br /><em>Museum no. W.16-1962</em></p></div></div></div>
-            <div class="txtr col"><div class="pane"><p>The back and seat boards are lacquered, and were made in China. They were exported to Britain – flat-packed – and assembled on an English frame, japanned black to match. Chinese craftsmen were adept at supplying lacquer for export, following designs provided by Western merchants. However, the requirements of low price and fast turnaround led to a reduction in quality.</p></div><div class="ctrl"><span>A</span><span class="lfont">A</span></div></div></div>
+        
+        <li class="home txt obj"><div class="mask"></div>
+            <div class="title"><h2>Hall chair</h2></div>
+            <div class="row">
+                <div class="txtl edged col">
+                    <div class="pane"><p>About 1725-30 (overpainting after 1762)</p></div>
+                    <div class="data col"><div class="pane"><p>Back and seat board: China (Canton)<br />Seat rails and legs: England (probably London)</p><p>Chinese lacquer on a Chinese hardwood, with legs and seat rails decorated with japanning probably on beech; some decoration repainted in oils.</p><p>Gift of Brigadier W. E. Clark CMG, DSO through the Art Fund<br /><em>Museum no. W.16-1962</em></p></div></div>
+                </div>
+                <div class="txtr col">
+                    <div class="pane"><p>The back and seat boards are lacquered, and were made in China. They were exported to Britain – flat-packed – and assembled on an English frame, japanned black to match. Chinese craftsmen were adept at supplying lacquer for export, following designs provided by Western merchants. However, the requirements of low price and fast turnaround led to a reduction in quality.</p></div>
+                    <div class="zoom"></div>
+                </div>
+            </div>
         </li>
-        <li class="txt obj"><div class="mask"></div><div class="title"><h2>Commode (chest of drawers)</h2></div><div class="row">
-            <div class="txtl edged col"><div class="pane"><p>About 1760-65, using Japanese panels made in the 1670s</p></div>
-            <div class="data col"><div class="pane"><p>France (Paris), incorporating lacquer panels made in Japan (probably Kyoto)<br />Attributed to Bernard Van Risamburgh II (master before 1735, d. 1765/66)</p><p>Oak carcase with fruitwood (?) veneers painted black, mounted with panels of wood covered in black lacquer with gold hiramaki-e (low sprinkled picture) and gold takamaki-e (raised sprinkled picture) lacquer, with some japanning; gilt brass mounts; top of Portoro Macchie Larga marble.</p><p>Bequeathed by John Jones<br /><em>Museum no. 1105-1882</em></p></div></div></div>
-            <div class="txtr col"><div class="pane"><p>Shortages in the supply of lacquer to Europe encouraged the dismantling of older, imported furniture such as cabinets. To create this Parisian commode, five sections of urushi lacquered wood were reused. Great skill was required to avoid damaging the lacquer when sawing the double-sided panels, reducing their thickness, and heat-bending them to the curvilinear carcase. Metal mounts conceal the joins.</p></div><div class="ctrl"><span>A</span><span class="lfont">A</span></div></div></div>
+        
+        <li class="txt obj"><div class="mask"></div>
+            <div class="title"><h2>Commode (chest of drawers)</h2></div>
+                <div class="row">
+                    <div class="txtl edged col">
+                        <div class="pane"><p>About 1760-65, using Japanese panels made in the 1670s</p></div>
+                        <div class="data col"><div class="pane"><p>France (Paris), incorporating lacquer panels made in Japan (probably Kyoto)<br />Attributed to Bernard Van Risamburgh II (master before 1735, d. 1765/66)</p><p>Oak carcase with fruitwood (?) veneers painted black, mounted with panels of wood covered in black lacquer with gold hiramaki-e (low sprinkled picture) and gold takamaki-e (raised sprinkled picture) lacquer, with some japanning; gilt brass mounts; top of Portoro Macchie Larga marble.</p><p>Bequeathed by John Jones<br /><em>Museum no. 1105-1882</em></p></div></div>
+                    </div>
+                    <div class="txtr col">
+                        <div class="pane"><p>Shortages in the supply of lacquer to Europe encouraged the dismantling of older, imported furniture such as cabinets. To create this Parisian commode, five sections of urushi lacquered wood were reused. Great skill was required to avoid damaging the lacquer when sawing the double-sided panels, reducing their thickness, and heat-bending them to the curvilinear carcase. Metal mounts conceal the joins.</p></div>
+                        <div class="zoom"></div>
+                    </div>
+                </div>
         </li>
-        <li class="txt obj"><div class="mask"></div><div class="title"><h2>Bureau cabinet</h2></div><div class="row">
-            <div class="txtl edged col"><div class="pane"><p>About 1735</p></div>
-            <div class="data col"><div class="pane"><p>England (London) or Germany (Dresden)</p><p>Wood, japanned, with engraved brass mounts.</p><p>Bequeathed by Sylvia Maud Cowles in memory of her brother John George Thorn-Drury <br /><em>Museum no. W.8-1972</em></p></div></div></div>
-            <div class="txtr col"><div class="pane"><p>European japanners experimented with numerous techniques and ingredients. On this bureau a coloured alcohol varnish made with plant resin was used. It was relatively quick-drying but the results were delicate. For smoothness, gesso was layered on close-grained wood veneer. Workshops were well-heated for the laborious process of applying, drying and polishing coats of varnish.</p></div><div class="ctrl"><span>A</span><span class="lfont">A</span></div></div></div>
+        
+        <li class="txt obj"><div class="mask"></div>
+            <div class="title"><h2>Bureau cabinet</h2></div>
+                <div class="row">
+                <div class="txtl edged col">
+                    <div class="pane"><p>About 1735</p></div>
+                    <div class="data col"><div class="pane"><p>England (London) or Germany (Dresden)</p><p>Wood, japanned, with engraved brass mounts.</p><p>Bequeathed by Sylvia Maud Cowles in memory of her brother John George Thorn-Drury <br /><em>Museum no. W.8-1972</em></p></div></div>
+                </div>
+                <div class="txtr col">
+                    <div class="pane"><p>European japanners experimented with numerous techniques and ingredients. On this bureau a coloured alcohol varnish made with plant resin was used. It was relatively quick-drying but the results were delicate. For smoothness, gesso was layered on close-grained wood veneer. Workshops were well-heated for the laborious process of applying, drying and polishing coats of varnish.</p></div>
+                    <div class="zoom"></div>
+                </div>
+            </div>
         </li>
-        <li class="txt obj"><div class="mask"></div><div class="title"><h2>Table cabinet</h2></div><div class="row">
-            <div class="txtl edged col"><div class="pane"><p>About 1620</p></div>
-            <div class="data col"><div class="pane"><p>England (probably London)</p><p>Eucalyptus, another tropical hardwood, oak and walnut, painted, gilded and varnished.</p><p><em>Museum no. W.9-1936</em></p></div></div></div>
-            <div class="txtr col"><div class="pane"><p>Early European imitations of lacquer show varied influences in design and technique. Inspiration probably included East Asian lacquer rarities as well as Indo-Portuguese and Islamic wares similarly exotic in appearance, but decorated using shellac. This cabinet is painted and gilded on a white gesso ground, not ‘japanned’ with multiple coats of varnish, individually polished. A plant resin varnish added lustre and protected the surface.</p></div><div class="ctrl"><span>A</span><span class="lfont">A</span></div></div></div>
+        
+        <li class="txt obj"><div class="mask"></div>
+            <div class="title"><h2>Table cabinet</h2></div>
+                <div class="row">
+                    <div class="txtl edged col">
+                        <div class="pane"><p>About 1620</p></div>
+                        <div class="data col"><div class="pane"><p>England (probably London)</p><p>Eucalyptus, another tropical hardwood, oak and walnut, painted, gilded and varnished.</p><p><em>Museum no. W.9-1936</em></p></div></div>
+                    </div>
+                    <div class="txtr col">
+                    <div class="pane"><p>Early European imitations of lacquer show varied influences in design and technique. Inspiration probably included East Asian lacquer rarities as well as Indo-Portuguese and Islamic wares similarly exotic in appearance, but decorated using shellac. This cabinet is painted and gilded on a white gesso ground, not ‘japanned’ with multiple coats of varnish, individually polished. A plant resin varnish added lustre and protected the surface.</p></div>
+                    <div class="zoom"></div>
+                </div>
+            </div>
         </li>
+        
     </ul>
     
-    <div class="pop" id="imgpop"><div class="case" id="imgbox"><img id="imgbig" src="" alt="" /><div class="ctrl"></div></div><div id="imgtxt"></div></div>
-    <div class="txt pop lfont" id="txtpop"></div>
+    <div class="pop" id="imgpop"><div class="case" id="imgbox"><img id="imgbig" src="" alt="" /><div class="zoom"></div></div><div id="imgtxt"></div></div>
+    <div class="txt pop" id="txtpop"></div>
 
 </body>
 </html>
