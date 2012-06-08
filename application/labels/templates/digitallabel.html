@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load replace %}
+
+    {% block content %}
+    <div id="header" class="hi">Touch an object or its label</div>
+
+    <div class="clip">
+        
+        <ul class="carousel" id="img">
+            {% for mo in mobjects %}
+            <li class="{% if mo.gateway_object %}home {% endif %}img obj">
+                <div class="mask"></div>
+                <div class="case">
+                    {% thumbnail mo.image_set.all.0.image_file "222x222" pad=True as im %}
+                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail mo.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                    {% endthumbnail %}
+                    {% thumbnail mo.image_set.all.0.image_file "128x128" pad=True as im %}
+                    <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" alt="" />
+                    {% endthumbnail %}
+                    <div class="zoom"></div>
+                </div>
+                {% if mo.image_set.all|length > 1 %}
+                <div class="thumbs">Supporting images&hellip;<br />
+                    {% for img in mo.image_set.all %}
+                        {% if forloop.counter > 1 and forloop.counter < 6 %}
+                            {% thumbnail img.image_file "48x48" pad=True as im %}
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                            {% endthumbnail %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <ul class="carousel" id="txt">
+            {% for mo in mobjects %}
+            <li class="{% if mo.gateway_object %}home {% endif %}txt obj">
+                <div class="mask"></div>
+                <div class="title"><h2>{{ mo.name }}</h2></div>
+                <div class="row">
+                    <div class="txtl edged col">
+                        <div class="pane"><p>{{ mo.date_text }}</p></div>
+                        <div class="data col">
+                            <div class="pane">
+                                <p>{{ mo.place }}<br />{{ mo.artist_maker }}</p>
+                                <p>{{ mo.materials_techniques|replace:'/-/&#8209;'|safe }}</p>
+                                <p>{{ mo.credit_line|replace:'/-/&#8209;'|safe }}{% if mo.credit_line|length > 0 %}<br />{% endif %}<em>Museum no. {{ mo.museum_number }}</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="txtr col">
+                        <div class="pane">{{ mo.main_text }}</div>
+                        <div class="zoom"></div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        
+    </div>
+    
+    <div class="pop" id="imgpop"><div class="case" id="imgbox"><img id="imgbig" src="" alt="" /><div class="zoom"></div></div><div id="imgtxt"></div></div>
+    <div class="txt pop" id="txtpop"></div>
+    {% endblock %}

@@ -1,0 +1,45 @@
+{% load thumbnail %}
+<!DOCTYPE html>
+<html lang="en" id="vam-ac-uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon" href="http://www.vam.ac.uk/apps/map2/130.png" />
+    <link rel="apple-touch-startup-image" href="http://www.vam.ac.uk/apps/map2/startup.png" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/reset.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/base.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/print.css" media="print" />
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.hooks.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/hammer.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.hammer.js"></script>
+    <title>V&amp;A Labels</title>
+</head>
+
+<body>
+
+    {% block content %}
+    <div id="index">
+        <h1>V&amp;A Digital Labels</h1>
+        {% if labels %}
+        <ul>
+            {% for l in labels %}
+            <li>
+                {% if l.museumobjects.all.0.image_set.all %}
+                {% thumbnail l.museumobjects.all.0.image_set.all.0.image_file "84x84" pad=True as im %}
+                <a href="{% url digitallabel l.id %}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a><br />
+                {% endthumbnail %}
+                {% endif %}
+                <a href="{% url digitallabel l.id %}">{{l}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    {% endblock %}
+
+</body>
+</html>
