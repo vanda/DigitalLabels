@@ -30,6 +30,11 @@ def get_api_data(sender, instance, **kwargs):
             instance.date_text = museum_object['fields']['date_text']
             instance.credit_line = museum_object['fields']['credit']
 
+            # get the first label text
+            if len(museum_object['fields']['labels']) > 0:
+                l = museum_object['fields']['labels'][-1]
+                instance.main_text = l['fields']['label_text']
+
         else:
             # make note of error in title
             instance.name = "* UNABLE TO GET RECORD DATA FOR %s *" % (
@@ -41,8 +46,7 @@ def get_api_data(sender, instance, **kwargs):
 
 def get_related_api_data(sender, instance, **kwargs):
     """
-    Retrieve current data from the API and use to populate label
-    Retrieve VADAR images as well
+    Retrieve VADAR images and individual labels as well
     """
 
     if instance.cmslabel_set.count() == 0:
