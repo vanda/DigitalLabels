@@ -119,7 +119,10 @@
         {% if not is_popup %}
             <ul class="grp-object-tools">
                 {% block object-tools-items %}
-                    <li><a href="#">Preview</a></li>
+                    <!-- # TODO make preview specific to model -->
+                    {% if original %}
+                    <li><a href="{% url 'labels.views.digitallabel' original.pk %}">Preview</a></li>
+                    {% endif %}
                     <li><a href="history/">{% trans "History" %}</a></li>
                     {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="grp-state-focus" target="_blank">{% trans "View on site" %}</a></li>{% endif%}
                 {% endblock %}
