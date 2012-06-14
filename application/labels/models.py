@@ -120,11 +120,6 @@ class MuseumObject(models.Model):
                 cms_label.text = l['fields']['label_text']
                 cms_label.museumobject = self
                 cms_label.save()
-                self.main_text = cms_label.text
-
-        # save the label text onto the main object
-        if self.main_text:
-            self.save()
 
     def create_images(self):
 
