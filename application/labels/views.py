@@ -22,7 +22,7 @@ def index(request):
 
 
 def template(request):
-
+    """Preview the layout of fields in the frontend"""
     t = loader.get_template('template.html')
     c = RequestContext(request, {})
     return HttpResponse(t.render(c))
