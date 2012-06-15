@@ -172,7 +172,6 @@ class Image(models.Model):
     def __unicode__(self):
         return u"%s for %s" % (self.image_id, self.museumobject.museum_number)
 
-
     @property
     def local_filename(self):
         """Where is the file stored regardless of source"""
@@ -182,7 +181,6 @@ class Image(models.Model):
                                 unicode(self.image_file.file))
         else:
             return None
-
 
     @property
     def local_vadar_filename(self):
