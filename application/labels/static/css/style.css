@@ -15,10 +15,11 @@
 .thumbs { border:solid #b5b5b5; border-width:1px 0 0; display:none; font-size:0.9em; overflow:hidden; padding:0 0 4px 5px; text-align:left; }
 .thumbs>img { border:1px solid #b5b5b5; float:left; margin:3px 4px 0 0; }
 .active.img { border-top:0; margin:0 17px; top:0; }
+.active.home.img { border-width:0 2px 2px; margin:0 16px; }
+.active.home.img, .active.home>.thumbs { border-color:#007d93; }
 .active>.case>img { display:block; }
 .active>.case>img.inactive { display:none; }
 .active>.thumbs { display:block; }
-.active.home.img, .active.home>.thumbs { border-color:#007d93; }
 .txt { background:#fff; border:1px solid #b5b5b5; padding:10px 16px 16px; width:508px; }
 .title { border-bottom:1px solid #b5b5b5; padding:0 0 0.1em; margin:0 0 0.8em; }
 .txtl, .txtr { height:314px; }
