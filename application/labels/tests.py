@@ -91,3 +91,24 @@ class LabelTest(TestCase):
         # check primary image position
         self.assertEquals(mo.image_set.filter(position=0).count(), 1)
         self.assertTrue(mo.image_set.filter(position=1).count() > 0)
+
+    def test_new_object(self):
+
+        mo = MuseumObject()
+        mo.name = 'Name'
+        mo.date_text = 'Date text'
+        mo.artist_maker = 'Artist maker'
+        mo.place = 'Place'
+        mo.materials_techniques = 'Materials techniques'
+        mo.museum_number = 'Museum number'
+        mo.object_number = '012345'
+        mo.credit_line = 'Credit line'
+        mo.main_text = """Main text, main text, main text, main text, 
+                            main text, main text, main text, main text,
+                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text."""
+        mo.save()

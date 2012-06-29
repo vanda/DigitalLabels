@@ -44,7 +44,11 @@
                 {% endspaceless %}
                 <div class="grp-tr">
                     <div class="grp-td">
-                    {{inline_admin_form.original.thumbnail_tag}}
+                    {% if inline_admin_form.original %}
+                    <a href="{% url 'admin:labels_museumobject_change' inline_admin_form.original.pk %}">
+                        {{inline_admin_form.original.thumbnail_tag}}
+                    </a>
+                    {% endif %}
                     </div>
                     {% for fieldset in inline_admin_form %}
                         {% for line in fieldset %}
