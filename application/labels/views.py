@@ -8,10 +8,8 @@ def digitallabel(request, digitallabel_id):
 
     dl = DigitalLabel.objects.get(id=digitallabel_id)
     mobjects = dl.museumobjects.all()
-
     t = loader.get_template('digitallabel.html')
     c = RequestContext(request, {'mobjects': mobjects})
-
     return HttpResponse(t.render(c))
 
 
@@ -20,4 +18,11 @@ def index(request):
     labels = DigitalLabel.objects.all()
     t = loader.get_template('base.html')
     c = RequestContext(request, {'labels': labels})
+    return HttpResponse(t.render(c))
+
+
+def template(request):
+    """Preview the layout of fields in the frontend"""
+    t = loader.get_template('template.html')
+    c = RequestContext(request, {})
     return HttpResponse(t.render(c))
