@@ -120,11 +120,6 @@ class MuseumObject(models.Model):
                 cms_label.text = l['fields']['label_text']
                 cms_label.museumobject = self
                 cms_label.save()
-                self.main_text = cms_label.text
-
-        # save the label text onto the main object
-        if self.main_text:
-            self.save()
 
     def create_images(self):
 
@@ -177,7 +172,6 @@ class Image(models.Model):
     def __unicode__(self):
         return u"%s for %s" % (self.image_id, self.museumobject.museum_number)
 
-
     @property
     def local_filename(self):
         """Where is the file stored regardless of source"""
@@ -187,7 +181,6 @@ class Image(models.Model):
                                 unicode(self.image_file.file))
         else:
             return None
-
 
     @property
     def local_vadar_filename(self):
