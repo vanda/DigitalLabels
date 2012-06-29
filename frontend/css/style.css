@@ -4,7 +4,7 @@
 .edged.col { border-right:1px solid #b5b5b5; }
 .edged.col>.pane { padding:0 0.5em 0 0; }
 
-#header { background-color:#d4006e; color:#fff; line-height:28px; text-align:center; }
+#header { background-color:#007d93; color:#fff; line-height:28px; text-align:center; }
 .clip { overflow:hidden; }
 .carousel { clear:both; margin:0; position:relative; }
 #img { height:326px; }
@@ -15,17 +15,18 @@
 .thumbs { border:solid #b5b5b5; border-width:1px 0 0; display:none; font-size:0.9em; overflow:hidden; padding:0 0 4px 5px; text-align:left; }
 .thumbs>img { border:1px solid #b5b5b5; float:left; margin:3px 4px 0 0; }
 .active.img { border-top:0; margin:0 17px; top:0; }
+.active.home.img { border-width:0 2px 2px; margin:0 16px; }
+.active.home.img, .active.home>.thumbs { border-color:#007d93; }
 .active>.case>img { display:block; }
 .active>.case>img.inactive { display:none; }
 .active>.thumbs { display:block; }
-.active.home.img, .active.home>.thumbs { border-color:#d4006e; }
 .txt { background:#fff; border:1px solid #b5b5b5; padding:10px 16px 16px; width:508px; }
 .title { border-bottom:1px solid #b5b5b5; padding:0 0 0.1em; margin:0 0 0.8em; }
 .txtl, .txtr { height:314px; }
 .data, .zoom { bottom:0; font-size:0.8em; position:absolute; }
 .data>.pane { padding:0 40px 0 0; }
 .mask { background:#292728; height:100%; opacity:0.5; left:0; position:absolute; top:0; width:100%; z-index:1; }
-.home.txt { background:#d4006e; color:#fff; }
+.home.txt { background:#007d93; color:#fff; }
 .home.txt .edged.col, .home.txt .title { border-color:#fff; }
 .pop { display:none; border:0; position:absolute; top:121px; z-index:1; }
 .pop>.mask { display:none; }
@@ -51,5 +52,5 @@ li.home.txt .zoom { background-image:url(img/zoomin_ht.png); }
 }
 @media screen and (max-height:650px) {
     .pop .zoom { background-color:#fff; border:1px solid #b5b5b5; border-radius:5px 5px 5px 5px; bottom:10px; padding:4px; position:fixed; right:10px; }
-    #txtpop.home .zoom { background-color:#d4006e; border-color:#fff; }
+    #txtpop.home .zoom { background-color:#007d93; border-color:#fff; }
 }
