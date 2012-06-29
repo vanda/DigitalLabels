@@ -31,6 +31,7 @@ jQuery(document).ready(function() {
         $(this).find('li.active').removeClass('active');
         $(this).width(w*($(this).find('li:last-child').index()+1)+wA);
         this.hit = function(i){
+            $(this).stop();
             var t = 1024;
             $(this).find('.active>.mask').animate({'opacity':'0.5'}, t/4, null, $(this).find('li>.mask').show());
             $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ 
@@ -45,7 +46,7 @@ jQuery(document).ready(function() {
         $('#img, #txt').each(function(){ this.hit(i); });
     });
     $('#img, #txt').find('li').each(function(){
-        $(this).hammer({css_hacks:false, swipe:false}).on('dragstart', function(e){
+        $(this).hammer({css_hacks:false, swipe:false, tap_double:false, hold:false}).on('dragstart', function(e){
             var li = $(this),
                 a = Math.abs(e.angle);
             if( a<60 || a>150 ){
@@ -61,8 +62,8 @@ jQuery(document).ready(function() {
                     $('#img, #txt').each(function(){ this.hit($(li).index()); });
                 }
             }
-        }).on('transformstart', function(e){
-            if( $(this).is('.active') ){ $(this).trigger('click'); }
+        }).on('transform', function(e){
+            if( $(this).is('.active') && e.scale>1 ){ $(this).trigger('click'); }
         });
     });
     
@@ -83,9 +84,11 @@ jQuery(document).ready(function() {
         if( $(this).hasClass('home') ){ $('#txtpop').addClass('home'); }
     });
     
-    $('.pop').on('click', function(){
-        $('.pop').hide();
-        $('#mousetrap').remove();
+    $('.pop').hammer({css_hacks:false, swipe:false, tap_double:false, hold:false}).on('click transform', function(e){
+        if( typeof(e.scale)==='undefined' || e.scale<1 ){
+            $('.pop').hide();
+            $('#mousetrap').remove();
+        }
     });
     
     $('#img').each(function(){
