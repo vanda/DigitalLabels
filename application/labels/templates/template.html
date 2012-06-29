@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en" id="vam-ac-uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon" href="http://www.vam.ac.uk/apps/map2/130.png" />
+    <link rel="apple-touch-startup-image" href="http://www.vam.ac.uk/apps/map2/startup.png" />
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/static/css/print.css" media="print" />
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.hooks.js"></script>
+    <script type="text/javascript" src="/static/js/hammer.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.hammer.js"></script>
+    <title>V&amp;A Labels</title>
+</head>
+
+<body>
+
+    
+    <div id="header" class="hi">Touch an object or its label</div>
+
+    <div class="clip">
+        
+        <ul class="carousel" id="img">
+           
+            <li class="img obj">
+                <div class="mask"></div>
+                <div class="case">
+                    
+                    <img class="active" src="{{STATIC_URL}}/img/template_img_small.jpg" width="222" height="222" title="Name Date text" data-img-l="{{STATIC_URL}}/img/template_img_large.jpg" alt="" />
+                    
+                    
+                    <img class="inactive" src="{{STATIC_URL}}/img/template_img_small.jpg" width="128" height="128" title="Name Date text" alt="" />
+                    
+                    <div class="zoom"></div>
+                </div>
+                
+            </li>            
+            <li class="home img obj">
+                <div class="mask"></div>
+                <div class="case">
+                    
+                    <img class="active" src="{{STATIC_URL}}/img/template_img_small.jpg" width="222" height="222" title="Name Date text" data-img-l="{{STATIC_URL}}/img/template_img_large.jpg" alt="" />
+                    
+                    
+                    <img class="inactive" src="{{STATIC_URL}}/img/template_img_small.jpg" width="128" height="128" title="Name Date text" alt="" />
+                    
+                    <div class="zoom"></div>
+                </div>
+                
+            </li>
+            <li class="img obj">
+                <div class="mask"></div>
+                <div class="case">
+                    
+                    <img class="active" src="{{STATIC_URL}}/img/template_img_small.jpg" width="222" height="222" title="Name Date text" data-img-l="{{STATIC_URL}}/img/template_img_large.jpg" alt="" />
+                    
+                    
+                    <img class="inactive" src="{{STATIC_URL}}/img/template_img_small.jpg" width="128" height="128" title="Name Date text" alt="" />
+                    
+                    <div class="zoom"></div>
+                </div>
+                
+            </li>
+            
+        </ul>
+        
+        <ul class="carousel" id="txt">
+            <li class="txt obj">
+                <div class="mask"></div>
+                <div class="title"><h2>Name</h2></div>
+                <div class="row">
+                    <div class="txtl edged col">
+                        <div class="pane"><p>Date text</p></div>
+                        <div class="data col">
+                            <div class="pane">
+                                <p>Place<br />Artist maker</p>
+                                <p>Materials techniques</p>
+                                <p>Credit line<br /><em>Museum no. Museum number</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="txtr col">
+                        <div class="pane">Main text, main text, main text, main text, 
+main text, main text, main text, main text,
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text.</div>
+                        <div class="zoom"></div>
+                    </div>
+                </div>
+            </li>
+    
+            <li class="home txt obj">
+                <div class="mask"></div>
+                <div class="title"><h2>Name</h2></div>
+                <div class="row">
+                    <div class="txtl edged col">
+                        <div class="pane"><p>Date text</p></div>
+                        <div class="data col">
+                            <div class="pane">
+                                <p>Place<br />Artist maker</p>
+                                <p>Materials techniques</p>
+                                <p>Credit line<br /><em>Museum no. Museum number</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="txtr col">
+                        <div class="pane">Main text, main text, main text, main text, 
+main text, main text, main text, main text,
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text.</div>
+                        <div class="zoom"></div>
+                    </div>
+                </div>
+            </li>
+            <li class="txt obj">
+                <div class="mask"></div>
+                <div class="title"><h2>Name</h2></div>
+                <div class="row">
+                    <div class="txtl edged col">
+                        <div class="pane"><p>Date text</p></div>
+                        <div class="data col">
+                            <div class="pane">
+                                <p>Place<br />Artist maker</p>
+                                <p>Materials techniques</p>
+                                <p>Credit line<br /><em>Museum no. Museum number</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="txtr col">
+                        <div class="pane">Main text, main text, main text, main text, 
+main text, main text, main text, main text,
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text, 
+main text, main text, main text, main text.</div>
+                        <div class="zoom"></div>
+                    </div>
+                </div>
+            </li>            
+            
+        </ul>
+        
+    </div>
+    
+    <div class="pop" id="imgpop"><div class="case" id="imgbox"><img id="imgbig" src="" alt="" /><div class="zoom"></div></div><div id="imgtxt"></div></div>
+    <div class="txt pop" id="txtpop"></div>
+    
+
+</body>
+</html>
