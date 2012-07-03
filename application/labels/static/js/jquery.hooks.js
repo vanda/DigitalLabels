@@ -92,10 +92,12 @@ jQuery(document).ready(function() {
     });
     
     $('#img').each(function(){
-        if( $(this).find('li.home').length < 1 ){ 
-            $(this).find('li').eq(Math.floor($(this).find('li').length/2)).trigger('click'); 
-        }else{ 
+        if( $(this).find('li.find').length > 0 ){
+            $(this).find('li.find').trigger('click');
+        }else if( $(this).find('li.home').length > 0 ){
             $(this).find('li.home').eq(0).trigger('click');
+        }else{
+            $(this).find('li').eq(Math.floor($(this).find('li').length/2)).trigger('click');
         }
     });
     
