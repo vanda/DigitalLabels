@@ -9,7 +9,7 @@
         
         <ul class="carousel" id="img">
             {% for mo in mobjects %}
-            <li class="{% if mo.gateway_object %}home {% endif %}img obj">
+            <li class="{% if mo.gateway_object %}home {% endif %}{% if id and id == mo.object_number or pos and forloop.counter == pos %}find {% endif %}img obj">
                 <div class="mask"></div>
                 <div class="case">
                     {% thumbnail mo.image_set.all.0.image_file "222x222" pad=True as im %}
