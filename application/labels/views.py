@@ -7,6 +7,8 @@ from labels.models import DigitalLabel
 def digitallabel(request, digitallabel_id, id=None, pos=None):
     dl = DigitalLabel.objects.get(id=digitallabel_id)
     mobjects = dl.museumobjects.all()
+    if id is not None:
+        id = int(id)
     if pos is not None:
         pos = int(pos)
     t = loader.get_template('digitallabel.html')
