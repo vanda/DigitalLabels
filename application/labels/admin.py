@@ -43,6 +43,12 @@ class MuseumObjectAdmin(reversion.VersionAdmin):
         CMSLabelInline,
     ]
 
+    class Media:
+        js = [
+            '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+            '/static/js/tinymce_setup.js',
+        ]
+
 
 class CMSLabelAdmin(reversion.VersionAdmin):
     pass
