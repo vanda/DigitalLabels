@@ -2,6 +2,13 @@ from sorl.thumbnail import get_thumbnail
 
 
 def get_api_data(sender, instance, **kwargs):
+    """
+    Get the MuseumObject data and load into model
+    """
+    # guard clause
+    if not instance.object_number:
+
+        return False
 
     if instance.id == None or instance.redownload == True:
 
@@ -48,6 +55,10 @@ def get_related_api_data(sender, instance, **kwargs):
     """
     Retrieve VADAR images and individual labels as well
     """
+    # guard clause
+    if not instance.object_number:
+
+        return False
 
     if instance.cmslabel_set.count() == 0:
 

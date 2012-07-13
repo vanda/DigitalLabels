@@ -35,7 +35,7 @@ class MuseumObject(models.Model):
     materials_techniques = models.CharField(max_length=255, null=False,
                                                             blank=True)
     museum_number = models.CharField(max_length=255, null=False, blank=True)
-    object_number = models.CharField(max_length=16, null=False, blank=False,
+    object_number = models.CharField(max_length=16, null=False, blank=True,
                                      unique=True,
                                      help_text="""Unique "O" number, For
                                              example, O9138, as used on
@@ -216,9 +216,11 @@ class Image(models.Model):
         #handle errors
         except urllib2.HTTPError, e:
             logging.error("HTTP Error: %s %s" % (e.code, image_url))
+            self.image_file = None
             return False
         except urllib2.URLError, e:
             logging.error("URL Error: %s %s" % (e.reason, image_url))
+            self.image_file = None
             return False
 
 
