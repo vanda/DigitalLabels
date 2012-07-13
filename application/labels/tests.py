@@ -112,3 +112,25 @@ class LabelTest(TestCase):
                             main text, main text, main text, main text,
                             main text, main text, main text, main text."""
         mo.save()
+
+    def test_new_loanobject(self):
+        """
+        Loan objects do not have O numbers but don't punish them
+        """
+        mo = MuseumObject()
+        mo.name = 'Name'
+        mo.date_text = 'Date text'
+        mo.artist_maker = 'Artist maker'
+        mo.place = 'Place'
+        mo.materials_techniques = 'Materials techniques'
+        mo.museum_number = 'Museum number'
+        mo.credit_line = 'Credit line'
+        mo.main_text = """Main text, main text, main text, main text, 
+                            main text, main text, main text, main text,
+                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text."""
+        mo.save()

@@ -92,7 +92,7 @@ class MuseumObject(models.Model):
     @property
     def museumobject_json(self):
 
-        if self._museumobject_json == None:
+        if self._museumobject_json == None and self.object_number:
             item_url = 'http://%s/api/json/museumobject/%s/' % (
                                         settings.COLLECTIONS_API_HOSTNAME,
                                         self.object_number)
