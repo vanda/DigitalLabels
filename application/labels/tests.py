@@ -103,12 +103,12 @@ class LabelTest(TestCase):
         mo.museum_number = 'Museum number'
         mo.object_number = '012345'
         mo.credit_line = 'Credit line'
-        mo.main_text = """Main text, main text, main text, main text, 
+        mo.main_text = """Main text, main text, main text, main text,
                             main text, main text, main text, main text,
-                            main text, main text, main text, main text, 
-                            main text, main text, main text, main text, 
-                            main text, main text, main text, main text, 
-                            main text, main text, main text, main text, 
-                            main text, main text, main text, main text, 
+                            main text, main text, main text, main text,
+                            main text, main text, main text, main text,
+                            main text, main text, main text, main text,
+                            main text, main text, main text, main text,
+                            main text, main text, main text, main text,
                             main text, main text, main text, main text."""
         mo.save()

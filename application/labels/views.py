@@ -12,7 +12,7 @@ def digitallabel(request, digitallabel_id, id=None, pos=None):
     if pos is not None:
         pos = int(pos)
     t = loader.get_template('digitallabel.html')
-    c = RequestContext(request, {'mobjects':mobjects, 'id':id, 'pos':pos})
+    c = RequestContext(request, {'mobjects': mobjects, 'id': id, 'pos': pos})
     return HttpResponse(t.render(c))
 
 
@@ -20,7 +20,7 @@ def index(request):
     """Lists available digital labels"""
     labels = DigitalLabel.objects.all()
     t = loader.get_template('base.html')
-    c = RequestContext(request, {'labels':labels})
+    c = RequestContext(request, {'labels': labels})
     return HttpResponse(t.render(c))
 
 
