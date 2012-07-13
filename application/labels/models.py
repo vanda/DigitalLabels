@@ -35,7 +35,7 @@ class MuseumObject(models.Model):
     materials_techniques = models.CharField(max_length=255, null=False,
                                                             blank=True)
     museum_number = models.CharField(max_length=255, null=False, blank=True)
-    object_number = models.CharField(max_length=16, null=False, blank=False,
+    object_number = models.CharField(max_length=16, null=False, blank=True,
                                      unique=True,
                                      help_text="""Unique "O" number, For
                                              example, O9138, as used on
@@ -92,7 +92,7 @@ class MuseumObject(models.Model):
     @property
     def museumobject_json(self):
 
-        if self._museumobject_json == None:
+        if self._museumobject_json == None and self.object_number:
             item_url = 'http://%s/api/json/museumobject/%s/' % (
                                         settings.COLLECTIONS_API_HOSTNAME,
                                         self.object_number)
