@@ -80,3 +80,4 @@ def create_thumbnails(sender, instance, **kwargs):
                                                     quality=85, pad=True)
         im = get_thumbnail(instance.local_filename, '44x44',
                                                     quality=85, pad=True)
+        return im
