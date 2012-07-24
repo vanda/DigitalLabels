@@ -1,25 +1,3 @@
-
-function CustomFileBrowser(field_name, url, type, win) {
-    
-    var cmsURL = '/admin/filebrowser/browse/?pop=2';
-    cmsURL = cmsURL + '&type=' + type;
-    
-    tinyMCE.activeEditor.windowManager.open({
-        file: cmsURL,
-        width: 980,  // Your dimensions may differ - toy around with them!
-        height: 500,
-        resizable: 'yes',
-        scrollbars: 'yes',
-        inline: 'no',  // This parameter only has an effect if you use the inlinepopups plugin!
-        close_previous: 'no'
-    }, {
-        window: win,
-        input: field_name,
-        editor_id: tinyMCE.selectedInstance.editorId
-    });
-    return false;
-}
-
 tinyMCE.init({
     
     // see http://www.tinymce.com/wiki.php/Configuration
@@ -37,10 +15,7 @@ tinyMCE.init({
     language: 'en',
     object_resizing: false,
     plugins: 'advimage,advlink,fullscreen,paste,media,searchreplace,grappelli,template',
-    
-    // Callbacks
-    file_browser_callback: 'CustomFileBrowser',
-    
+      
     // Cleanup/Output
     element_format: 'xhtml',
     fix_list_elements: true,
@@ -67,8 +42,8 @@ tinyMCE.init({
     theme_advanced_toolbar_location: 'top',
     theme_advanced_toolbar_align: 'left',
     theme_advanced_statusbar_location: 'bottom',
-    theme_advanced_buttons1: 'bold,italic,|,undo,redo,|',
-    theme_advanced_buttons2: '',
+    theme_advanced_buttons1: 'bold,italic',
+    theme_advanced_buttons2: 'undo,redo',
     theme_advanced_buttons3: '',
     theme_advanced_path: false,
     theme_advanced_blockformats: 'p,h1,h2,h3,h4,pre',

@@ -14,8 +14,25 @@ logger = logging.getLogger('labels')
 
 
 class DigitalLabel(models.Model):
-
+    """
+    Grouping several museum object labels into
+    the one digital label interface
+    """
     name = models.CharField(max_length=255, null=False)
+
+    def __unicode__(self):
+
+        return self.name
+
+
+class Portal(models.Model):
+    """
+    An interface to provide contextual information in a gallery
+    """
+    name = models.CharField(max_length=255, null=False)
+    main_text = models.TextField(blank=True)
+    historical_context = models.TextField(blank=True)
+    object_text = models.TextField(blank=True)
 
     def __unicode__(self):
 
@@ -164,13 +181,23 @@ class Image(models.Model):
     caption = models.CharField(max_length=255, null=False, blank=True)
     image_file = ImageField(upload_to="labels/images")
     position = models.PositiveIntegerField(null=False, default=1)
-    museumobject = models.ForeignKey(MuseumObject)
+    museumobject = models.ForeignKey(MuseumObject, null=True)
+    portal_historical = models.ForeignKey(Portal, null=True,
+                                        related_name="images_historical")
+    portal_main = models.ForeignKey(Portal, null=True,
+                                        related_name="images_main")
+    portal_object = models.ForeignKey(Portal, null=True,
+                                        related_name="images_object")
 
     class Meta:
         ordering = ['position']
 
     def __unicode__(self):
-        return u"%s for %s" % (self.image_id, self.museumobject.museum_number)
+        if self.museumobject:
+            return u"%s for %s" % (self.image_id,
+                                   self.museumobject.museum_number)
+        else:
+            return u"%s" % (self.caption)
 
     @property
     def local_filename(self):

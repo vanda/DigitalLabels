@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from labels.models import MuseumObject
+from labels.models import MuseumObject, Image, Portal
 
 
 class SimpleTest(TestCase):
@@ -134,3 +134,68 @@ class LabelTest(TestCase):
                             main text, main text, main text, main text, 
                             main text, main text, main text, main text."""
         mo.save()
+
+class PortalTest(TestCase):
+
+    def setUp(self):
+        """
+        Tests that we can create a copy of the API data in the
+        MuseumObject model
+        """
+        mo, cr = MuseumObject.objects.get_or_create(object_number='O7351')
+        p = Portal()
+        p.name = "Islamic Bowls"
+        p.main_text = """Main text, main text, main text, main text, 
+                       main text, <strong>main text</strong>, main text,
+                       main text, main text, main text, main text, 
+                       main text, main text, main text, main text, 
+                       main text, main text, main text, main text, 
+                       main text, main text, main text, main text, 
+                       main text, main text, main text, main text, 
+                       main text, main text, main text, main text."""
+        p.historical_context = """Main text, main text, main text, main text, 
+                               main text, <em>main text</em>, main text,
+                               main text, main text, main text, main text, 
+                               main text, main text, main text, main text, 
+                               main text, main text, main text, main text, 
+                               main text, main text, main text, main text, 
+                               main text, main text, main text, main text, 
+                               main text, main text, main text, main text."""
+        p.object_text = """Main text, main text, main text, main text, 
+                           main text, <strong>main text</strong>, main text,
+                           main text, main text, main text, main text, 
+                           main text, main text, main text, main text, 
+                           main text, main text, main text, main text, 
+                           main text, main text, main text, main text, 
+                           main text, main text, <em>main text</em>, 
+                           main text, main text, main text, main text."""
+        p.save()
+
+        # Set up links between portal and images
+        im = Image.objects.all()[0]
+        im2 = Image.objects.all()[1]
+        p.images_historical.add(im)
+        im2.portal_main = p
+        p.save()
+        im2.save()
+
+    def test_created_portal(self):
+        """
+        Make sure we find a portal to use
+        """
+        self.assertEqual(Portal.objects.count(), 1)
+
+    def test_portal_images(self):
+        """
+        Test links between images and portals
+        """
+        p = Portal.objects.get(id=1)
+        self.assertGreater(p.images_historical.count(), 0)
+        self.assertGreater(p.images_main.count(), 0)
+
+    def test_portal_frontend(self):
+        """
+        Make sure the portal we've set up works on the front-end
+        """
+        self.client.get('/portal/1')
+
