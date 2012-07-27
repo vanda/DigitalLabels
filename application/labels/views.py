@@ -1,7 +1,7 @@
 # Create your views here.
 from django.http import HttpResponse
 from django.template import loader, RequestContext
-from labels.models import DigitalLabel
+from labels.models import DigitalLabel, Portal
 
 
 def digitallabel(request, digitallabel_id, id=None, pos=None):
@@ -28,4 +28,11 @@ def template(request):
     """Preview the layout of fields in the frontend"""
     t = loader.get_template('template.html')
     c = RequestContext(request, {})
+    return HttpResponse(t.render(c))
+
+
+def portal(request, portal_id):
+    p = Portal.objects.get(id=portal_id)
+    t = loader.get_template('portal.html')
+    c = RequestContext(request, {'portal': p})
     return HttpResponse(t.render(c))
