@@ -42,12 +42,25 @@
                 <div class="title"><h2>{{ mo.name }}</h2></div>
                 <div class="row">
                     <div class="txtl edged col">
-                        <div class="pane"><p>{{ mo.date_text }}</p></div>
-                        <div class="data col">
+                        <div class="pane">
+                            <p>
+                                <strong>
+                                {{ mo.date_text }}<br/>
+                                </strong>
+                            </p>
+                            <p>
+                                {{ mo.place }}<br/>
+                                {{ mo.artist_maker }}
+                            </p>
+                            <p>{{ mo.materials_techniques|replace:'/-/&#8209;'|safe }}</p>
+                            <p>
+                                {{ mo.credit_line|replace:'/-/&#8209;'|safe }}{% if mo.credit_line|length > 0 %}<br/>{% endif %}
+                                <em>Museum no. {{ mo.museum_number }}</em>
+                            </p>
+                        </div>
+                        <div class="bot col">
                             <div class="pane">
-                                <p>{{ mo.place }}<br />{{ mo.artist_maker }}</p>
-                                <p>{{ mo.materials_techniques|replace:'/-/&#8209;'|safe }}</p>
-                                <p>{{ mo.credit_line|replace:'/-/&#8209;'|safe }}{% if mo.credit_line|length > 0 %}<br />{% endif %}<em>Museum no. {{ mo.museum_number }}</em></p>
+                                <p class="artfund"><img src="{{STATIC_URL}}img/logo-artfund.png" alt="ArtFund"/></p>
                             </div>
                         </div>
                     </div>
