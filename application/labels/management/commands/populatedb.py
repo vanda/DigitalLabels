@@ -1,3 +1,4 @@
+import csv
 import urllib
 from django.conf import settings
 from django.core.management.base import BaseCommand
@@ -13,15 +14,31 @@ class Command(BaseCommand):
     help = "Preloads the database with the specified objects"
 
     def handle(self, *args, **options):
-
+        dls = {}
+        identifiers = []
         if not args:
             chip_grp, cr = DigitalLabel.objects.get_or_create(
                                                         name="Chippendale")
             identifiers = RECORDS.split(' ')
 
+            # load up label hash
+            for i in identifiers:
+                dls[i] = chip_grp
+
+        elif len(args) == 1 and args[0].endswith('csv'):
+            reader = csv.reader(open(args[0]))
+            for row in reader:
+                dl_name = row[0]
+                mus_no = row[1]
+                dl, cr = DigitalLabel.objects.get_or_create(name=dl_name)
+                dls[mus_no] = dl
+                identifiers.append(mus_no)
+
         else:
             chip_grp = None
             identifiers = args
+            for i in identifiers:
+                dls[i] = None
 
         for identifier in identifiers:
 
@@ -35,8 +52,9 @@ class Command(BaseCommand):
                 print 'Downloading', object_number
                 mo, cr = MuseumObject.objects.get_or_create(
                                             object_number=object_number)
-                if chip_grp:
-                    mo.digitallabel = chip_grp
+                dl = dls[identifier]
+                if dl:
+                    mo.digitallabel = dl
 
                 mo.save()
             else:
