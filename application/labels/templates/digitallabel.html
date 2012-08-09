@@ -2,8 +2,10 @@
 {% load thumbnail %}
 {% load replace %}
 
+{% block title %}{{dl.name}}{% endblock %}
+
     {% block content %}
-    <div id="header" class="hi">Touch an object or its label ({{dl.name}})</div>
+    <div id="header" class="hi">Touch an object or its label</div>
 
     <div class="clip">
         
@@ -63,11 +65,13 @@
                                 <em>Museum no. {{ mo.museum_number }}</em>
                             </p>
                         </div>
+                        {% if mo.artfund %}
                         <div class="bot col">
                             <div class="pane">
                                 <p class="artfund"><img src="{{STATIC_URL}}img/logo-artfund.png" alt="ArtFund"/></p>
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                     <div class="txtr col">
                         <div class="pane">{{ mo.main_text|safe }}</div>
