@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 object_number = self.get_object_by_mn(identifier)
 
             if object_number:
-                print 'Downloading', object_number
+                print 'Downloading', object_number, identifier
                 mo, cr = MuseumObject.objects.get_or_create(
                                             object_number=object_number)
                 dl = dls[identifier]
