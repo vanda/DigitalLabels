@@ -175,7 +175,7 @@ class Image(models.Model):
     @property
     def local_filename(self):
         """Where is the file stored regardless of source"""
-        if self.image_file:
+        if unicode(self.image_file):
             return os.path.join(settings.MEDIA_ROOT,
                                 self.image_file.field.upload_to,
                                 unicode(self.image_file.file))

@@ -3,7 +3,7 @@
 {% load replace %}
 
     {% block content %}
-    <div id="header" class="hi">Touch an object or its label</div>
+    <div id="header" class="hi">Touch an object or its label ({{dl.name}})</div>
 
     <div class="clip">
         
@@ -12,12 +12,17 @@
             <li class="{% if mo.gateway_object %}home {% endif %}{% if id and id == mo.pk or pos and forloop.counter == pos %}find {% endif %}img obj">
                 <div class="mask"></div>
                 <div class="case">
+                    {% if mo.image_set.all %}
                     {% thumbnail mo.image_set.all.0.image_file "222x222" pad=True as im %}
                     <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail mo.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                     {% endthumbnail %}
                     {% thumbnail mo.image_set.all.0.image_file "128x128" pad=True as im %}
                     <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" alt="" />
                     {% endthumbnail %}
+                    {% else %}
+                    <img class="active" src="{{STATIC_URL}}img/logo-va.png" width="222" height="222" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{{STATIC_URL}}img/logo-va.png" alt="" />
+                    <img class="inactive" src="{{STATIC_URL}}img/logo-va.png" width="128" height="128" title="{{ mo.name }} {{ mo.date_text }}" alt="" />
+                    {% endif %}
                     <div class="zoom"></div>
                 </div>
                 {% if mo.image_set.all|length > 1 %}
