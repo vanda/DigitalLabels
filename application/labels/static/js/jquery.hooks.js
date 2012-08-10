@@ -109,7 +109,7 @@ jQuery(document).ready(function() {
         var to = this, t;
         this.init = function(){
             $(this).show().css({'opacity':0}).animate({'opacity':1}, 1000);
-            if( $(this).children('img').length>1 ){ setTimeout(function(){to.flick();}, 4000); }
+            if( $(this).children('img').length>1 ){ t = setTimeout(function(){to.flick();}, 4000); }
         };
         this.flick = function(){
             $(this).append($(this).children(':first-child').css({'opacity':0}).animate({'opacity':1}, 1000));
