@@ -29,8 +29,10 @@ class Command(BaseCommand):
             reader = csv.reader(open(args[0]))
             for row in reader:
                 dl_name = row[0]
+                dl_no = row[2]
                 mus_no = row[1]
-                dl, cr = DigitalLabel.objects.get_or_create(name=dl_name)
+                dl, cr = DigitalLabel.objects.get_or_create(
+                                                name=dl_no + ' ' + dl_name)
                 dls[mus_no] = dl
                 identifiers.append(mus_no)
 
