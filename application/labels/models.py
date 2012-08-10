@@ -41,6 +41,7 @@ class MuseumObject(models.Model):
                                              example, O9138, as used on
                                          Search the Collections""")
     credit_line = models.CharField(max_length=255, null=False, blank=True)
+    artfund = models.BooleanField(default=False)
     main_text = models.TextField(blank=True)
     redownload = models.BooleanField(help_text="""WARNING: This may
                                          replace your existing content""")
@@ -130,16 +131,22 @@ class MuseumObject(models.Model):
                 try:
                     cms_image, cr = Image.objects.get_or_create(
                                 museumobject=self, image_id=image_id)
-                    cms_image.store_vadar_image()
-                    cms_image.caption = image_id
-                    cms_image.image_file = os.path.join(
-                                    cms_image.image_file.field.upload_to,
-                                    unicode(cms_image.image_id) + '.jpg')
-                    if image_id == museum_object['fields']['primary_image_id']:
-                        cms_image.position = 0
-                    cms_image.save()
+                    # retreive image from media server
+                    image_success = cms_image.store_vadar_image()
+                    if image_success:
+                        cms_image.caption = image_id
+                        cms_image.image_file = os.path.join(
+                                        cms_image.image_file.field.upload_to,
+                                        unicode(cms_image.image_id) + '.jpg')
+                        if image_id == \
+                                museum_object['fields']['primary_image_id']:
+                            cms_image.position = 0
+                        cms_image.save()
+                    else:
+                        cms_image.delete()
 
                 except urllib2.HTTPError, e:
+                    cms_image.image_file = ''
                     if e.code == 404:
                         # Missing object
                         pass
@@ -175,7 +182,7 @@ class Image(models.Model):
     @property
     def local_filename(self):
         """Where is the file stored regardless of source"""
-        if self.image_file:
+        if unicode(self.image_file):
             return os.path.join(settings.MEDIA_ROOT,
                                 self.image_file.field.upload_to,
                                 unicode(self.image_file.file))
