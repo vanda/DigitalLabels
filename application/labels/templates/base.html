@@ -16,7 +16,7 @@
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery.hooks.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/hammer.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery.hammer.js"></script>
-    <title>V&amp;A Labels</title>
+    <title>{% block title %}V&amp;A Labels{% endblock %}</title>
 </head>
 
 <body>
@@ -32,6 +32,8 @@
                 {% thumbnail l.museumobjects.all.0.image_set.all.0.image_file "84x84" pad=True as im %}
                 <a href="{% url digitallabel l.id %}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a><br />
                 {% endthumbnail %}
+                {% else %}
+                <a href="{% url digitallabel l.id %}"><img src="{{STATIC_URL}}img/logo-va.png" width="84" height="84"></a><br />
                 {% endif %}
                 <a href="{% url digitallabel l.id %}">{{l}}</a>
             </li>
