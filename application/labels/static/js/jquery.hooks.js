@@ -97,9 +97,9 @@ jQuery(document).ready(function() {
             if( $(this).find('li.find').length > 0 ){
                 $(this).find('li.find:not(.active)').trigger('click');
             }else if( $(this).find('li.home').length > 0 ){
-                $(this).find('li.home:not(.active)').eq(0).trigger('click');
+                $(this).find('li.home').eq(0).not('.active').trigger('click');
             }else{
-                $(this).find('li:not(.active)').eq(Math.floor($(this).find('li').length/2)).trigger('click');
+                $(this).find('li').eq(Math.floor($(this).find('li').length/2)).not('.active').trigger('click');
             }
         };
         this.reset();
