@@ -108,7 +108,7 @@ jQuery(document).ready(function() {
     $('#timeout').each(function(){
         var to = this, t;
         this.init = function(){
-            $(this).show().css({'opacity':0}).animate({'opacity':1}, 1000);
+            $(this).show();
             if( $(this).children('img').length>1 ){ t = setTimeout(function(){to.flick();}, 4000); }
         };
         this.flick = function(){
@@ -118,7 +118,7 @@ jQuery(document).ready(function() {
         this.reset = function(){
             clearTimeout(t);
             $(this).hide();
-            t = setTimeout(function(){to.init(); $('#img').get(0).reset();}, 8000);
+            t = setTimeout(function(){to.init(); $('#img').get(0).reset();}, 80000);
         };
         $(window).on('mousedown', function(){to.reset();});
         this.init();
