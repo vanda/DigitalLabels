@@ -23,7 +23,7 @@
 .active>.thumbs { display:block; }
 .txt { background:#fff; border:1px solid #b5b5b5; padding:10px 16px 16px; width:508px; }
 .title { border-bottom:1px solid #b5b5b5; padding:0 0 6px; margin:0 0 10px; }
-.txtl, .txtr { height:314px; }
+.txtl, .txtr { height:317px; }
 .txtr { font-size:114%; line-height:122%; }
 .bot, .zoom { bottom:0; font-size:0.8em; position:absolute; }
 .bot>.pane { padding:0 40px 0 0; }
@@ -45,7 +45,7 @@ li.home.txt .zoom { background-image:url(img/zoomin_ht.png); }
 #imgbox { border:0; height:542px; width:542px; }
 #imgtxt { background:#6b6a6f; color:#fff; display:table-cell; height:77px; padding:0 12px; vertical-align:middle; width:518px; }
 #txtpop { font-size:156%; padding:15px 24px 24px; width:794px; }
-#txtpop .txtl, #txtpop .txtr { height:511px; }
+#txtpop .txtl, #txtpop .txtr { height:523px; }
 
 #mousetrap { height:100%; left:0; position:absolute; top:0; width:100%; z-index:1; }
 #mousetrap.mask { background:#292728; opacity:0.9; }
