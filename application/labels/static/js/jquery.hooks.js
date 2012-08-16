@@ -120,7 +120,8 @@ jQuery(document).ready(function() {
             $(this).hide();
             t = setTimeout(function(){to.init(); $('#img').get(0).reset();}, 80000);
         };
-        $(window).on('mousedown', function(){to.reset();});
+        $(window).on('mousedown', function(e){to.reset(); e.preventDefault();});
+        $('html').css({'cursor':'none'});
         this.init();
     });
 
