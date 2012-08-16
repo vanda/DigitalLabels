@@ -28,7 +28,7 @@
                     <div class="zoom"></div>
                 </div>
                 {% if mo.image_set.all|length > 1 %}
-                <div class="thumbs">Supporting images&hellip;<br />
+                <div class="thumbs">More images<br />
                     {% for img in mo.image_set.all %}
                         {% if forloop.counter > 1 and forloop.counter < 6 %}
                             {% thumbnail img.image_file "48x48" pad=True as im %}
