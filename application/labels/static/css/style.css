@@ -30,7 +30,7 @@
 .mask { background:#292728; height:100%; opacity:0.5; left:0; position:absolute; top:0; width:100%; z-index:1; }
 .home.txt { background:#007d93; color:#fff; }
 .home.txt .edged.col, .home.txt .title { border-color:#fff; }
-.pop { display:none; border:0; position:absolute; top:121px; z-index:1; }
+.pop { display:none; border:0; overflow:hidden; position:absolute; top:121px; z-index:1; }
 .pop>.mask { display:none; }
 .zoom { background:url(img/zoomin.png) 50% 50% no-repeat; display:none; height:22px; margin:10px; right:0; width:22px; }
 .pop .zoom { background-image:url(img/zoomout.png); height:32px; width:32px; }
