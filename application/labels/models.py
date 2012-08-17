@@ -31,7 +31,45 @@ class Portal(models.Model):
         return self.name
 
 
-class MuseumObject(models.Model):
+class BaseLabel(models.Model):
+    _thumbnail_url = None
+
+    @property
+    def display_text(self):
+        return NotImplementedError
+
+    @property
+    def thumbnail_url(self):
+
+        if not self._thumbnail_url:
+
+            if self.image_set.count() > 0:
+
+                # images are sorted by priority, so take the first
+                image_file = self.image_set.all()[0]
+
+                im = get_thumbnail(image_file.local_filename, '44x44',
+                                                    quality=85, pad=True)
+
+                self._thumbnail_url = im.url
+
+        return self._thumbnail_url
+
+    def thumbnail_tag(self):
+
+        if self.thumbnail_url:
+            return mark_safe('<img alt="%s" src="%s" />' % (
+                                            self.display_text, self.thumbnail_url))
+        else:
+            return mark_safe('<em>No Images</em>')
+
+    thumbnail_tag.allow_tags = True
+    thumbnail_tag.short_description = 'Thumb'
+
+    class Meta:
+        abstract = True
+
+class MuseumObject(BaseLabel):
     """
     A label describing an individual object
     """
@@ -59,6 +97,10 @@ class MuseumObject(models.Model):
     gateway_object = models.BooleanField(default=False)
     position = models.PositiveIntegerField(null=False, default=1)
 
+    @property
+    def display_text(self):
+        return self.name
+
     class Meta:
         ordering = ['position']
         verbose_name = "object"
@@ -71,35 +113,6 @@ class MuseumObject(models.Model):
             return self.name
 
     _museumobject_json = None
-    _thumbnail_url = None
-
-    @property
-    def thumbnail_url(self):
-
-        if not self._thumbnail_url:
-
-            if self.image_set.count() > 0:
-
-                # images are sorted by priority, so take the first
-                image_file = self.image_set.all()[0]
-
-                im = get_thumbnail(image_file.local_filename, '44x44',
-                                                    quality=85, pad=True)
-
-                self._thumbnail_url = im.url
-
-        return self._thumbnail_url
-
-    def thumbnail_tag(self):
-
-        if self.thumbnail_url:
-            return mark_safe('<img alt="%s" src="%s" />' % (
-                                            self.name, self.thumbnail_url))
-        else:
-            return mark_safe('<em>No Images</em>')
-
-    thumbnail_tag.allow_tags = True
-    thumbnail_tag.short_description = 'Thumb'
 
     @property
     def museumobject_json(self):
@@ -166,7 +179,7 @@ class MuseumObject(models.Model):
                         pass
 
 
-class TextLabel(models.Model):
+class TextLabel(BaseLabel):
     """
     A label describing biography or a historical notes
     """
@@ -178,6 +191,11 @@ class TextLabel(models.Model):
 
     biography = models.BooleanField(default=False)
     position = models.PositiveIntegerField(null=False, default=1)
+
+    @property
+    def display_text(self):
+        return self.title
+
 
 
 class CMSLabel(models.Model):
