@@ -196,6 +196,8 @@ class TextLabel(BaseLabel):
     def display_text(self):
         return self.title
 
+    def __unicode__(self):
+        return self.title
 
 
 class CMSLabel(models.Model):
