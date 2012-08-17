@@ -61,7 +61,7 @@ class MuseumObjectAdmin(reversion.VersionAdmin):
 
 
 class TextLabelAdmin(reversion.VersionAdmin):
-    list_display = ('title',)
+    list_display = ('thumbnail_tag', 'title',)
     list_display_links = ('title',)
     list_per_page = 25
     list_selected_related = True
