@@ -22,12 +22,23 @@ class DigitalLabel(models.Model):
         return self.name
 
 
+class Portal(models.Model):
+
+    name = models.CharField(max_length=255, null=False)
+
+    def __unicode__(self):
+
+        return self.name
+
+
 class MuseumObject(models.Model):
     """
     A label describing an individual object
     """
     name = models.CharField(max_length=255, null=False, blank=True)
     digitallabel = models.ForeignKey(DigitalLabel, null=True, blank=True,
+                                                related_name="museumobjects")
+    portal = models.ForeignKey(Portal, null=True, blank=True,
                                                 related_name="museumobjects")
     date_text = models.CharField(max_length=255, null=False, blank=True)
     artist_maker = models.CharField(max_length=255, null=False, blank=True)
@@ -155,6 +166,20 @@ class MuseumObject(models.Model):
                         pass
 
 
+class TextLabel(models.Model):
+    """
+    A label describing biography or a historical notes
+    """
+    title = models.CharField(max_length=255, null=False, blank=True)
+    portal = models.ForeignKey(Portal, null=True, blank=True,
+                                                related_name="textlabels")
+
+    main_text = models.TextField(blank=True)
+
+    biography = models.BooleanField(default=False)
+    position = models.PositiveIntegerField(null=False, default=1)
+
+
 class CMSLabel(models.Model):
 
     date = models.CharField(max_length=255, null=False)
@@ -171,14 +196,19 @@ class Image(models.Model):
     caption = models.CharField(max_length=255, null=False, blank=True)
     image_file = ImageField(upload_to="labels/images")
     position = models.PositiveIntegerField(null=False, default=1)
-    museumobject = models.ForeignKey(MuseumObject)
+    museumobject = models.ForeignKey(MuseumObject, null=True, blank=True)
+    textlabel = models.ForeignKey(TextLabel, null=True, blank=True)
 
     class Meta:
         ordering = ['position']
 
     def __unicode__(self):
-        return u"%s for %s" % (self.image_id, self.museumobject.museum_number)
-
+        if self.museumobject:
+            return u"%s for MN: %s" % (self.image_id, self.museumobject.museum_number)
+        elif self.textlabel:
+            return u"Image for TL: %s" % (self.textlabel.title)
+        else:
+            return unicode(self.image_file)
     @property
     def local_filename(self):
         """Where is the file stored regardless of source"""
