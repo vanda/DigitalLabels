@@ -21,7 +21,7 @@ class ImageInline(AdminImageMixin, admin.TabularInline):
 
 class MuseumObjectInline(admin.TabularInline):
     inline_classes = ('collapse open',)
-    fields = ('museum_number', 'name', 'gateway_object', 'position',)
+    fields = ('object_number', 'name', 'gateway_object', 'position',)
     extra = 0
     model = MuseumObject
     # define the sortable
