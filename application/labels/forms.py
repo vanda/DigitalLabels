@@ -19,6 +19,7 @@ class ObjectNumberInput(TextInput):
             # Only add the 'value' attribute if a value is non-empty.
             final_attrs['value'] = force_unicode(self._format_value(value))
             final_attrs['readonly'] = 'readonly'
+            final_attrs['style'] = 'width: 272px;'
         return mark_safe(u'<input%s />' % flatatt(final_attrs))
 
 class EditMuseumObjectForm(ModelForm):
