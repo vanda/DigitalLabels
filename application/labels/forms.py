@@ -7,8 +7,7 @@ from labels.models import MuseumObject
 
 class ObjectNumberInput(TextInput):
     """
-    Base class for all <input> widgets (except type='checkbox' and
-    type='radio', which are special).
+    Class for managing the object_number input editability 
     """
     input_type = None # Subclasses must define this.
 
