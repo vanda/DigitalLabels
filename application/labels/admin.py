@@ -99,6 +99,7 @@ class PortalAdmin(reversion.VersionAdmin):
     save_on_top = True
     inlines = [
         TextLabelInline,
+        MuseumObjectInline,
     ]
 
 admin.site.register(MuseumObject, MuseumObjectAdmin)
