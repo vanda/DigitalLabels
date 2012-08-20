@@ -199,6 +199,9 @@ class TextLabel(BaseLabel):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        ordering = ['position']
+
 
 class CMSLabel(models.Model):
 
