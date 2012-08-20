@@ -2,6 +2,7 @@ from django.contrib import admin
 import reversion
 from sorl.thumbnail.admin import AdminImageMixin
 from labels.models import MuseumObject, TextLabel, CMSLabel, Image, DigitalLabel, Portal
+from labels.forms import EditMuseumObjectForm
 
 
 class CMSLabelInline(admin.TabularInline):
@@ -40,6 +41,8 @@ class TextLabelInline(admin.TabularInline):
 
 
 class MuseumObjectAdmin(reversion.VersionAdmin):
+    form = EditMuseumObjectForm
+
     list_display = ('thumbnail_tag', 'object_number', 'museum_number',
                                             'name', 'artist_maker', 'place')
     list_display_links = ('object_number', 'museum_number', 'name',)
