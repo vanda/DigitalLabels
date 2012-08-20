@@ -21,6 +21,8 @@ class ImageInline(AdminImageMixin, admin.TabularInline):
 
 
 class MuseumObjectInline(admin.TabularInline):
+    form = EditMuseumObjectForm
+
     inline_classes = ('collapse open',)
     fields = ('object_number', 'name', 'gateway_object', 'position',)
     extra = 0
