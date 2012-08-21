@@ -51,7 +51,7 @@ class MuseumObjectAdmin(reversion.VersionAdmin):
     list_per_page = 25
     list_selected_related = True
     list_filter = ('digitallabel',)
-    search_fields = ['name', 'museum_number', 'object_number']
+    search_fields = ['name', 'museum_number', 'object_number', 'artist_maker']
     save_on_top = True
     inlines = [
         ImageInline,
