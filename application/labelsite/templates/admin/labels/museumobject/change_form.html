@@ -122,8 +122,8 @@
                     <!-- # TODO make preview specific to model -->
                     <li><a onclick="javascript:window.open(this.href);return false;" href="{% url 'labels.views.template' %}">Template</a></li>
                     {% if original.digitallabel %}
-                    <li><a onclick="javascript:window.open(this.href);return false;" href="{% url 'labels.views.digitallabel' digitallabel_id=original.digitallabel.pk id=original.pk %}">Preview</a></li>
-                    {% endif %}                                     
+                    <li><a onclick="javascript:window.open(this.href);return false;" href="{% url 'labels.views.digitallabel' digitallabel_id=original.digitallabel.pk objectid=original.pk %}">Preview</a></li>
+                    {% endif %}
                     <li><a href="history/">{% trans "History" %}</a></li>
                     {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="grp-state-focus" target="_blank">{% trans "View on site" %}</a></li>{% endif%}
                 {% endblock %}

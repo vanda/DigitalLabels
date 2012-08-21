@@ -4,29 +4,28 @@ from django.template import loader, RequestContext
 from labels.models import DigitalLabel, Portal
 
 
-def digitallabel(request, digitallabel_id, id=None, pos=None):
+def digitallabel(request, digitallabel_id, objectid=None, pos=None):
     dl = DigitalLabel.objects.get(id=digitallabel_id)
     mobjects = dl.museumobjects.all()
-    if id is not None:
-        id = int(id)
+    if objectid is not None:
+        objectid = int(objectid)
     if pos is not None:
         pos = int(pos)
     t = loader.get_template('digitallabel.html')
     c = RequestContext(request, {'mobjects': mobjects, 'dl': dl,
-                                 'id': id, 'pos': pos})
+                                 'objectid': objectid, 'pos': pos})
     return HttpResponse(t.render(c))
 
 
-def portal(request, portal_id, id=None, pos=None):
+def portal(request, portal_id, objectid=None, pos=None):
     p = Portal.objects.get(id=portal_id)
     mobjects = p.museumobjects.all()
-    if id is not None:
-        id = int(id)
+    if objectid is not None:
+        objectid = int(objectid)
     if pos is not None:
         pos = int(pos)
     t = loader.get_template('portal.html')
-    c = RequestContext(request, {'mobjects': mobjects, 'p': p,
-                                 'objectid': id, 'pos': pos})
+    c = RequestContext(request, {'mobjects': mobjects, 'objectid': objectid, 'pos': pos})
     return HttpResponse(t.render(c))
 
 
