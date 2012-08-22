@@ -1,6 +1,6 @@
 /*
  * Hammer.JS
- * version 0.6
+ * version 0.6.1
  * author: Eight Media
  * https://github.com/EightMedia/hammer.js
  */
@@ -12,6 +12,7 @@ function Hammer(element, options, undefined)
         // prevent the default event or not... might be buggy when false
         prevent_default    : false,
         css_hacks          : true,
+        cancel_event       : true,
 
         swipe              : true,
         swipe_time         : 200,   // ms
@@ -172,15 +173,15 @@ function Hammer(element, options, undefined)
                 body = doc.body;
 
             return [{
-                x: event.pageX || event.clientX + ( doc && doc.scrollLeft || body && body.scrollLeft || 0 ) - ( doc && doc.clientLeft || body && body.clientLeft || 0 ),
-                y: event.pageY || event.clientY + ( doc && doc.scrollTop || body && body.scrollTop || 0 ) - ( doc && doc.clientTop || body && body.clientTop || 0 )
+                x: event.pageX || event.clientX + ( doc && doc.scrollLeft || body && body.scrollLeft || 0 ) - ( doc && doc.clientLeft || body && doc.clientLeft || 0 ),
+                y: event.pageY || event.clientY + ( doc && doc.scrollTop || body && body.scrollTop || 0 ) - ( doc && doc.clientTop || body && doc.clientTop || 0 )
             }];
         }
         // multitouch, return array with positions
         else {
-            var pos = [], src;
-            for(var t=0, len=event.touches.length; t<len; t++) {
-                src = event.touches[t];
+            var pos = [], src, touches = event.touches.length > 0 ? event.touches : event.changedTouches;
+            for(var t=0, len=touches.length; t<len; t++) {
+                src = touches[t];
                 pos.push({ x: src.pageX, y: src.pageY });
             }
             return pos;
@@ -277,6 +278,8 @@ function Hammer(element, options, undefined)
 
     function cancelEvent(event)
     {
+        if (!options.cancel_event) { return; };
+
         event = event || window.event;
         if(event.preventDefault){
             event.preventDefault();
@@ -389,6 +392,11 @@ function Hammer(element, options, undefined)
                     return;
                 }
 
+                var interim_angle = getAngle(_pos.interim || _pos.start[0], _pos.move[0]),
+                    interim_direction = self.getDirectionFromAngle(interim_angle);
+                _pos.interim = _pos.move[0];
+
+
                 _gesture = 'drag';
 
                 var position = { x: _pos.move[0].x - _offset.left,
@@ -401,7 +409,9 @@ function Hammer(element, options, undefined)
                     distance        : _distance,
                     distanceX       : _distance_x,
                     distanceY       : _distance_y,
-                    angle           : _angle
+                    angle           : _angle,
+                    interim_angle: interim_angle,
+                    interim_direction: interim_direction
                 };
 
                 // on the first time trigger the start event
@@ -584,7 +594,8 @@ function Hammer(element, options, undefined)
 
                 _mousedown = false;
                 _event_end = event;
-
+                
+                var dragging = _gesture == 'drag';
 
                 // swipe gesture
                 gestures.swipe(event);
@@ -592,7 +603,7 @@ function Hammer(element, options, undefined)
 
                 // drag gesture
                 // dragstart is triggered, so dragend is possible
-                if(_gesture == 'drag') {
+                if(dragging) {
                     triggerEvent("dragend", {
                         originalEvent   : event,
                         direction       : _direction,
