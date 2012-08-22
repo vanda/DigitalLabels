@@ -17,15 +17,19 @@ def digitallabel(request, digitallabel_id, objectid=None, pos=None):
     return HttpResponse(t.render(c))
 
 
-def portal(request, portal_id, objectid=None, pos=None):
+def portal(request, portal_id, objectid=None, labelid=None, pos=None):
     p = Portal.objects.get(id=portal_id)
+    tl = p.textlabels.all()
     mobjects = p.museumobjects.all()
     if objectid is not None:
         objectid = int(objectid)
+    if labelid is not None:
+        labelid = int(labelid)
     if pos is not None:
         pos = int(pos)
     t = loader.get_template('portal.html')
-    c = RequestContext(request, {'mobjects': mobjects, 'objectid': objectid, 'pos': pos})
+    c = RequestContext(request, {'tlabel': tl, 'mobjects': mobjects,
+                                 'labelid': labelid, 'objectid': objectid, 'pos': pos})
     return HttpResponse(t.render(c))
 
 

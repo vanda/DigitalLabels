@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     #Portal urls
     url(r'^portal/(?P<portal_id>\d+)/$',
                             'labels.views.portal', name='portal'),
+    url(r'^portal/(?P<portal_id>\d+)/labelid/(?P<labelid>\d+)/$',
+                            'labels.views.portal', name='portal'),
     url(r'^portal/(?P<portal_id>\d+)/objectid/(?P<objectid>\d+)/$',
                             'labels.views.portal', name='portal'),
     url(r'^portal/(?P<portal_id>\d+)/pos/(?P<pos>\d+)/$',
