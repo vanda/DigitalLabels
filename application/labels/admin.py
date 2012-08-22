@@ -89,7 +89,12 @@ class CMSLabelAdmin(reversion.VersionAdmin):
 
 
 class ImageAdmin(AdminImageMixin, reversion.VersionAdmin):
-    pass
+    list_display = ('filename', 'museumobject', 'textlabel', 'caption',)
+    list_display_links = ('filename',)
+    list_selected_related = True
+    list_filter = ('museumobject', 'textlabel',)
+    search_fields = ['caption', 'museumobject', 'textlabel', ]
+    save_on_top = True
 
 
 class DigitalLabelAdmin(reversion.VersionAdmin):
