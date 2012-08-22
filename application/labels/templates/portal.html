@@ -68,7 +68,7 @@
                 <div class="mask"></div>
                 <div class="title"><h2>{{ tl.title }}</h2></div>
                 <div class="row nomrg">
-                    <div class="txtr {% if not tl.biography %}multicolumn {% endif %}">
+                    <div class="txtr{% if not tl.biography %} multicolumn{% endif %}">
                         <div class="pane">{{ tl.main_text|safe }}</div>
                         <div class="zoom"></div>
                     </div>
