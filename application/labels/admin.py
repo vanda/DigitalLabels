@@ -70,6 +70,7 @@ class TextLabelAdmin(reversion.VersionAdmin):
     list_display_links = ('title',)
     list_per_page = 25
     list_selected_related = True
+    list_filter = ('portal',)
     search_fields = ['title']
     save_on_top = True
     inlines = [
