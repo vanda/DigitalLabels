@@ -106,21 +106,23 @@ jQuery(document).ready(function() {
     });
 
     $('#timeout').each(function(){
-        var to = this, t;
+        var to = this, t,
+            e = 4000, d = 80000;
         this.init = function(){
             $(this).show();
-            if( $(this).children('img').length>1 ){ t = setTimeout(function(){to.flick();}, 4000); }
+            $('#img').get(0).reset();
+            if( $(this).children('img').length>1 ){ t = setTimeout(function(){ to.flick(); }, e); }
         };
         this.flick = function(){
             $(this).append($(this).children(':first-child').css({'opacity':0}).animate({'opacity':1}, 1000));
-            t = setTimeout(function(){to.flick();}, 4000);
+            t = setTimeout(function(){ to.flick(); }, e);
         };
         this.reset = function(){
             clearTimeout(t);
             $(this).hide();
-            t = setTimeout(function(){to.init(); $('#img').get(0).reset();}, 80000);
+            t = setTimeout(function(){ to.init(); }, d);
         };
-        $(window).on('mousedown', function(e){to.reset(); e.preventDefault();});
+        $(window).on('mousedown', function(e){ to.reset(); e.preventDefault(); });
         $('html').css({'cursor':'none'});
         this.init();
     });
