@@ -1,7 +1,8 @@
 from django.contrib import admin
 import reversion
 from sorl.thumbnail.admin import AdminImageMixin
-from labels.models import MuseumObject, CMSLabel, Image, DigitalLabel
+from labels.models import MuseumObject, TextLabel, CMSLabel, Image, DigitalLabel, Portal
+from labels.forms import EditMuseumObjectForm
 
 
 class CMSLabelInline(admin.TabularInline):
@@ -20,8 +21,10 @@ class ImageInline(AdminImageMixin, admin.TabularInline):
 
 
 class MuseumObjectInline(admin.TabularInline):
+    form = EditMuseumObjectForm
+
     inline_classes = ('collapse open',)
-    fields = ('museum_number', 'name', 'gateway_object', 'position',)
+    fields = ('object_number', 'name', 'gateway_object', 'position',)
     extra = 0
     model = MuseumObject
     # define the sortable
@@ -29,18 +32,49 @@ class MuseumObjectInline(admin.TabularInline):
     template = 'admin/object_inline/tabular.html'
 
 
+class TextLabelInline(admin.TabularInline):
+    inline_classes = ('collapse open',)
+    fields = ('title', 'position',)
+    extra = 0
+    model = TextLabel
+    # define the sortable
+    sortable_field_name = "position"
+    template = 'admin/object_inline/tabular.html'
+
+
 class MuseumObjectAdmin(reversion.VersionAdmin):
+    form = EditMuseumObjectForm
+
     list_display = ('thumbnail_tag', 'object_number', 'museum_number',
                                             'name', 'artist_maker', 'place')
     list_display_links = ('object_number', 'museum_number', 'name',)
     list_per_page = 25
     list_selected_related = True
-    list_filter = ('digitallabel',)
-    search_fields = ['name', 'museum_number', 'object_number']
+    list_filter = ('digitallabel', 'portal',)
+    search_fields = ['name', 'museum_number', 'object_number', 'artist_maker']
     save_on_top = True
     inlines = [
         ImageInline,
         CMSLabelInline,
+    ]
+
+    class Media:
+        js = [
+            '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+            '/static/js/tinymce_setup.js',
+        ]
+
+
+class TextLabelAdmin(reversion.VersionAdmin):
+    list_display = ('thumbnail_tag', 'title',)
+    list_display_links = ('title',)
+    list_per_page = 25
+    list_selected_related = True
+    list_filter = ('portal',)
+    search_fields = ['title']
+    save_on_top = True
+    inlines = [
+        ImageInline,
     ]
 
     class Media:
@@ -55,12 +89,30 @@ class CMSLabelAdmin(reversion.VersionAdmin):
 
 
 class ImageAdmin(AdminImageMixin, reversion.VersionAdmin):
-    pass
+    list_display = ('filename', 'museumobject', 'textlabel', 'caption',)
+    list_display_links = ('filename',)
+    list_selected_related = True
+    list_filter = ('museumobject', 'textlabel',)
+    search_fields = ['caption', 'museumobject', 'textlabel', ]
+    save_on_top = True
 
 
 class DigitalLabelAdmin(reversion.VersionAdmin):
+    list_display = ('id', 'name',)
+    list_display_links = ('id', 'name',)
+    search_fields = ['name']
     save_on_top = True
     inlines = [
+        MuseumObjectInline,
+    ]
+
+class PortalAdmin(reversion.VersionAdmin):
+    list_display = ('id', 'name',)
+    list_display_links = ('id', 'name',)
+    search_fields = ['name']
+    save_on_top = True
+    inlines = [
+        TextLabelInline,
         MuseumObjectInline,
     ]
 
@@ -68,3 +120,5 @@ admin.site.register(MuseumObject, MuseumObjectAdmin)
 #admin.site.register(CMSLabel, CMSLabelAdmin)
 admin.site.register(Image, ImageAdmin)
 admin.site.register(DigitalLabel, DigitalLabelAdmin)
+admin.site.register(Portal, PortalAdmin)
+admin.site.register(TextLabel, TextLabelAdmin)

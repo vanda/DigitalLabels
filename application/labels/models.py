@@ -22,45 +22,24 @@ class DigitalLabel(models.Model):
         return self.name
 
 
-class MuseumObject(models.Model):
-    """
-    A label describing an individual object
-    """
-    name = models.CharField(max_length=255, null=False, blank=True)
-    digitallabel = models.ForeignKey(DigitalLabel, null=True, blank=True,
-                                                related_name="museumobjects")
-    date_text = models.CharField(max_length=255, null=False, blank=True)
-    artist_maker = models.CharField(max_length=255, null=False, blank=True)
-    place = models.CharField(max_length=255, null=False, blank=True)
-    materials_techniques = models.CharField(max_length=255, null=False,
-                                                            blank=True)
-    museum_number = models.CharField(max_length=255, null=False, blank=True)
-    object_number = models.CharField(max_length=16, null=False, blank=True,
-                                     unique=True,
-                                     help_text="""Unique "O" number, For
-                                             example, O9138, as used on
-                                         Search the Collections""")
-    credit_line = models.CharField(max_length=255, null=False, blank=True)
-    artfund = models.BooleanField(default=False)
-    main_text = models.TextField(blank=True)
-    redownload = models.BooleanField(help_text="""WARNING: This may
-                                         replace your existing content""")
-    gateway_object = models.BooleanField(default=False)
-    position = models.PositiveIntegerField(null=False, default=1)
+class Portal(models.Model):
 
-    class Meta:
-        ordering = ['position']
-        verbose_name = "object"
+    name = models.CharField(max_length=255, null=False)
 
     def __unicode__(self):
-        if self.museum_number:
-            return u"%s %s (%s)" % (self.object_number,
-                                 self.name, self.museum_number)
-        else:
-            return self.name
 
-    _museumobject_json = None
+        return self.name
+
+
+class BaseLabel(models.Model):
     _thumbnail_url = None
+
+    def admint(self):
+        return 'admin:%s_%s_change' % (self._meta.app_label, self._meta.object_name.lower())
+
+    @property
+    def display_text(self):
+        return NotImplementedError
 
     @property
     def thumbnail_url(self):
@@ -83,12 +62,60 @@ class MuseumObject(models.Model):
 
         if self.thumbnail_url:
             return mark_safe('<img alt="%s" src="%s" />' % (
-                                            self.name, self.thumbnail_url))
+                                            self.display_text, self.thumbnail_url))
         else:
             return mark_safe('<em>No Images</em>')
 
     thumbnail_tag.allow_tags = True
     thumbnail_tag.short_description = 'Thumb'
+
+    class Meta:
+        abstract = True
+
+class MuseumObject(BaseLabel):
+    """
+    A label describing an individual object
+    """
+    name = models.CharField(max_length=255, null=False, blank=True)
+    digitallabel = models.ForeignKey(DigitalLabel, null=True, blank=True,
+                                                related_name="museumobjects")
+    portal = models.ForeignKey(Portal, null=True, blank=True,
+                                                related_name="museumobjects")
+    date_text = models.CharField(max_length=255, null=False, blank=True)
+    artist_maker = models.CharField(max_length=255, null=False, blank=True)
+    place = models.CharField(max_length=255, null=False, blank=True)
+    materials_techniques = models.CharField(max_length=255, null=False,
+                                                            blank=True)
+    museum_number = models.CharField(max_length=255, null=False, blank=True)
+    object_number = models.CharField(max_length=16, null=False, blank=True,
+                                     unique=True,
+                                     help_text="""Unique "O" number, For
+                                             example, O9138, as used on
+                                         Search the Collections""")
+    credit_line = models.CharField(max_length=255, null=False, blank=True)
+    artfund = models.BooleanField(default=False)
+    main_text = models.TextField(blank=True)
+    redownload = models.BooleanField(help_text="""WARNING: This may
+                                         replace your existing content""")
+    gateway_object = models.BooleanField(default=False)
+    position = models.PositiveIntegerField(null=False, default=1)
+
+    @property
+    def display_text(self):
+        return self.name
+
+    class Meta:
+        ordering = ['position']
+        verbose_name = "object"
+
+    def __unicode__(self):
+        if self.museum_number:
+            return u"%s %s (%s)" % (self.object_number,
+                                 self.name, self.museum_number)
+        else:
+            return self.name
+
+    _museumobject_json = None
 
     @property
     def museumobject_json(self):
@@ -155,6 +182,33 @@ class MuseumObject(models.Model):
                         pass
 
 
+class TextLabel(BaseLabel):
+    """
+    A label describing biography or a historical notes
+    """
+    title = models.CharField(max_length=255, null=False, blank=True)
+    portal = models.ForeignKey(Portal, null=True, blank=True,
+                                                related_name="textlabels")
+
+    main_text = models.TextField(blank=True)
+
+    biography = models.BooleanField(default=False)
+    position = models.PositiveIntegerField(null=False, default=1)
+
+    @property
+    def display_text(self):
+        return self.title
+
+    def __unicode__(self):
+        if self.portal:
+            return u"%s - %s" % (self.title, self.portal)
+        else:
+            return self.title
+
+    class Meta:
+        ordering = ['position']
+
+
 class CMSLabel(models.Model):
 
     date = models.CharField(max_length=255, null=False)
@@ -171,13 +225,14 @@ class Image(models.Model):
     caption = models.CharField(max_length=255, null=False, blank=True)
     image_file = ImageField(upload_to="labels/images")
     position = models.PositiveIntegerField(null=False, default=1)
-    museumobject = models.ForeignKey(MuseumObject)
+    museumobject = models.ForeignKey(MuseumObject, null=True, blank=True)
+    textlabel = models.ForeignKey(TextLabel, null=True, blank=True)
 
     class Meta:
         ordering = ['position']
 
     def __unicode__(self):
-        return u"%s for %s" % (self.image_id, self.museumobject.museum_number)
+        return self.filename()
 
     @property
     def local_filename(self):
@@ -188,6 +243,9 @@ class Image(models.Model):
                                 unicode(self.image_file.file))
         else:
             return None
+
+    def filename(self):
+        return os.path.basename(self.image_file.name)
 
     @property
     def local_vadar_filename(self):

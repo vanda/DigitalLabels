@@ -1,8 +1,20 @@
 .row { clear:both; display:block; margin:0 0 0.75em; }
+.nomrg { margin:0; }
 .col { display:block; float:left; width:49.8%; }
 .pane { padding:0 0 0 0.5em; }
 .edged.col { border-right:1px solid #b5b5b5; }
 .edged.col>.pane { padding:0 0.5em 0 0; }
+.multicolumn {
+	-moz-column-count: 2;
+	-moz-column-gap: 0.5em;
+	-webkit-column-count: 2;
+	-webkit-column-gap: 0.5em;
+	column-count: 2;
+	column-gap: 0.5em;
+	-moz-column-rule: 1px solid #b5b5b5;
+	-webkit-column-rule: 1px solid #b5b5b5;
+	column-rule: 1px solid #b5b5b5;
+}
 
 .timeout { height:auto; width:100%; position:absolute; top:0; left:0; z-index:1; }
 #header { background-color:#007d93; color:#fff; line-height:28px; text-align:center; }
