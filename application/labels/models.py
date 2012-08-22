@@ -200,7 +200,10 @@ class TextLabel(BaseLabel):
         return self.title
 
     def __unicode__(self):
-        return self.title
+        if self.portal:
+            return u"%s - %s" % (self.title, self.portal)
+        else:
+            return self.title
 
     class Meta:
         ordering = ['position']
