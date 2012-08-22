@@ -232,12 +232,8 @@ class Image(models.Model):
         ordering = ['position']
 
     def __unicode__(self):
-        if self.museumobject:
-            return u"%s for MN: %s" % (self.image_id, self.museumobject.museum_number)
-        elif self.textlabel:
-            return u"Image for TL: %s" % (self.textlabel.title)
-        else:
-            return unicode(self.image_file)
+        return self.filename()
+
     @property
     def local_filename(self):
         """Where is the file stored regardless of source"""
@@ -247,6 +243,9 @@ class Image(models.Model):
                                 unicode(self.image_file.file))
         else:
             return None
+
+    def filename(self):
+        return os.path.basename(self.image_file.name)
 
     @property
     def local_vadar_filename(self):
