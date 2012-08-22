@@ -34,6 +34,9 @@ class Portal(models.Model):
 class BaseLabel(models.Model):
     _thumbnail_url = None
 
+    def admint(self):
+        return 'admin:%s_%s_change' % (self._meta.app_label, self._meta.object_name.lower())
+
     @property
     def display_text(self):
         return NotImplementedError
