@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load replace %}
+
+{% block title %}{{dl.name}}{% endblock %}
+
+    {% block content %}
+    <div id="header" class="hi">Touch an object or its label</div>
+
+    <div class="clip">
+        
+        <ul class="carousel" id="img">
+            {% for tl in tlabel %}
+            <li class="{% if tl.biography %}home {% endif %}{% if labelid and labelid == tl.pk or pos and forloop.counter == pos %}find {% endif %}img obj">
+                <div class="mask"></div>
+                <div class="case">
+                    {% if tl.image_set.all %}
+                    {% thumbnail tl.image_set.all.0.image_file "222x222" pad=True as im %}
+                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ tl.name }} {{ tl.date_text }}" data-img-l="{% thumbnail tl.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                    {% endthumbnail %}
+                    {% thumbnail tl.image_set.all.0.image_file "128x128" pad=True as im %}
+                    <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ tl.name }} {{ tl.date_text }}" alt="" />
+                    {% endthumbnail %}
+                    {% else %}
+                    <img class="active" src="{{STATIC_URL}}img/logo-va.png" width="222" height="222" title="{{ tl.name }} {{ tl.date_text }}" data-img-l="{{STATIC_URL}}img/logo-va.png" alt="" />
+                    <img class="inactive" src="{{STATIC_URL}}img/logo-va.png" width="128" height="128" title="{{ tl.name }} {{ tl.date_text }}" alt="" />
+                    {% endif %}
+                    <div class="zoom"></div>
+                </div>
+            </li>
+            {% endfor %}
+
+            {% for mo in mobjects %}
+            <li class="{% if objectid and objectid == mo.pk or pos and forloop.counter == pos %}find {% endif %}img obj">
+                <div class="mask"></div>
+                <div class="case">
+                    {% if mo.image_set.all %}
+                    {% thumbnail mo.image_set.all.0.image_file "222x222" pad=True as im %}
+                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail mo.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                    {% endthumbnail %}
+                    {% thumbnail mo.image_set.all.0.image_file "128x128" pad=True as im %}
+                    <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" alt="" />
+                    {% endthumbnail %}
+                    {% else %}
+                    <img class="active" src="{{STATIC_URL}}img/logo-va.png" width="222" height="222" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{{STATIC_URL}}img/logo-va.png" alt="" />
+                    <img class="inactive" src="{{STATIC_URL}}img/logo-va.png" width="128" height="128" title="{{ mo.name }} {{ mo.date_text }}" alt="" />
+                    {% endif %}
+                    <div class="zoom"></div>
+                </div>
+                {% if mo.image_set.all|length > 1 %}
+                <div class="thumbs">More images<br />
+                    {% for img in mo.image_set.all %}
+                        {% if forloop.counter > 1 and forloop.counter < 6 %}
+                            {% thumbnail img.image_file "48x48" pad=True as im %}
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                            {% endthumbnail %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <ul class="carousel" id="txt">
+            {% for tl in tlabel %}
+            <li class="{% if tl.biography %}home {% endif %}txt obj">
+                <div class="mask"></div>
+                <div class="title"><h2>{{ tl.title }}</h2></div>
+                <div class="row nomrg">
+                    <div class="txtr {% if not tl.biography %}multicolumn {% endif %}">
+                        <div class="pane">{{ tl.main_text|safe }}</div>
+                        <div class="zoom"></div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+
+            {% for mo in mobjects %}
+            <li class="txt obj">
+                <div class="mask"></div>
+                <div class="title"><h2>{{ mo.name }}</h2></div>
+                <div class="row">
+                    <div class="txtl edged col">
+                        <div class="pane">
+                            <p>
+                                <strong>
+                                {{ mo.date_text }}<br/>
+                                </strong>
+                            </p>
+                            <p>
+                                {{ mo.place }}<br/>
+                                {{ mo.artist_maker }}
+                            </p>
+                            <p>{{ mo.materials_techniques|replace:'/-/&#8209;'|safe }}</p>
+                            <p>
+                                {{ mo.credit_line|replace:'/-/&#8209;'|safe }}{% if mo.credit_line|length > 0 %}<br/>{% endif %}
+                                <em>Museum no. {{ mo.museum_number }}</em>
+                            </p>
+                        </div>
+                        {% if mo.artfund %}
+                        <div class="bot col">
+                            <div class="pane">
+                                <p class="artfund"><img src="{{STATIC_URL}}img/logo-artfund.png" alt="ArtFund"/></p>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="txtr col">
+                        <div class="pane">{{ mo.main_text|safe }}</div>
+                        <div class="zoom"></div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        
+    </div>
+    
+    <div class="pop" id="imgpop"><div class="case" id="imgbox"><img id="imgbig" src="" alt="" /><div class="zoom"></div></div><div id="imgtxt"></div></div>
+    <div class="txt pop" id="txtpop"></div>
+
+    <div id="timeout"><img class="timeout" src="{{STATIC_URL}}img/2006AM2739.jpg" alt=""/><img class="timeout" src="{{STATIC_URL}}img/2010ED1385.jpg" alt=""/></div>
+    {% endblock %}
+
