@@ -86,7 +86,10 @@
     
     <div class="pop" id="imgpop"><div class="case" id="imgbox"><img id="imgbig" src="" alt="" /><div class="zoom"></div></div><div id="imgtxt"></div></div>
     <div class="txt pop" id="txtpop"></div>
-
-    <div id="timeout"><img class="timeout" src="{{STATIC_URL}}img/2006AM2739.jpg" alt=""/><img class="timeout" src="{{STATIC_URL}}img/2010ED1385.jpg" alt=""/></div>
+    
+    {% if not debug %}
+        <div id="timeout"><img class="timeout" src="{{STATIC_URL}}img/2006AM2739.jpg" alt=""/><img class="timeout" src="{{STATIC_URL}}img/2010ED1385.jpg" alt=""/></div>
+    {% endif %}
+    
     {% endblock %}
 
