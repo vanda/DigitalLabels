@@ -135,7 +135,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-INTERNAL_IPS = ('127.0.0.1', '79.125.15.191','10.58.165.127',)
+INTERNAL_IPS = ('127.0.0.1', '79.125.15.191','10.58.165.127','193.62.214.1',)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
