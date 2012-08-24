@@ -37,6 +37,16 @@ class BaseLabel(models.Model):
     def admint(self):
         return 'admin:%s_%s_change' % (self._meta.app_label, self._meta.object_name.lower())
 
+    def digital_label(self):
+        return mark_safe('<a href="../digitallabel/%s/">%s</a>' % (self.digitallabel.pk, self.digitallabel))
+
+    digital_label.allow_tags = True
+
+    def _portal(self):
+        return mark_safe('<a href="../portal/%s/">%s</a>' % (self.portal.pk, self.portal))
+
+    _portal.allow_tags = True
+
     @property
     def display_text(self):
         return NotImplementedError

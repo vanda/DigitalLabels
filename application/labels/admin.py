@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 import reversion
 from sorl.thumbnail.admin import AdminImageMixin
 from labels.models import MuseumObject, TextLabel, CMSLabel, Image, DigitalLabel, Portal
@@ -46,7 +47,8 @@ class MuseumObjectAdmin(reversion.VersionAdmin):
     form = EditMuseumObjectForm
 
     list_display = ('thumbnail_tag', 'object_number', 'museum_number',
-                                            'name', 'artist_maker', 'place')
+                                            'name', 'artist_maker',
+                                            'place', 'digital_label', '_portal')
     list_display_links = ('object_number', 'museum_number', 'name',)
     list_per_page = 25
     list_selected_related = True
@@ -66,7 +68,7 @@ class MuseumObjectAdmin(reversion.VersionAdmin):
 
 
 class TextLabelAdmin(reversion.VersionAdmin):
-    list_display = ('thumbnail_tag', 'title',)
+    list_display = ('thumbnail_tag', 'title', '_portal')
     list_display_links = ('title',)
     list_per_page = 25
     list_selected_related = True
