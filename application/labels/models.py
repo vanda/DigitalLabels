@@ -14,26 +14,14 @@ from sorl.thumbnail import ImageField, get_thumbnail
 logger = logging.getLogger('labels')
 
 
-class DigitalLabel(models.Model):
-
-    name = models.CharField(max_length=255, null=False)
-
-    def __unicode__(self):
-
-        return self.name
-
-
-class Portal(models.Model):
-
-    name = models.CharField(max_length=255, null=False)
-
-    def __unicode__(self):
-
-        return self.name
-
-
 class BaseLabel(models.Model):
     _thumbnail_url = None
+
+    def _Objects(self):
+        return self.museumobjects.count()
+
+    def _Labels(self):
+        return self.textlabels.count()
 
     def admin_template(self):
         return 'admin:%s_%s_change' % (self._meta.app_label, self._meta.object_name.lower())
@@ -86,6 +74,25 @@ class BaseLabel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class DigitalLabel(BaseLabel):
+
+    name = models.CharField(max_length=255, null=False)
+
+    def __unicode__(self):
+
+        return self.name
+
+
+class Portal(BaseLabel):
+
+    name = models.CharField(max_length=255, null=False)
+
+    def __unicode__(self):
+
+        return self.name
+
 
 class MuseumObject(BaseLabel):
     """
