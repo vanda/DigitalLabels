@@ -45,7 +45,7 @@
                 <div class="grp-tr">
                     <div class="grp-td">
                     {% if inline_admin_form.original %}
-                    <a href="{% url inline_admin_form.original.admint inline_admin_form.original.pk %}">
+                    <a href="{% url inline_admin_form.original.admin_template inline_admin_form.original.pk %}">
                         {{inline_admin_form.original.thumbnail_tag}}
                     </a>
                     {% endif %}
