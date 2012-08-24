@@ -242,7 +242,7 @@ class Image(models.Model):
         ordering = ['position']
 
     def __unicode__(self):
-        return self.filename()
+        return os.path.basename(self.image_file.name)
 
     @property
     def local_filename(self):
@@ -254,8 +254,13 @@ class Image(models.Model):
         else:
             return None
 
-    def filename(self):
-        return os.path.basename(self.image_file.name)
+    def thumb(self):
+        im = get_thumbnail(self.local_filename, '44x44',
+                                                    quality=85, pad=True)
+
+        return mark_safe('<img alt="%s" src="%s" />' % (
+                                            self.caption, im.url))
+    thumb.allow_tags = True
 
     @property
     def local_vadar_filename(self):
