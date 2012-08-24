@@ -2,6 +2,7 @@ import logging
 import os
 import urllib2
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import simplejson
 from django.utils.safestring import mark_safe
@@ -38,12 +39,16 @@ class BaseLabel(models.Model):
         return 'admin:%s_%s_change' % (self._meta.app_label, self._meta.object_name.lower())
 
     def digital_label(self):
-        return mark_safe('<a href="../digitallabel/%s/">%s</a>' % (self.digitallabel.pk, self.digitallabel))
+        href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'digitallabel'),
+                       args={self.digitallabel.pk})
+        return mark_safe('<a href="%s">%s</a>' % (href, self.digitallabel))
 
     digital_label.allow_tags = True
 
     def _portal(self):
-        return mark_safe('<a href="../portal/%s/">%s</a>' % (self.portal.pk, self.portal))
+        href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'portal'),
+                       args={self.portal.pk})
+        return mark_safe('<a href="%s">%s</a>' % (href, self.portal))
 
     _portal.allow_tags = True
 
