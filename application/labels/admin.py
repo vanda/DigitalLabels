@@ -100,7 +100,7 @@ class ImageAdmin(AdminImageMixin, reversion.VersionAdmin):
 
 
 class DigitalLabelAdmin(reversion.VersionAdmin):
-    list_display = ('id', 'name',)
+    list_display = ('id', 'name', '_Objects')
     list_display_links = ('id', 'name',)
     search_fields = ['name']
     save_on_top = True
@@ -109,7 +109,7 @@ class DigitalLabelAdmin(reversion.VersionAdmin):
     ]
 
 class PortalAdmin(reversion.VersionAdmin):
-    list_display = ('id', 'name',)
+    list_display = ('id', 'name', '_Labels', '_Objects')
     list_display_links = ('id', 'name',)
     search_fields = ['name']
     save_on_top = True
