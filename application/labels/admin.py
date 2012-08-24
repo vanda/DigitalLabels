@@ -35,7 +35,7 @@ class MuseumObjectInline(admin.TabularInline):
 
 class TextLabelInline(admin.TabularInline):
     inline_classes = ('collapse open',)
-    fields = ('title', 'position',)
+    fields = ('title', 'position', 'biography',)
     extra = 0
     model = TextLabel
     # define the sortable
