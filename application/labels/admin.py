@@ -126,7 +126,7 @@ class ImageAdmin(AdminImageMixin, reversion.VersionAdmin):
     list_display_links = ('thumb',)
     list_selected_related = True
     list_filter = ('museumobject__digitallabel', 'textlabel__portal',)
-    search_fields = ['caption', 'museumobject', 'textlabel', ]
+    search_fields = ['caption', 'museumobject__name', 'textlabel__title', ]
     save_on_top = True
 
 
