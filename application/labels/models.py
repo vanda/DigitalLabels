@@ -14,7 +14,7 @@ from sorl.thumbnail import ImageField, get_thumbnail
 logger = logging.getLogger('labels')
 
 
-class BaseLabel(models.Model):
+class BaseScreen(models.Model):
     _thumbnail_url = None
 
     def referrer(self):
@@ -23,11 +23,31 @@ class BaseLabel(models.Model):
     def _Objects(self):
         return self.museumobjects.count()
 
+    class Meta:
+        abstract = True
+
+
+class DigitalLabel(BaseScreen):
+
+    name = models.CharField(max_length=255, null=False)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Portal(BaseScreen):
+
+    name = models.CharField(max_length=255, null=False)
+
+    def __unicode__(self):
+        return self.name
+
     def _Labels(self):
         return self.textlabels.count()
 
-    def admin_template(self):
-        return 'admin:%s_%s_change' % (self._meta.app_label, self._meta.object_name.lower())
+
+class BaseLabel(models.Model):
+    _thumbnail_url = None
 
     def digital_label(self):
         href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'digitallabel'),
@@ -42,6 +62,10 @@ class BaseLabel(models.Model):
         return mark_safe('<a href="%s">%s</a>' % (href, self.portal))
 
     _portal.allow_tags = True
+
+
+    def admin_template(self):
+        return 'admin:%s_%s_change' % (self._meta.app_label, self._meta.object_name.lower())
 
     @property
     def display_text(self):
@@ -77,24 +101,6 @@ class BaseLabel(models.Model):
 
     class Meta:
         abstract = True
-
-
-class DigitalLabel(BaseLabel):
-
-    name = models.CharField(max_length=255, null=False)
-
-    def __unicode__(self):
-
-        return self.name
-
-
-class Portal(BaseLabel):
-
-    name = models.CharField(max_length=255, null=False)
-
-    def __unicode__(self):
-
-        return self.name
 
 
 class MuseumObject(BaseLabel):
