@@ -98,10 +98,12 @@ class ImageAdmin(AdminImageMixin, reversion.VersionAdmin):
 
 
 class DigitalLabelAdmin(reversion.VersionAdmin):
+
     list_display = ('id', 'name',)
     list_display_links = ('id', 'name',)
     search_fields = ['name']
     save_on_top = True
+    filter_horizontal = ('timeout_images',)
     inlines = [
         MuseumObjectInline,
     ]
@@ -111,6 +113,7 @@ class PortalAdmin(reversion.VersionAdmin):
     list_display_links = ('id', 'name',)
     search_fields = ['name']
     save_on_top = True
+    filter_horizontal = ('timeout_images',)
     inlines = [
         TextLabelInline,
         MuseumObjectInline,
