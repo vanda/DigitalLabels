@@ -129,14 +129,14 @@ class MuseumObject(BaseLabel):
     redownload = models.BooleanField(help_text="""WARNING: This may
                                          replace your existing content""")
     gateway_object = models.BooleanField(default=False)
-    position = models.PositiveIntegerField(null=False, default=1)
+    dl_position = models.PositiveIntegerField(null=False, default=1)
+    pt_position = models.PositiveIntegerField(null=False, default=1)
 
     @property
     def display_text(self):
         return self.name
 
     class Meta:
-        ordering = ['position']
         verbose_name = "object"
 
     def __unicode__(self):
