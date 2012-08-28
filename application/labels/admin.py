@@ -22,15 +22,29 @@ class ImageInline(AdminImageMixin, admin.TabularInline):
     sortable_field_name = "position"
 
 
-class MuseumObjectInline(admin.TabularInline):
+class MuseumObject_dl_Inline(admin.TabularInline):
     form = EditMuseumObjectForm
 
     inline_classes = ('collapse open',)
-    fields = ('object_number', 'name', 'gateway_object', 'position',)
+    fields = ('object_number', 'name', 'gateway_object', 'dl_position',)
     extra = 0
     model = MuseumObject
+    ordering = ['dl_position']
     # define the sortable
-    sortable_field_name = "position"
+    sortable_field_name = "dl_position"
+    template = 'admin/object_inline/tabular.html'
+
+
+class MuseumObject_pt_Inline(admin.TabularInline):
+    form = EditMuseumObjectForm
+
+    inline_classes = ('collapse open',)
+    fields = ('object_number', 'name', 'gateway_object', 'pt_position',)
+    extra = 0
+    model = MuseumObject
+    ordering = ['pt_position']
+    # define the sortable
+    sortable_field_name = "pt_position"
     template = 'admin/object_inline/tabular.html'
 
 
@@ -122,7 +136,7 @@ class DigitalLabelAdmin(reversion.VersionAdmin):
     search_fields = ['name']
     save_on_top = True
     inlines = [
-        MuseumObjectInline,
+        MuseumObject_dl_Inline,
     ]
 
 class PortalAdmin(reversion.VersionAdmin):
@@ -132,7 +146,7 @@ class PortalAdmin(reversion.VersionAdmin):
     save_on_top = True
     inlines = [
         TextLabelInline,
-        MuseumObjectInline,
+        MuseumObject_pt_Inline,
     ]
 
 admin.site.register(MuseumObject, MuseumObjectAdmin)
