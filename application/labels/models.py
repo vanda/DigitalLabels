@@ -16,6 +16,7 @@ logger = logging.getLogger('labels')
 class DigitalLabel(models.Model):
 
     name = models.CharField(max_length=255, null=False)
+    timeout_images = models.ManyToManyField("Image")
 
     def __unicode__(self):
 
@@ -25,6 +26,7 @@ class DigitalLabel(models.Model):
 class Portal(models.Model):
 
     name = models.CharField(max_length=255, null=False)
+    timeout_images = models.ManyToManyField("Image")
 
     def __unicode__(self):
 
