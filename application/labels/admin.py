@@ -1,5 +1,6 @@
 from django.contrib import admin
-from django.utils.safestring import mark_safe
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 import reversion
 from sorl.thumbnail.admin import AdminImageMixin
 from labels.models import MuseumObject, TextLabel, CMSLabel, Image, DigitalLabel, Portal
@@ -46,6 +47,14 @@ class TextLabelInline(admin.TabularInline):
 class MuseumObjectAdmin(reversion.VersionAdmin):
     form = EditMuseumObjectForm
 
+    def response_change(self, request, model=None):
+        if request.GET.get('referrer'):
+            referrer_model = request.GET.get('referrer')
+            return HttpResponseRedirect(reverse('admin:labels_%s_change' % (referrer_model),
+                                                args=(getattr(model, referrer_model).pk,)))
+        else:
+            return HttpResponseRedirect('../')
+
     list_display = ('thumbnail_tag', 'object_number', 'museum_number',
                                             'name', 'artist_maker',
                                             'place', 'digital_label', '_portal')
@@ -68,6 +77,14 @@ class MuseumObjectAdmin(reversion.VersionAdmin):
 
 
 class TextLabelAdmin(reversion.VersionAdmin):
+    def response_change(self, request, model=None):
+        if request.GET.get('referrer'):
+            referrer_model = request.GET.get('referrer')
+            return HttpResponseRedirect(reverse('admin:labels_%s_change' % (referrer_model),
+                                                args=(getattr(model, referrer_model).pk,)))
+        else:
+            return HttpResponseRedirect('../')
+
     list_display = ('thumbnail_tag', 'title', '_portal')
     list_display_links = ('title',)
     list_per_page = 25

@@ -17,6 +17,9 @@ logger = logging.getLogger('labels')
 class BaseLabel(models.Model):
     _thumbnail_url = None
 
+    def referrer(self):
+        return self._meta.object_name.lower()
+
     def _Objects(self):
         return self.museumobjects.count()
 
