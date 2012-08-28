@@ -265,6 +265,20 @@ class Image(models.Model):
     def __unicode__(self):
         return os.path.basename(self.image_file.name)
 
+    def object_link(self):
+        href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'museumobject'),
+                       args={self.museumobject.pk})
+        return mark_safe('<a href="%s">%s</a>' % (href, self.museumobject))
+
+    object_link.allow_tags = True
+
+    def label_link(self):
+        href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'textlabel'),
+                       args={self.textlabel.pk})
+        return mark_safe('<a href="%s">%s</a>' % (href, self.textlabel))
+
+    label_link.allow_tags = True
+
     @property
     def local_filename(self):
         """Where is the file stored regardless of source"""
