@@ -34,9 +34,9 @@ jQuery(document).ready(function() {
             $(this).stop();
             var t = 1024;
             $(this).children('.active>.mask').animate({'opacity':'0.5'}, t/4, null, $(this).children('li>.mask').show());
-            $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){ 
-                $(this).children('li').removeClass('active').children('.mask').css({'opacity':'0.5','display':'block'}); 
-                $(this).children('li:nth-child('+(i+1)+')').addClass('active').children('.mask').fadeToggle(t/4); 
+            $(this).animate({'left':$(window).width()/2-((i*w)+(0.5*wA))}, t, function(){
+                $(this).children('li').removeClass('active').children('.mask').css({'opacity':'0.5','display':'block'});
+                $(this).children('li:nth-child('+(i+1)+')').addClass('active').children('.mask').fadeToggle(t/4);
             });
         };
     });
