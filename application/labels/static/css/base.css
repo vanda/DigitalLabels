@@ -1,4 +1,5 @@
 body { color:#292728; font:13.5px/1.184 "V&A TheSansLightPlain",arial,helvetica,freesans,sans-serif; }
+body.gb { background-color:#575757; }
 img { vertical-align:bottom; }
 p, ol, ul { margin-bottom:1em; }
 a { color:#292728; text-decoration:underline; }
