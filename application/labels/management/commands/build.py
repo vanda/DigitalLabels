@@ -5,7 +5,8 @@ from optparse import make_option
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.test.client import Client
-from labels.models import DigitalLabel
+from django.template.defaultfilters import slugify
+from labels.models import DigitalLabel, Portal
 
 
 class Command(BaseCommand):
@@ -22,13 +23,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         destination = options['out']
-        if not args:
-            g_ids = [g.id for g in DigitalLabel.objects.all()]
-        else:
-            g_ids = [int(a) for a in args]
 
-        for gid in g_ids:
-            self.save_html(gid, destination)
+        for dl in DigitalLabel.objects.all():
+            self.save_html(dl, destination)
+
+        for pt in Portal.objects.all():
+            self.save_html(pt, destination)
 
         # handle static media: JS, IMG, CSS, etc.
 
@@ -47,9 +47,9 @@ class Command(BaseCommand):
         copy_tree(settings.STATIC_ROOT, static_build_dir)
         copy_tree(os.path.join(settings.MEDIA_ROOT, 'cache'), media_build_dir)
 
-    def save_html(self, digitallabel_id, destination):
+    def save_html(self, screen, destination):
         cl = Client()
-        page_html = cl.get('/digitallabel/%d/' % digitallabel_id).content
+        page_html = cl.get('/%s/%d/' % (screen.model_name, screen.pk)).content
 
         # make img, css and js links relative
         page_html = page_html.replace('data-img-l="/', 'data-img-l="./'
@@ -61,7 +61,8 @@ class Command(BaseCommand):
             print 'Making %s' % (dest_abspath)
             os.mkdir(dest_abspath)
 
-        filename = os.path.join(destination, '%d.html' % (digitallabel_id))
+        filename = os.path.join(destination,
+                        '%s.html' % (slugify(screen.name)))
         f = codecs.open(filename, 'w', 'UTF-8')
         unicode_html = unicode(page_html, 'UTF-8')
         f.write(unicode_html)
