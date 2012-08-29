@@ -2,6 +2,7 @@ import logging
 import os
 import urllib2
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import simplejson
 from django.utils.safestring import mark_safe
@@ -13,28 +14,59 @@ from sorl.thumbnail import ImageField, get_thumbnail
 logger = logging.getLogger('labels')
 
 
-class DigitalLabel(models.Model):
-
+class BaseScreen(models.Model):
     name = models.CharField(max_length=255, null=False)
+    timeout_images = models.ManyToManyField("Image")
+
+    _thumbnail_url = None
 
     def __unicode__(self):
-
         return self.name
 
+    def referrer(self):
+        return self._meta.object_name.lower()
 
-class Portal(models.Model):
+    @property
+    def model_name(self):
+        return self._meta.object_name.lower()
 
-    name = models.CharField(max_length=255, null=False)
+    def _Objects(self):
+        return self.museumobjects.count()
 
-    def __unicode__(self):
+    class Meta:
+        abstract = True
 
-        return self.name
+
+class DigitalLabel(BaseScreen):
+
+    pass
+
+
+class Portal(BaseScreen):
+
+    def _Labels(self):
+        return self.textlabels.count()
 
 
 class BaseLabel(models.Model):
     _thumbnail_url = None
 
-    def admint(self):
+    def digital_label(self):
+        href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'digitallabel'),
+                       args={self.digitallabel.pk})
+        return mark_safe('<a href="%s">%s</a>' % (href, self.digitallabel))
+
+    digital_label.allow_tags = True
+
+    def _portal(self):
+        href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'portal'),
+                       args={self.portal.pk})
+        return mark_safe('<a href="%s">%s</a>' % (href, self.portal))
+
+    _portal.allow_tags = True
+
+
+    def admin_template(self):
         return 'admin:%s_%s_change' % (self._meta.app_label, self._meta.object_name.lower())
 
     @property
@@ -72,6 +104,7 @@ class BaseLabel(models.Model):
     class Meta:
         abstract = True
 
+
 class MuseumObject(BaseLabel):
     """
     A label describing an individual object
@@ -98,14 +131,14 @@ class MuseumObject(BaseLabel):
     redownload = models.BooleanField(help_text="""WARNING: This may
                                          replace your existing content""")
     gateway_object = models.BooleanField(default=False)
-    position = models.PositiveIntegerField(null=False, default=1)
+    dl_position = models.PositiveIntegerField(null=False, default=1)
+    pt_position = models.PositiveIntegerField(null=False, default=1)
 
     @property
     def display_text(self):
         return self.name
 
     class Meta:
-        ordering = ['position']
         verbose_name = "object"
 
     def __unicode__(self):
@@ -232,7 +265,21 @@ class Image(models.Model):
         ordering = ['position']
 
     def __unicode__(self):
-        return self.filename()
+        return os.path.basename(self.image_file.name)
+
+    def object_link(self):
+        href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'museumobject'),
+                       args={self.museumobject.pk})
+        return mark_safe('<a href="%s">%s</a>' % (href, self.museumobject))
+
+    object_link.allow_tags = True
+
+    def label_link(self):
+        href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'textlabel'),
+                       args={self.textlabel.pk})
+        return mark_safe('<a href="%s">%s</a>' % (href, self.textlabel))
+
+    label_link.allow_tags = True
 
     @property
     def local_filename(self):
@@ -244,8 +291,13 @@ class Image(models.Model):
         else:
             return None
 
-    def filename(self):
-        return os.path.basename(self.image_file.name)
+    def thumb(self):
+        im = get_thumbnail(self.local_filename, '44x44',
+                                                    quality=85, pad=True)
+
+        return mark_safe('<img alt="%s" src="%s" />' % (
+                                            self.caption, im.url))
+    thumb.allow_tags = True
 
     @property
     def local_vadar_filename(self):
