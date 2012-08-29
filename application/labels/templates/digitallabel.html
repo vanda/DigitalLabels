@@ -30,7 +30,7 @@
                 {% if mo.image_set.all|length > 1 %}
                 <div class="thumbs">More images<br />
                     {% for img in mo.image_set.all %}
-                        {% if forloop.counter > 1 and forloop.counter < 6 %}
+                        {% if forloop.counter > 1 and forloop.counter < 7 %}
                             {% thumbnail img.image_file "48x48" pad=True as im %}
                             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                             {% endthumbnail %}
@@ -88,7 +88,11 @@
     <div class="txt pop" id="txtpop"></div>
     
     {% if not debug %}
-        <div id="timeout"><img class="timeout" src="{{STATIC_URL}}img/2006AM2739.jpg" alt=""/><img class="timeout" src="{{STATIC_URL}}img/2010ED1385.jpg" alt=""/></div>
+        <div id="timeout">
+            {% for ti in dl.timeout_images.all %}
+            <img class="timeout" src="{{MEDIA_URL}}{{ti.image_file}}" alt=""/>
+            {% endfor %}
+        </div>
     {% endif%}
     
     {% endblock %}

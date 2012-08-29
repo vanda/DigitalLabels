@@ -136,6 +136,7 @@ class DigitalLabelAdmin(reversion.VersionAdmin):
     list_display_links = ('id', 'name',)
     search_fields = ['name']
     save_on_top = True
+    filter_horizontal = ('timeout_images',)
     inlines = [
         MuseumObject_dl_Inline,
     ]
@@ -145,6 +146,7 @@ class PortalAdmin(reversion.VersionAdmin):
     list_display_links = ('id', 'name',)
     search_fields = ['name']
     save_on_top = True
+    filter_horizontal = ('timeout_images',)
     inlines = [
         TextLabelInline,
         MuseumObject_pt_Inline,
