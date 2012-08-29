@@ -1,10 +1,11 @@
 from django.contrib import admin
-from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 import reversion
 from sorl.thumbnail.admin import AdminImageMixin
-from labels.models import MuseumObject, TextLabel, CMSLabel, Image, DigitalLabel, Portal
+from labels.filters import PortalListFilter
 from labels.forms import EditMuseumObjectForm
+from labels.models import MuseumObject, TextLabel, CMSLabel, Image, DigitalLabel, Portal
 
 
 class CMSLabelInline(admin.TabularInline):
@@ -125,7 +126,7 @@ class ImageAdmin(AdminImageMixin, reversion.VersionAdmin):
     list_display = ('thumb', 'caption', 'object_link', 'label_link',)
     list_display_links = ('thumb',)
     list_selected_related = True
-    list_filter = ('museumobject__digitallabel', 'textlabel__portal',)
+    list_filter = ('museumobject__digitallabel', PortalListFilter,)
     search_fields = ['caption', 'museumobject__name', 'textlabel__title', ]
     save_on_top = True
 
