@@ -30,7 +30,7 @@
                 {% if mo.image_set.all|length > 1 %}
                 <div class="thumbs">More images<br />
                     {% for img in mo.image_set.all %}
-                        {% if forloop.counter > 1 and forloop.counter < 6 %}
+                        {% if forloop.counter > 1 and forloop.counter < 7 %}
                             {% thumbnail img.image_file "48x48" pad=True as im %}
                             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                             {% endthumbnail %}
