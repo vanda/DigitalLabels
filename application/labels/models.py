@@ -15,9 +15,19 @@ logger = logging.getLogger('labels')
 
 
 class BaseScreen(models.Model):
+    name = models.CharField(max_length=255, null=False)
+    timeout_images = models.ManyToManyField("Image")
+
     _thumbnail_url = None
 
+    def __unicode__(self):
+        return self.name
+
     def referrer(self):
+        return self._meta.object_name.lower()
+
+    @property
+    def model_name(self):
         return self._meta.object_name.lower()
 
     def _Objects(self):
@@ -29,20 +39,10 @@ class BaseScreen(models.Model):
 
 class DigitalLabel(BaseScreen):
 
-    name = models.CharField(max_length=255, null=False)
-    timeout_images = models.ManyToManyField("Image")
-
-    def __unicode__(self):
-        return self.name
+    pass
 
 
 class Portal(BaseScreen):
-
-    name = models.CharField(max_length=255, null=False)
-    timeout_images = models.ManyToManyField("Image")
-
-    def __unicode__(self):
-        return self.name
 
     def _Labels(self):
         return self.textlabels.count()
