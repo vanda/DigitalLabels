@@ -73,7 +73,7 @@ class MuseumObjectAdmin(reversion.VersionAdmin):
     list_display = ('thumbnail_tag', 'object_number', 'museum_number',
                                             'name', 'artist_maker',
                                             'place', 'digital_label', '_portal')
-    list_display_links = ('object_number', 'museum_number', 'name',)
+    list_display_links = ('thumbnail_tag', 'object_number', 'museum_number', 'name',)
     list_per_page = 25
     list_selected_related = True
     list_filter = ('digitallabel', 'portal',)
@@ -101,7 +101,7 @@ class TextLabelAdmin(reversion.VersionAdmin):
             return HttpResponseRedirect('../')
 
     list_display = ('thumbnail_tag', 'title', '_portal')
-    list_display_links = ('title',)
+    list_display_links = ('thumbnail_tag', 'title',)
     list_per_page = 25
     list_selected_related = True
     list_filter = ('portal',)
