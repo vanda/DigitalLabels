@@ -1,0 +1,5 @@
+Django==1.4.1
+django-digitallabels==0.49
+django-grappelli==2.4.0
+django-reversion==1.6.2
+sorl-thumbnail==11.12
