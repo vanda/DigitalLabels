@@ -1,0 +1,2 @@
+include README LICENSE
+recursive-include labels *.py *.html *.js *.css *.png *.jpg
