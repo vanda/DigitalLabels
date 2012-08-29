@@ -25,7 +25,7 @@
 .img { top:93px; }
 .case { background:#fff url(img/spinner.gif) 50% 50% no-repeat; display:block; position:relative; text-align:center; }
 .case>img.active { display:none; }
-.thumbs { border:solid #b5b5b5; border-width:1px 0 0; display:none; font-size:0.9em; overflow:hidden; padding:0 0 4px 5px; text-align:left; }
+.thumbs { display:none; font-size:0.9em; overflow:hidden; padding:0 0 4px 5px; text-align:left; width:125%; position:absolute; bottom:-74px; }
 .thumbs>img { border:1px solid #b5b5b5; float:left; margin:3px 4px 0 0; }
 .active.img { border-top:0; margin:0 17px; top:0; }
 .active.home.img { border-width:0 2px 2px; margin:0 16px; }
