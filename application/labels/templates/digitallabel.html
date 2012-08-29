@@ -88,8 +88,12 @@
     <div class="txt pop" id="txtpop"></div>
     
     {% if not debug %}
-        <div id="timeout"><img class="timeout" src="{{STATIC_URL}}img/2006AM2739.jpg" alt=""/><img class="timeout" src="{{STATIC_URL}}img/2010ED1385.jpg" alt=""/></div>
-    {% endif %}
+        <div id="timeout">
+            {% for ti in dl.timeout_images.all %}
+            <img class="timeout" src="{{MEDIA_URL}}{{ti.image_file}}" alt=""/>
+            {% endfor %}
+        </div>
+    {% endif%}
     
     {% endblock %}
 

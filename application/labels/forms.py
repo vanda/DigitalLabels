@@ -26,5 +26,5 @@ class EditMuseumObjectForm(ModelForm):
     class Meta:
         model = MuseumObject
         widgets = {
-            'object_number': ObjectNumberInput,
+            'object_number' : ObjectNumberInput,
         }
