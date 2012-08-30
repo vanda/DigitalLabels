@@ -19,7 +19,7 @@
     <title>{% block title %}V&amp;A Labels{% endblock %}</title>
 </head>
 
-<body {% if pt %}class="portal"{% endif %}>
+<body{% block body_class %}{% endblock %}>
 
     {% block content %}
     <div id="index">
@@ -42,6 +42,14 @@
         {% endif %}
     </div>
     {% endblock %}
+    
+    {% if not debug %}
+        <div id="timeout">
+            {% for ti in screen.timeout_images.all %}
+            <img class="timeout" src="{{MEDIA_URL}}{{ti.image_file}}" alt=""/>
+            {% endfor %}
+        </div>
+    {% endif%}
 
 </body>
 </html>
