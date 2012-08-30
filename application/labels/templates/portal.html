@@ -13,6 +13,7 @@
             {% for tl in tlabel %}
             <li class="{% if tl.biography %}home {% endif %}{% if labelid and labelid == tl.pk or pos and forloop.counter == pos %}find {% endif %}img obj">
                 <div class="mask"></div>
+                <div class="thumb_title">{{tl.title}}</div>
                 <div class="case">
                     {% if tl.image_set.all %}
                     {% thumbnail tl.image_set.all.0.image_file "222x222" pad=True as im %}
@@ -33,6 +34,7 @@
             {% for mo in mobjects %}
             <li class="{% if objectid and objectid == mo.pk or pos and forloop.counter == pos %}find {% endif %}img obj">
                 <div class="mask"></div>
+                <div class="thumb_title">{{mo.name}}</div>
                 <div class="case">
                     {% if mo.image_set.all %}
                     {% thumbnail mo.image_set.all.0.image_file "222x222" pad=True as im %}

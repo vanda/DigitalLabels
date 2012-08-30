@@ -21,10 +21,13 @@
 .clip { overflow:hidden; }
 .carousel { clear:both; margin:0; position:relative; }
 #img { height:326px; }
+.portal .obj { border:none; }
 .obj { border:1px solid #b5b5b5; display:block; float:left; list-style-type:none; margin:0 12px; position:relative; vertical-align:top; }
 .img { top:93px; }
+.portal li.active.img.obj { border:1px solid #000; border-top:none; }
 .case { background:#fff url(img/spinner.gif) 50% 50% no-repeat; display:block; position:relative; text-align:center; }
 .case>img.active { display:none; }
+.portal .thumbs { position:relative; background-color: #fff; width:217px; bottom:0; margin-top:2px; }
 .thumbs { display:none; font-size:0.9em; overflow:hidden; padding:0 0 4px 5px; text-align:left; width:125%; position:absolute; bottom:-74px; }
 .thumbs>img { border:1px solid #b5b5b5; float:left; margin:3px 4px 0 0; }
 .active.img { border-top:0; margin:0 17px; top:0; }
@@ -33,6 +36,8 @@
 .active>.case>img { display:block; }
 .active>.case>img.inactive { display:none; }
 .active>.thumbs { display:block; }
+.active .thumb_title { display:none; }
+.thumb_title { position:absolute; top:-1.3em; left:-1px; color:#fff; }
 .txt { background:#fff; border:1px solid #b5b5b5; padding:10px 16px 16px; width:508px; }
 .title { border-bottom:1px solid #b5b5b5; padding:0 0 6px; margin:0 0 10px; }
 .txtl, .txtr { height:317px; }
