@@ -23,30 +23,24 @@ class ImageInline(AdminImageMixin, admin.TabularInline):
     sortable_field_name = "position"
 
 
-class MuseumObject_dl_Inline(admin.TabularInline):
+class MuseumObjectInline(admin.TabularInline):
     form = EditMuseumObjectForm
-
     inline_classes = ('collapse open',)
-    fields = ('object_number', 'name', 'gateway_object', 'dl_position',)
     extra = 0
     model = MuseumObject
+    template = 'admin/object_inline/tabular.html'
+
+class MuseumObject_dl_Inline(MuseumObjectInline):
+    fields = ('object_number', 'name', 'gateway_object', 'dl_position',)
     ordering = ['dl_position']
     # define the sortable
     sortable_field_name = "dl_position"
-    template = 'admin/object_inline/tabular.html'
 
-
-class MuseumObject_pt_Inline(admin.TabularInline):
-    form = EditMuseumObjectForm
-
-    inline_classes = ('collapse open',)
+class MuseumObject_pt_Inline(MuseumObjectInline):
     fields = ('object_number', 'name', 'gateway_object', 'pt_position',)
-    extra = 0
-    model = MuseumObject
     ordering = ['pt_position']
     # define the sortable
     sortable_field_name = "pt_position"
-    template = 'admin/object_inline/tabular.html'
 
 
 class TextLabelInline(admin.TabularInline):
