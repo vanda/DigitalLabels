@@ -16,7 +16,7 @@
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery.hooks.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/hammer.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery.hammer.js"></script>
-    <title>{% block title %}V&amp;A Labels{% endblock %}</title>
+    <title>{% if screen %}{{screen.name}}{% else %}V&amp;A Labels{% endif %}</title>
 </head>
 
 <body{% block body_class %}{% endblock %}>
