@@ -12,7 +12,7 @@ def digitallabel(request, digitallabel_id, objectid=None, pos=None):
     if pos is not None:
         pos = int(pos)
     t = loader.get_template('digitallabel.html')
-    c = RequestContext(request, {'mobjects': mobjects, 'dl': dl,
+    c = RequestContext(request, {'mobjects': mobjects, 'screen': dl,
                                  'objectid': objectid, 'pos': pos})
     return HttpResponse(t.render(c))
 
@@ -28,7 +28,7 @@ def portal(request, portal_id, objectid=None, labelid=None, pos=None):
     if pos is not None:
         pos = int(pos)
     t = loader.get_template('portal.html')
-    c = RequestContext(request, {'tlabel': tl, 'mobjects': mobjects, 'pt': pt,
+    c = RequestContext(request, {'tlabel': tl, 'mobjects': mobjects, 'screen': pt,
                                  'labelid': labelid, 'objectid': objectid, 'pos': pos})
     return HttpResponse(t.render(c))
 

@@ -2,7 +2,7 @@
 {% load thumbnail %}
 {% load replace %}
 
-{% block title %}{{dl.name}}{% endblock %}
+{% block title %}{{screen.name}}{% endblock %}
 
     {% block content %}
     <div id="header" class="hi">Touch an object or its label</div>
@@ -86,14 +86,5 @@
     
     <div class="pop" id="imgpop"><div class="case" id="imgbox"><img id="imgbig" src="" alt="" /><div class="zoom"></div></div><div id="imgtxt"></div></div>
     <div class="txt pop" id="txtpop"></div>
-    
-    {% if not debug %}
-        <div id="timeout">
-            {% for ti in dl.timeout_images.all %}
-            <img class="timeout" src="{{MEDIA_URL}}{{ti.image_file}}" alt=""/>
-            {% endfor %}
-        </div>
-    {% endif%}
-    
     {% endblock %}
 
