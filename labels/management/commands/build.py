@@ -40,12 +40,11 @@ class Command(BaseCommand):
         static_build_dir = os.path.join(destination,
                                         os.path.basename(static_abspath))
         media_build_dir = os.path.join(destination,
-                                       os.path.basename(media_abspath),
-                                       'cache')
+                                       os.path.basename(media_abspath))
 
         # COPY FILES
         copy_tree(settings.STATIC_ROOT, static_build_dir)
-        copy_tree(os.path.join(settings.MEDIA_ROOT, 'cache'), media_build_dir)
+        copy_tree(os.path.join(settings.MEDIA_ROOT), media_build_dir)
 
     def save_html(self, screen, destination):
         cl = Client()
