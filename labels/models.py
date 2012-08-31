@@ -53,14 +53,14 @@ class BaseLabel(models.Model):
 
     def digital_label(self):
         href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'digitallabel'),
-                       args=(self.digitallabel.pk))
+                       args=[self.digitallabel.pk])
         return mark_safe('<a href="%s">%s</a>' % (href, self.digitallabel))
 
     digital_label.allow_tags = True
 
     def _portal(self):
         href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'portal'),
-                       args=(self.portal.pk))
+                       args=[self.portal.pk])
         return mark_safe('<a href="%s">%s</a>' % (href, self.portal))
 
     _portal.allow_tags = True
@@ -269,14 +269,14 @@ class Image(models.Model):
 
     def object_link(self):
         href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'museumobject'),
-                       args=(self.museumobject.pk))
+                       args=[self.museumobject.pk])
         return mark_safe('<a href="%s">%s</a>' % (href, self.museumobject))
 
     object_link.allow_tags = True
 
     def label_link(self):
         href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'textlabel'),
-                       args=(self.textlabel.pk))
+                       args=[self.textlabel.pk])
         return mark_safe('<a href="%s">%s</a>' % (href, self.textlabel))
 
     label_link.allow_tags = True
