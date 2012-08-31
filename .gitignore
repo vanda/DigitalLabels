@@ -1,4 +1,4 @@
 [Tt]humbs.db
 *.DS_Store
 *.pyc
-application/labelsite/digitallabels.db
+labelsite/digitallabels.db*
