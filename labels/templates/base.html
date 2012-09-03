@@ -43,7 +43,7 @@
     </div>
     {% endblock %}
     
-    {% if not debug %}
+    {% if kiosk_mode %}
         <div id="timeout">
             {% for ti in screen.timeout_images.all %}
             <img class="timeout" src="{{MEDIA_URL}}{{ti.image_file}}" alt=""/>
