@@ -6,7 +6,7 @@ from labels.models import DigitalLabel, Portal
 
 def digitallabel(request, digitallabel_id, objectid=None, pos=None):
     dl = DigitalLabel.objects.get(id=digitallabel_id)
-    mobjects = dl.museumobjects.all()
+    mobjects = dl.museumobjects.all().order_by('dl_position')
     if objectid is not None:
         objectid = int(objectid)
     if pos is not None:
@@ -20,7 +20,7 @@ def digitallabel(request, digitallabel_id, objectid=None, pos=None):
 def portal(request, portal_id, objectid=None, labelid=None, pos=None):
     pt = Portal.objects.get(id=portal_id)
     tl = pt.textlabels.all()
-    mobjects = pt.museumobjects.all()
+    mobjects = pt.museumobjects.all().order_by('pt_position')
     if objectid is not None:
         objectid = int(objectid)
     if labelid is not None:
