@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from labels.models import DigitalLabel, Portal
-
+from django.conf import settings
 
 def digitallabel(request, digitallabel_id, objectid=None, pos=None):
     dl = DigitalLabel.objects.get(id=digitallabel_id)
@@ -13,7 +13,8 @@ def digitallabel(request, digitallabel_id, objectid=None, pos=None):
         pos = int(pos)
     t = loader.get_template('digitallabel.html')
     c = RequestContext(request, {'mobjects': mobjects, 'screen': dl,
-                                 'objectid': objectid, 'pos': pos})
+                                 'objectid': objectid, 'pos': pos,
+                                 'kiosk_mode': settings.KIOSK_MODE})
     return HttpResponse(t.render(c))
 
 
@@ -29,7 +30,8 @@ def portal(request, portal_id, objectid=None, labelid=None, pos=None):
         pos = int(pos)
     t = loader.get_template('portal.html')
     c = RequestContext(request, {'tlabel': tl, 'mobjects': mobjects, 'screen': pt,
-                                 'labelid': labelid, 'objectid': objectid, 'pos': pos})
+                                 'labelid': labelid, 'objectid': objectid, 'pos': pos,
+                                 'kiosk_mode':settings.KIOSK_MODE})
     return HttpResponse(t.render(c))
 
 
