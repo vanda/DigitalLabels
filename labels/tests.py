@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from labels.models import MuseumObject
+from labels.models import MuseumObject, Portal, TextLabel
 
 
 class SimpleTest(TestCase):
@@ -134,3 +134,90 @@ class LabelTest(TestCase):
                             main text, main text, main text, main text, 
                             main text, main text, main text, main text."""
         mo.save()
+
+class PortalTest(TestCase):
+
+    def setUp(self):
+        #create a portal
+        pt = Portal()
+        pt.name = 'Frank Lloyd Wright'
+        pt.save()
+
+    def test_textlabel(self):
+        #create a Text Label
+        tl = TextLabel()
+        tl.title = 'Frank Lloyd Wright (Biography)'
+        tl.portal_id = 1
+        tl.biography = True
+        tl.main_text = """Frank Lloyd Wright (born Frank Lincoln Wright,
+                            June 8, 1867 - April 9, 1959) was an American architect,
+                            interior designer, writer and educator, who designed
+                            more than 1,000 structures and completed 500 works.
+                            Wright believed in designing structures which were
+                            in harmony with humanity and its environment, a
+                            philosophy he called organic architecture. This
+                            philosophy was best exemplified by his design for
+                            Fallingwater (1935), which has been called "the best
+                            all-time work of American architecture".[1] Wright was
+                            a leader of the Prairie School movement of architecture
+                            and developed the concept of the Usonian home, his unique
+                            vision for urban planning in the United States."""
+        tl.save()
+
+        #test the text label appear in the HTML of the portal page
+        response = self.client.get('/portal/1/')
+        self.assertContains(response, """<div class="title"><h2>Frank Lloyd Wright (Biography)</h2></div>""", 1, 200)
+
+    def test_museumobject(self):
+        #create a Museum Object
+        mo = MuseumObject()
+        mo.name = 'Armchair'
+        mo.portal = Portal.objects.get(id=1)
+        mo.date_text = '1904 (made)'
+        mo.artist_maker = 'Wright, Frank Lloyd'
+        mo.place = 'America'
+        mo.materials_techniques = """Frame: painted steel, with cast-iron base and rubber
+                                        castersUpholstery: slip seat with horsehair(?)
+                                        stuffing, and leather cover (probably original)"""
+        mo.museum_number = 'W.43-1981'
+        mo.object_number = 'O112088'
+        mo.credit_line = 'Lorem ipsum'
+        mo.main_text = """Wright designed a variety of metal chairs and desks for the
+                            headquarters of this mail-order soap company. The client's
+                            requirement that the building be fireproof provided the
+                            impetus for Wright's use of metal. The form of the chair
+                            and the decoration of perforated squares on the back indicate
+                            Wright's likely awareness of contemporary Viennese design."""
+        mo.save()
+
+        #test the object appear in the Portal
+        response = self.client.get('/portal/1/')
+        self.assertContains(response, '<div class="title"><h2>Armchair</h2></div>', 1, 200)
+
+    def test_edit_TextLabel(self):
+        #create a new Text Label
+        tl = TextLabel()
+        tl.title = 'Historical Context 2'
+        tl.portal = Portal.objects.get(id=1)
+        tl.biography = False
+        tl.main_text = """The massive stained oak table combines forms derived from the
+                            Gothic Revival and Arts and Crafts movements of the later
+                            19th century. The colour and shape of the table, and of other
+                            pieces of furniture, were echoed in interior details throughout
+                            the house. Wright believed that wood should be cut simply and
+                            stained (never varnished) to reveal the 'nature' of the material."""
+        tl.save()
+
+        #get the Text Label and set the new title 
+        tl = TextLabel.objects.get(id=1)
+        replacing_title = 'The stained oak table'
+        self.assertNotEqual(tl.title, replacing_title)
+
+        # change the title
+        tl.title = replacing_title
+        tl.save()
+        self.assertEqual(tl.title, replacing_title)
+
+        #test the title has changed in the portal view
+        response = self.client.get('/portal/1/')
+        self.assertContains(response, """<div class="title"><h2>The stained oak table</h2></div>""", 1, 200)
