@@ -279,6 +279,20 @@
             });
         });
         {% endif %}
+        $("div.gateway_object input[type=checkbox]").each(function(){
+        	$(this).clone().attr({
+        		type: 'radio',
+        		name: 'gateway_object',
+        		value: $(this).attr('name')
+        	}).insertBefore($(this));
+        	$(this).hide();
+        	$("div.gateway_object").attr('align', 'center');
+        });
+        $("#{{ opts.module_name }}_form").bind("submit", function(){
+        	$("div.gateway_object input[type=checkbox]").removeAttr("checked");
+        	var checked = $("div.gateway_object input[name=gateway_object]:checked");
+        	$("div.gateway_object input[name=" + checked.val() + "]").attr('checked', 'checked');
+        });
         
     });
 })(django.jQuery);
