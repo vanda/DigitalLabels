@@ -50,7 +50,7 @@ class TextLabelInline(admin.TabularInline):
     model = TextLabel
     # define the sortable
     sortable_field_name = "position"
-    template = 'admin/object_inline/tabular.html'
+    template = 'admin/textlabel_inline/tabular.html'
 
 
 class MuseumObjectAdmin(reversion.VersionAdmin):
