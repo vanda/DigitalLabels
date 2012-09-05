@@ -297,13 +297,17 @@
         $(".grp-th.dl-position, .grp-td.dl_position").hide();
         {% elif original.referrer == 'portal' %}
         $("div.biography input[type=checkbox]").each(function(){
-        	$(this).clone().attr({
-        		type: 'radio',
-        		name: 'biography',
-        		value: $(this).attr('name')
-        	}).insertBefore($(this));
-        	$(this).hide();
-        	$("div.biography").attr('align', 'center');
+        	if ($(this).parent().children("input[type=radio][name=biography]").length > 0) {
+        		return false;
+			} else {
+				$(this).clone().attr({
+	        		type: 'radio',
+	        		name: 'biography',
+	        		value: $(this).attr('name')
+	        	}).insertBefore($(this));
+	        	$(this).hide();
+	        	$("div.biography").attr('align', 'center');
+			}
         });
         $("#{{ opts.module_name }}_form").bind("submit", function(){
         	$("div.biography input[type=checkbox]").removeAttr("checked");
