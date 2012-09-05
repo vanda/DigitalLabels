@@ -282,17 +282,13 @@
         {% endif %}
         {% if inline_admin_formset.opts.custom_radio %}
         $("div.{{ inline_admin_formset.opts.custom_radio }} input[type=checkbox]").each(function(){
-        	if ($(this).parent().children("input[type=radio][name={{ inline_admin_formset.opts.custom_radio }}]").length > 0) {
-        		return false;
-			} else {
-				$(this).clone().attr({
-	        		type: 'radio',
-	        		name: '{{ inline_admin_formset.opts.custom_radio }}',
-	        		value: $(this).attr('name')
-	        	}).insertBefore($(this));
-	        	$(this).hide();
-	        	$("div.{{ inline_admin_formset.opts.custom_radio }}").attr('align', 'center');
-			}
+        	$(this).clone().attr({
+        		type: 'radio',
+        		name: '{{ inline_admin_formset.opts.custom_radio }}',
+        		value: $(this).attr('name')
+        	}).insertBefore($(this));
+        	$(this).hide();
+        	$("div.{{ inline_admin_formset.opts.custom_radio }}").attr('align', 'center');
         });
         $("#{{ opts.module_name }}_form").bind("submit", function(){
         	$("div.{{ inline_admin_formset.opts.custom_radio }} input[type=checkbox]").removeAttr("checked");
