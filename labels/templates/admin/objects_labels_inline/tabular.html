@@ -280,6 +280,7 @@
             });
         });
         {% endif %}
+        {% if inline_admin_formset.opts.custom_radio %}
         $("div.{{ inline_admin_formset.opts.custom_radio }} input[type=checkbox]").each(function(){
         	if ($(this).parent().children("input[type=radio][name={{ inline_admin_formset.opts.custom_radio }}]").length > 0) {
         		return false;
@@ -298,6 +299,7 @@
         	var checked = $("div.{{ inline_admin_formset.opts.custom_radio }} input[type=radio]:checked");
         	$("div.{{ inline_admin_formset.opts.custom_radio }} input[name=" + checked.val() + "]").attr('checked', 'checked');
         });
+        {% endif %}
         
     });
 })(django.jQuery);
