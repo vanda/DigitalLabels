@@ -37,7 +37,7 @@ class MuseumObject_dl_Inline(MuseumObjectInline):
     sortable_field_name = "dl_position"
 
 class MuseumObject_pt_Inline(MuseumObjectInline):
-    fields = ('object_number', 'name', 'gateway_object', 'pt_position',)
+    fields = ('object_number', 'name', 'pt_position',)
     ordering = ['pt_position']
     # define the sortable
     sortable_field_name = "pt_position"
