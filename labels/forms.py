@@ -22,7 +22,7 @@ class ObjectNumberInput(TextInput):
             final_attrs['style'] = 'width: 272px;'
         return mark_safe(u'<input%s />' % flatatt(final_attrs))
 
-class EditMuseumObjectForm(ModelForm):
+class ObjectReadObjNumbForm(ModelForm):
     class Meta:
         model = MuseumObject
         widgets = {
