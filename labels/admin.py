@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 import reversion
 from sorl.thumbnail.admin import AdminImageMixin
 from labels.filters import PortalListFilter
-from labels.forms import MuseumObjectForm, EditMuseumObjectForm
+from labels.forms import MuseumObjectForm, ObjectReadObjNumbForm
 from labels.models import MuseumObject, TextLabel, CMSLabel, Image, DigitalLabel, Portal
 
 
@@ -24,7 +24,7 @@ class ImageInline(AdminImageMixin, admin.TabularInline):
 
 
 class MuseumObjectInline(admin.TabularInline):
-    form = EditMuseumObjectForm
+    form = ObjectReadObjNumbForm
     inline_classes = ('collapse open',)
     extra = 0
     model = MuseumObject
