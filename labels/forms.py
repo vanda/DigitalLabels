@@ -28,3 +28,11 @@ class EditMuseumObjectForm(ModelForm):
         widgets = {
             'object_number' : ObjectNumberInput,
         }
+
+class MuseumObjectForm(ModelForm):
+    class Meta:
+        model = MuseumObject
+        exclude = ('gateway_object', 'dl_position', 'pt_position')
+        widgets = {
+            'object_number' : ObjectNumberInput,
+        }
