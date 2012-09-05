@@ -28,7 +28,6 @@ class MuseumObjectInline(admin.TabularInline):
     inline_classes = ('collapse open',)
     extra = 0
     model = MuseumObject
-    custom_radio = "gateway_object"
     template = 'admin/objects_labels_inline/tabular.html'
 
 class MuseumObject_dl_Inline(MuseumObjectInline):
@@ -36,6 +35,7 @@ class MuseumObject_dl_Inline(MuseumObjectInline):
     ordering = ['dl_position']
     # define the sortable
     sortable_field_name = "dl_position"
+    custom_radio = "gateway_object"
 
 class MuseumObject_pt_Inline(MuseumObjectInline):
     fields = ('object_number', 'name', 'pt_position',)
