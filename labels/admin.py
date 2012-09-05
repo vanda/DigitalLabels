@@ -28,7 +28,7 @@ class MuseumObjectInline(admin.TabularInline):
     inline_classes = ('collapse open',)
     extra = 0
     model = MuseumObject
-    template = 'admin/object_inline/tabular.html'
+    template = 'admin/objects_labels_inline/tabular.html'
 
 class MuseumObject_dl_Inline(MuseumObjectInline):
     fields = ('object_number', 'name', 'gateway_object', 'dl_position',)
@@ -50,7 +50,7 @@ class TextLabelInline(admin.TabularInline):
     model = TextLabel
     # define the sortable
     sortable_field_name = "position"
-    template = 'admin/textlabel_inline/tabular.html'
+    template = 'admin/objects_labels_inline/tabular.html'
 
 
 class MuseumObjectAdmin(reversion.VersionAdmin):
