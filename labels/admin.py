@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 import reversion
 from sorl.thumbnail.admin import AdminImageMixin
 from labels.filters import PortalListFilter
-from labels.forms import EditMuseumObjectForm
+from labels.forms import MuseumObjectForm, EditMuseumObjectForm
 from labels.models import MuseumObject, TextLabel, CMSLabel, Image, DigitalLabel, Portal
 
 
@@ -54,7 +54,7 @@ class TextLabelInline(admin.TabularInline):
 
 
 class MuseumObjectAdmin(reversion.VersionAdmin):
-    form = EditMuseumObjectForm
+    form = MuseumObjectForm
 
     def response_change(self, request, model=None):
         if request.GET.get('referrer'):
