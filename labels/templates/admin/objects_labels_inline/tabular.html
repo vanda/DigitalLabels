@@ -243,6 +243,7 @@
         });
         
         {% if inline_admin_formset.opts.sortable_field_name %}
+        $(".grp-th.position, .grp-td.position, .grp-th.pt-position, .grp-td.pt_position, .grp-th.dl-position, .grp-td.dl_position").hide();
         $("#{{ inline_admin_formset.formset.prefix }}-group > div.grp-table").sortable({
             handle: "a.grp-drag-handler",
             items: "div.grp-dynamic-form",
@@ -279,37 +280,23 @@
             });
         });
         {% endif %}
-        {% if original.referrer == 'digitallabel' %}
-        $("div.gateway_object input[type=checkbox]").each(function(){
-        	$(this).clone().attr({
-        		type: 'radio',
-        		name: 'gateway_object',
-        		value: $(this).attr('name')
-        	}).insertBefore($(this));
-        	$(this).hide();
-        	$("div.gateway_object").attr('align', 'center');
-        });
-        $(".grp-th.dl-position, .grp-td.dl_position").hide();
-        {% elif original.referrer == 'portal' %}
-        $("div.biography input[type=checkbox]").each(function(){
-        	if ($(this).parent().children("input[type=radio][name=biography]").length > 0) {
+        $("div.{{ inline_admin_formset.opts.custom_radio }} input[type=checkbox]").each(function(){
+        	if ($(this).parent().children("input[type=radio][name={{ inline_admin_formset.opts.custom_radio }}]").length > 0) {
         		return false;
 			} else {
 				$(this).clone().attr({
 	        		type: 'radio',
-	        		name: 'biography',
+	        		name: '{{ inline_admin_formset.opts.custom_radio }}',
 	        		value: $(this).attr('name')
 	        	}).insertBefore($(this));
 	        	$(this).hide();
-	        	$("div.biography").attr('align', 'center');
+	        	$("div.{{ inline_admin_formset.opts.custom_radio }}").attr('align', 'center');
 			}
         });
-        $(".grp-th.position, .grp-td.position, .grp-th.pt-position, .grp-td.pt_position").hide();
-        {% endif %}
         $("#{{ opts.module_name }}_form").bind("submit", function(){
-        	$(".grp-tr .grp-td input[type=checkbox]").removeAttr("checked");
-        	var checked = $(".grp-tr .grp-td input[type=radio]:checked");
-        	$(".grp-tr .grp-td input[name=" + checked.val() + "]").attr('checked', 'checked');
+        	$("div.{{ inline_admin_formset.opts.custom_radio }} input[type=checkbox]").removeAttr("checked");
+        	var checked = $("div.{{ inline_admin_formset.opts.custom_radio }} input[type=radio]:checked");
+        	$("div.{{ inline_admin_formset.opts.custom_radio }} input[name=" + checked.val() + "]").attr('checked', 'checked');
         });
         
     });
