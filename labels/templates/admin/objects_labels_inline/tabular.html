@@ -289,11 +289,6 @@
         	$(this).hide();
         	$("div.gateway_object").attr('align', 'center');
         });
-        $("#{{ opts.module_name }}_form").bind("submit", function(){
-        	$("div.gateway_object input[type=checkbox]").removeAttr("checked");
-        	var checked = $("div.gateway_object input[name=gateway_object]:checked");
-        	$("div.gateway_object input[name=" + checked.val() + "]").attr('checked', 'checked');
-        });
         $(".grp-th.dl-position, .grp-td.dl_position").hide();
         {% elif original.referrer == 'portal' %}
         $("div.biography input[type=checkbox]").each(function(){
@@ -309,13 +304,13 @@
 	        	$("div.biography").attr('align', 'center');
 			}
         });
-        $("#{{ opts.module_name }}_form").bind("submit", function(){
-        	$("div.biography input[type=checkbox]").removeAttr("checked");
-        	var checked = $("div.biography input[name=biography]:checked");
-        	$("div.biography input[name=" + checked.val() + "]").attr('checked', 'checked');
-        });
         $(".grp-th.position, .grp-td.position, .grp-th.pt-position, .grp-td.pt_position").hide();
         {% endif %}
+        $("#{{ opts.module_name }}_form").bind("submit", function(){
+        	$(".grp-tr .grp-td input[type=checkbox]").removeAttr("checked");
+        	var checked = $(".grp-tr .grp-td input[type=radio]:checked");
+        	$(".grp-tr .grp-td input[name=" + checked.val() + "]").attr('checked', 'checked');
+        });
         
     });
 })(django.jQuery);
