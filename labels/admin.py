@@ -57,12 +57,15 @@ class TextLabelInline(admin.TabularInline):
 
 class ResponseChange(reversion.VersionAdmin):
     def response_change(self, request, obj):
+        global referrer_model
+        referrer_model = request.GET.get('referrer')
         if request.GET.get('referrer')\
         and not (request.POST.has_key("_continue") or request.POST.has_key("_saveasnew") or\
                 request.POST.has_key("_addanother")):
-            referrer_model = request.GET.get('referrer')
             return HttpResponseRedirect(reverse('admin:labels_%s_change' % (referrer_model),
                                                 args=(getattr(obj, referrer_model).pk,)))
+        elif request.GET.get('referrer') and request.POST.has_key("_continue"):
+            return HttpResponseRedirect(request.path + "?referrer=%s" % (referrer_model))
         return super(ResponseChange, self).response_change(request, obj)
 
 class MuseumObjectAdmin(ResponseChange):
