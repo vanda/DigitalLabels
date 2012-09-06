@@ -169,13 +169,19 @@
                             {{ block.super }}
                             <script type="text/javascript">
                                 (function($){
-                                    $(function(){
-                                        try {
-                                            // focus on first form-field
-                                            $("#{{ adminform.first_field.auto_id }}, #{{ adminform.first_field.auto_id }}_0")
-                                            .eq(0).focus();
-                                        } catch(e) {}
-                                    });
+                                	$(function(){
+                                		try {
+                                			// focus on first form-field
+                                			$("#{{ adminform.first_field.auto_id }}, #{{ adminform.first_field.auto_id }}_0")
+                                			.eq(0).focus();
+                                		} catch(e) {}
+                                		var selector = $("div.grp-row.grp-cells-1.timeout_images");
+                                		$("div.c-1", selector).append("<div class=\"thumb_preview\" />");
+                                		$("div.c-2", selector).on("click", "select.filtered option", function(){
+                                			var picName = $(this).text().substring(0, $(this).text().indexOf(' - '));
+                                			$("div.c-1 div.thumb_preview", selector).html('<img src="/media/labels/images/' + picName + '" width="150px" alt="preview for ' + picName + '">');
+                                		});
+                                	});
                                 }(django.jQuery));
                             </script>
                         {% endblock %}
