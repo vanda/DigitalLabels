@@ -55,9 +55,7 @@ class TextLabelInline(admin.TabularInline):
     template = 'admin/objects_labels_inline/tabular.html'
 
 
-class MuseumObjectAdmin(reversion.VersionAdmin):
-    form = MuseumObjectForm
-
+class ResponseChange(reversion.VersionAdmin):
     def response_change(self, request, obj):
         if request.GET.get('referrer')\
         and not (request.POST.has_key("_continue") or request.POST.has_key("_saveasnew") or\
@@ -65,7 +63,10 @@ class MuseumObjectAdmin(reversion.VersionAdmin):
             referrer_model = request.GET.get('referrer')
             return HttpResponseRedirect(reverse('admin:labels_%s_change' % (referrer_model),
                                                 args=(getattr(obj, referrer_model).pk,)))
-        return super(MuseumObjectAdmin, self).response_change(request, obj)
+        return super(self.__class__, self).response_change(request, obj)
+
+class MuseumObjectAdmin(ResponseChange):
+    form = MuseumObjectForm
 
     list_display = ('thumbnail_tag', 'object_number', 'museum_number',
                                             'name', 'artist_maker',
@@ -88,16 +89,7 @@ class MuseumObjectAdmin(reversion.VersionAdmin):
         ]
 
 
-class TextLabelAdmin(reversion.VersionAdmin):
-    def response_change(self, request, obj):
-        if request.GET.get('referrer')\
-        and not (request.POST.has_key("_continue") or request.POST.has_key("_saveasnew") or\
-                request.POST.has_key("_addanother")):
-            referrer_model = request.GET.get('referrer')
-            return HttpResponseRedirect(reverse('admin:labels_%s_change' % (referrer_model),
-                                                args=(getattr(obj, referrer_model).pk,)))
-        return super(TextLabelAdmin, self).response_change(request, obj)
-
+class TextLabelAdmin(ResponseChange):
     list_display = ('thumbnail_tag', 'title', '_portal')
     list_display_links = ('thumbnail_tag', 'title',)
     list_per_page = 25
