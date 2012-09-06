@@ -95,6 +95,7 @@ class TextLabelAdmin(ResponseChange):
     list_per_page = 25
     list_selected_related = True
     list_filter = ('portal',)
+    exclude = ('biography', 'position',)
     search_fields = ['title']
     save_on_top = True
     inlines = [
