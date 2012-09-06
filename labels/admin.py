@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 import reversion
 from sorl.thumbnail.admin import AdminImageMixin
 from labels.filters import PortalListFilter
-from labels.forms import MuseumObjectForm, ObjectReadObjNumbForm
+from labels.forms import ObjectReadObjNumbForm
 from labels.models import MuseumObject, TextLabel, CMSLabel, Image, DigitalLabel, Portal
 
 
@@ -66,8 +66,6 @@ class ResponseChange(reversion.VersionAdmin):
         return super(self.__class__, self).response_change(request, obj)
 
 class MuseumObjectAdmin(ResponseChange):
-    form = MuseumObjectForm
-
     list_display = ('thumbnail_tag', 'object_number', 'museum_number',
                                             'name', 'artist_maker',
                                             'place', 'digital_label', '_portal')
@@ -75,6 +73,7 @@ class MuseumObjectAdmin(ResponseChange):
     list_per_page = 25
     list_selected_related = True
     list_filter = ('digitallabel', 'portal',)
+    exclude = ('gateway_object', 'dl_position', 'pt_position')
     search_fields = ['name', 'museum_number', 'object_number', 'artist_maker']
     save_on_top = True
     inlines = [
