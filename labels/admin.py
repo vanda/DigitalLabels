@@ -63,7 +63,7 @@ class ResponseChange(reversion.VersionAdmin):
             referrer_model = request.GET.get('referrer')
             return HttpResponseRedirect(reverse('admin:labels_%s_change' % (referrer_model),
                                                 args=(getattr(obj, referrer_model).pk,)))
-        return super(self.__class__, self).response_change(request, obj)
+        return super(ResponseChange, self).response_change(request, obj)
 
 class MuseumObjectAdmin(ResponseChange):
     form = EditMuseumObjectForm
