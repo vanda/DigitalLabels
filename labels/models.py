@@ -265,7 +265,14 @@ class Image(models.Model):
         ordering = ['position']
 
     def __unicode__(self):
-        return os.path.basename(self.image_file.name)
+        if self.museumobject:
+            desc = self.museumobject
+        elif self.textlabel:
+            desc = self.textlabel
+        else:
+            desc = self.caption
+
+        return '%s - %s' % (os.path.basename(self.image_file.name), desc)
 
     def object_link(self):
         href = reverse('admin:%s_%s_change' % (self._meta.app_label, 'museumobject'),
