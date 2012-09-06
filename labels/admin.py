@@ -58,13 +58,14 @@ class TextLabelInline(admin.TabularInline):
 class MuseumObjectAdmin(reversion.VersionAdmin):
     form = MuseumObjectForm
 
-    def response_change(self, request, model=None):
-        if request.GET.get('referrer'):
+    def response_change(self, request, obj):
+        if request.GET.get('referrer')\
+        and not (request.POST.has_key("_continue") or request.POST.has_key("_saveasnew") or\
+                request.POST.has_key("_addanother")):
             referrer_model = request.GET.get('referrer')
             return HttpResponseRedirect(reverse('admin:labels_%s_change' % (referrer_model),
-                                                args=(getattr(model, referrer_model).pk,)))
-        else:
-            return HttpResponseRedirect('../')
+                                                args=(getattr(obj, referrer_model).pk,)))
+        return super(MuseumObjectAdmin, self).response_change(request, obj)
 
     list_display = ('thumbnail_tag', 'object_number', 'museum_number',
                                             'name', 'artist_maker',
@@ -88,13 +89,14 @@ class MuseumObjectAdmin(reversion.VersionAdmin):
 
 
 class TextLabelAdmin(reversion.VersionAdmin):
-    def response_change(self, request, model=None):
-        if request.GET.get('referrer'):
+    def response_change(self, request, obj):
+        if request.GET.get('referrer')\
+        and not (request.POST.has_key("_continue") or request.POST.has_key("_saveasnew") or\
+                request.POST.has_key("_addanother")):
             referrer_model = request.GET.get('referrer')
             return HttpResponseRedirect(reverse('admin:labels_%s_change' % (referrer_model),
-                                                args=(getattr(model, referrer_model).pk,)))
-        else:
-            return HttpResponseRedirect('../')
+                                                args=(getattr(obj, referrer_model).pk,)))
+        return super(TextLabelAdmin, self).response_change(request, obj)
 
     list_display = ('thumbnail_tag', 'title', '_portal')
     list_display_links = ('thumbnail_tag', 'title',)
