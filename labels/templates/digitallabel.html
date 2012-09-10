@@ -14,14 +14,14 @@
                 <div class="case">
                     {% if mo.image_set.all %}
                     {% thumbnail mo.image_set.all.0.image_file "222x222" pad=True as im %}
-                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail mo.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" data-caption="{{ mo.image_set.all.0.caption }}" data-img-l="{% thumbnail mo.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                     {% endthumbnail %}
                     {% thumbnail mo.image_set.all.0.image_file "128x128" pad=True as im %}
-                    <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" alt="" />
+                    <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
                     {% endthumbnail %}
                     {% else %}
-                    <img class="active" src="{{STATIC_URL}}img/logo-va.png" width="222" height="222" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{{STATIC_URL}}img/logo-va.png" alt="" />
-                    <img class="inactive" src="{{STATIC_URL}}img/logo-va.png" width="128" height="128" title="{{ mo.name }} {{ mo.date_text }}" alt="" />
+                    <img class="active" src="{{STATIC_URL}}img/logo-va.png" width="222" height="222" data-caption="{{ mo.name }}" data-img-l="{{STATIC_URL}}img/logo-va.png" alt="" />
+                    <img class="inactive" src="{{STATIC_URL}}img/logo-va.png" width="128" height="128" alt="" />
                     {% endif %}
                     <div class="zoom"></div>
                 </div>
@@ -30,7 +30,7 @@
                     {% for img in mo.image_set.all %}
                         {% if forloop.counter > 1 and forloop.counter < 7 %}
                             {% thumbnail img.image_file "48x48" pad=True as im %}
-                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ mo.name }} {{ mo.date_text }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" data-caption="{{ img.caption }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                             {% endthumbnail %}
                         {% endif %}
                     {% endfor %}
