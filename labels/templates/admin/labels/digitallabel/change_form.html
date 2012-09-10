@@ -14,7 +14,6 @@
     {{ block.super }}
     {% url 'admin:jsi18n' as jsi18nurl %}
     <script type="text/javascript" src="{{ jsi18nurl|default:'../../../jsi18n/' }}"></script>
-    <script src="{% static "grappelli/js/jquery.grp_inline.js" %}" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8">
         (function($) {
             $(document).ready(function() {
@@ -72,43 +71,44 @@
                     });
                 });
                 $("a#grp-open-all").bind("click", function(){
-                    $("div.grp-form-container .grp-collapse-handler").each(function() {
+                    $("#grp-content .grp-collapse-handler").each(function() {
                         $(this).parent(".grp-collapse").removeClass("grp-closed").addClass("grp-open");
                     });   
                 });
                 $("a#grp-close-all").bind("click", function(){
-                    $("div.grp-form-container .grp-collapse-handler").each(function() {
+                    $("#grp-content .grp-collapse-handler").each(function() {
                         $(this).parent(".grp-collapse").removeClass("grp-open").addClass("grp-closed");
                     });
                 });
             });
-        })(django.jQuery);
+        })(grp.jQuery);
     </script>
     {{ media }}
 {% endblock %}
 
 <!-- COLTYPE/BODYCLASS -->
-{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} grp-change-form{% endblock %}
 {% block content-class %}{% endblock %}
 
-<!-- BREADCRUMBS -->
-{% block breadcrumbs %}
-    {% if not is_popup %}
-        <ul class="grp-horizontal-list">
-            <li><a href="../../../">{% trans "Home" %}</a></li>
-            <li><a href="../../">{% trans app_label|capfirst|escape %}</a></li>
-            <li>{% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}</li>
-            <li>{% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
-        </ul>
-    {% endif %}
-{% endblock %}
 
 <!-- PAGE-TOOLS -->
 {% block page-tools %}
     {% if not is_popup %}
-        <ul class="grp-horizontal-list grp-page-tools">
-            <li><a href="javascript://" id="grp-open-all">&nbsp;</a></li>
-            <li><a href="javascript://" id="grp-close-all">&nbsp;</a></li>
+        <ul>
+            <li><a href="javascript://" class="grp-tool" id="grp-open-all">&nbsp;</a></li>
+            <li><a href="javascript://" class="grp-tool" id="grp-close-all">&nbsp;</a></li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
+<!-- BREADCRUMBS -->
+{% block breadcrumbs %}
+    {% if not is_popup %}
+        <ul>
+            <li><a href="../../../">{% trans "Home" %}</a></li>
+            <li><a href="../../">{% trans app_label|capfirst|escape %}</a></li>
+            <li>{% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}</li>
+            <li>{% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
         </ul>
     {% endif %}
 {% endblock %}
@@ -119,9 +119,8 @@
         {% if not is_popup %}
             <ul class="grp-object-tools">
                 {% block object-tools-items %}
-                    <!-- # TODO make preview specific to model -->
-                    {% if original %}
-                    <li><a href="{% url 'labels.views.digitallabel' original.pk %}">Preview</a></li>
+                	{% if original %}
+                    <li><a href="{% url 'labels.views.digitallabel' original.pk %}" target="_blank">Preview</a></li>
                     {% endif %}
                     <li><a href="history/">{% trans "History" %}</a></li>
                     {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="grp-state-focus" target="_blank">{% trans "View on site" %}</a></li>{% endif%}
@@ -133,65 +132,66 @@
 
 <!-- CONTENT -->
 {% block content %}
-    <div class="grp-layout-container">
-        <div class="grp-form-container">
-            <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %} 
-                <div>
-                    <!-- Popup Hidden Field -->
-                    {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
-                    
-                    <!-- No Submit-Row on Top -->
+    <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %} 
+        <div>
+            <!-- Popup Hidden Field -->
+            {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
+            
+            <!-- No Submit-Row on Top -->
 
-                    <!-- Errors -->
-                    {% if errors %}
-                        <p class="errornote">{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}</p>
-                        <ul class="errorlist">{% for error in adminform.form.non_field_errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                    {% endif %}
-                    <!-- Fieldsets -->
-                    {% for fieldset in adminform %}
-                        {% include "admin/includes/fieldset.html" %}
-                    {% endfor %}
-                    
-                    {% block after_field_sets %}{% endblock %}
-                    
-                    <!-- Inlines -->
-                    {% for inline_admin_formset in inline_admin_formsets %}
-                        {% include inline_admin_formset.opts.template %}
-                    {% endfor %}
-                    
-                    {% block after_related_objects %}{% endblock %}
-                    
-                    <!-- Submit-Row -->
-                    {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
-                    
-                    {% if adminform and add %}
-                        {% block extrahead %}
-                            {{ block.super }}
-                            <script type="text/javascript">
-                                (function($){
-                                    $(function(){
-                                        try {
-                                            // focus on first form-field
-                                            $("#{{ adminform.first_field.auto_id }}, #{{ adminform.first_field.auto_id }}_0")
-                                            .eq(0).focus();
-                                        } catch(e) {}
-                                		var selector = $("div.grp-row.grp-cells-1.timeout_images");
-                                		$("div.c-1", selector).append("<div class=\"thumb_preview\" />");
-                                		$("div.c-2", selector).on("click", "select.filtered option", function(){
-                                			var picName = $(this).text().substring(0, $(this).text().indexOf(' - '));
-                                			$("div.c-1 div.thumb_preview", selector).html('<img src="/media/labels/images/' + picName + '" width="150px" alt="preview for ' + picName + '">');
-                                		});
-                                    });
-                                }(django.jQuery));
-                            </script>
-                        {% endblock %}
-                    {% endif %}
-                    
-                    <!-- JS for prepopulated fields -->
-                    {% prepopulated_fields_js %}
-                    
-                </div>
-            </form>
+            <!-- Errors -->
+            {% if errors %}
+                <p class="errornote">{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}</p>
+                <ul class="errorlist">{% for error in adminform.form.non_field_errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+            
+            <!-- Fieldsets -->
+            {% block field_sets %}
+                {% for fieldset in adminform %}
+                    {% include "admin/includes/fieldset.html" %}
+                {% endfor %}
+            {% endblock %}
+            
+            {% block after_field_sets %}{% endblock %}
+            
+            <!-- Inlines -->
+            {% block inline_field_sets %}
+                {% for inline_admin_formset in inline_admin_formsets %}
+                    {% include inline_admin_formset.opts.template %}
+                {% endfor %}
+            {% endblock %}
+            
+            {% block after_related_objects %}{% endblock %}
+            
+            <!-- Submit-Row -->
+            {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
+            
+            {% if adminform and add %}
+                {% block extrahead %}
+                    {{ block.super }}
+                    <script type="text/javascript">
+                        (function($){
+                            $(function(){
+                                try {
+                                    // focus on first form-field
+                                    $("#{{ adminform.first_field.auto_id }}, #{{ adminform.first_field.auto_id }}_0")
+                                    .eq(0).focus();
+                                } catch(e) {}
+                                var selector = $("div.grp-row.grp-cells-1.timeout_images");
+                        		$("div.c-1", selector).append("<div class=\"thumb_preview\" />");
+                        		$("div.c-2", selector).on("click", "select.filtered option", function(){
+                        			var picName = $(this).text().substring(0, $(this).text().indexOf(' - '));
+                        			$("div.c-1 div.thumb_preview", selector).html('<img src="/media/labels/images/' + picName + '" width="150px" alt="preview for ' + picName + '">');
+                        		});
+                            });
+                        }(grp.jQuery));
+                    </script>
+                {% endblock %}
+            {% endif %}
+            
+            <!-- JS for prepopulated fields -->
+            {% prepopulated_fields_js %}
+            
         </div>
-    </div>
+    </form>
 {% endblock %}
