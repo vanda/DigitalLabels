@@ -1,11 +1,12 @@
 {% load url from future %}
 {% load i18n grp_tags %}
+
 <!-- group -->
 <div class="grp-group grp-tabular{% if inline_admin_formset.opts.classes %} {{ inline_admin_formset.opts.classes|join:" " }}{% endif %}"
     id="{{ inline_admin_formset.formset.prefix }}-group" >
     <h2 class="grp-collapse-handler">{% if inline_admin_formset.opts.title %}{{ inline_admin_formset.opts.title }}{% else %}{{ inline_admin_formset.opts.verbose_name_plural|capfirst }}{% endif %}</h2>
     <ul class="grp-tools">
-        <li class="grp-add-handler-container"><a href="javascript://" class="grp-icon grp-add-handler" title="{% trans 'Add Another' %}"> </a></li>
+        <li><a href="javascript://" class="grp-icon grp-add-handler" title="{% trans 'Add Another' %}"> </a></li>
     </ul>
     {{ inline_admin_formset.formset.management_form }}
     {{ inline_admin_formset.formset.non_form_errors }}
@@ -13,9 +14,7 @@
     <div class="grp-module grp-table">
         <div class="grp-module grp-thead">
             <div class="grp-tr">
-                <div class="grp-th">
-                Thumbnail
-                </div>
+            	<div class="grp-th">Thumbnail</div>
                 {% for field in inline_admin_formset.fields %}
                     {% if not field.widget.is_hidden %}
                         <div class="grp-th {{ field.label|lower|slugify }}{% if field.required %} required{% endif %}">{{ field.label|capfirst }}</div>
@@ -30,7 +29,7 @@
             <div class="grp-module grp-tbody{% if inline_admin_form.original or inline_admin_form.show_url %} has_original{% endif %}{% if forloop.last %} grp-empty-form{% endif %}"
                 id="{{ inline_admin_formset.formset.prefix }}{% if not forloop.last %}{{ forloop.counter0 }}{% else %}-empty{% endif %}">
                 {% if inline_admin_form.form.non_field_errors %}
-                    <ul class="grp-errorlist"><li>{{ inline_admin_form.form.non_field_errors }}</li></ul>
+                    {{ inline_admin_form.form.non_field_errors }}
                 {% endif %}
                 <h3 style="display: none;"><b>{{ inline_admin_formset.opts.verbose_name|title }} #{{ forloop.counter }}</b>&nbsp;&nbsp;{% if inline_admin_form.original %} {{ inline_admin_form.original }}{% endif %}</h3>
                 {% spaceless %}
@@ -43,7 +42,7 @@
                 {% endfor %}
                 {% endspaceless %}
                 <div class="grp-tr">
-                    <div class="grp-td">
+                	<div class="grp-td">
                     {% if inline_admin_form.original %}
                     <a href="{% url inline_admin_form.original.admin_template inline_admin_form.original.pk %}?referrer={{ original.referrer }}">
                         {{inline_admin_form.original.thumbnail_tag}}
@@ -56,7 +55,7 @@
                                 {% if not field.field.is_hidden %}
                                     <div class="grp-td {{ field.field.name }} {% if field.field.errors %} grp-error{% endif %}">
                                         {% if field.is_readonly %}
-                                            <p>{{ field.contents }}</p>
+                                            <p class="grp-readonly">{{ field.contents }}</p>
                                         {% else %}
                                             {{ field.field }}
                                             {{ field.field.errors.as_ul }}
@@ -70,17 +69,17 @@
                     <div class="grp-td grp-tools-container">
                         {% spaceless %}
                         <ul class="grp-tools">
-                            {% if inline_admin_form.show_url %}<li class="grp-viewsite-link-container"><a href="../../../r/{{ inline_admin_form.original_content_type_id }}/{{ inline_admin_form.original.id }}/" class="grp-icon grp-viewsite-link" title="{% trans 'View on Site' %}" target="_blank"> </a></li>{% endif %}
+                            {% if inline_admin_form.show_url %}<li><a href="../../../r/{{ inline_admin_form.original_content_type_id }}/{{ inline_admin_form.original.id }}/" class="grp-icon grp-viewsite-link" title="{% trans 'View on Site' %}" target="_blank"></a></li>{% endif %}
                             {% if inline_admin_formset.opts.sortable_field_name %}
-                                <li class="grp-drag-handler-container"><a href="javascript://" class="grp-icon grp-drag-handler" title="{% trans 'Move Item' %}"></a></li>
+                                <li><a href="javascript://" class="grp-icon grp-drag-handler" title="{% trans 'Move Item' %}"></a></li>
                             {% endif %}
                             {% if inline_admin_formset.formset.can_delete %}
-                                <li class="grp-delete-handler-container">{{ inline_admin_form.deletion_field.field }}<a href="javascript://" class="grp-icon {% if inline_admin_form.original %}grp-delete-handler{% else %}grp-remove-handler{% endif %}" title="{% trans 'Remove' %}"> </a></li>
+                                <li>{{ inline_admin_form.deletion_field.field }}<a href="javascript://" class="grp-icon {% if inline_admin_form.original %}grp-delete-handler{% else %}grp-remove-handler{% endif %}" title="{% trans 'Remove' %}"></a></li>
                             {% else %}
                                 {% if inline_admin_form.original %}
-                                    <li class="grp-delete-handler-container">&nbsp;</li>
+                                    <li>&nbsp;</li>
                                 {% else %}
-                                    <li class="grp-delete-handler-container"><a href="javascript://" class="grp-icon grp-remove-handler" title="{% trans 'Remove' %}"> </a></li>
+                                    <li><a href="javascript://" class="grp-icon grp-remove-handler" title="{% trans 'Remove' %}"></a></li>
                                 {% endif %}
                             {% endif %}
                         </ul>
@@ -93,11 +92,13 @@
         {% endfor %}
         {% endwith %}
     </div>
-    <div class="grp-module grp-add-item">
-        <a href="javascript://" class="grp-add-handler">{% blocktrans with inline_admin_formset.opts.verbose_name|title as verbose_name %}Add another {{ verbose_name }}{% endblocktrans %}</a>
-        <ul class="grp-tools">
-            <li class="grp-add-handler-container"><a href="javascript://" class="grp-icon grp-add-handler" title="{% trans 'Add Item' %}"> </a></li>
-        </ul>
+    <div class="grp-module grp-transparent">
+        <div class="grp-row">
+            <a href="javascript://" class="grp-add-handler"><strong>{% blocktrans with inline_admin_formset.opts.verbose_name|title as verbose_name %}Add another {{ verbose_name }}{% endblocktrans %}</strong></a>
+            <ul class="grp-tools">
+                <li><a href="javascript://" class="grp-icon grp-add-handler" title="{% trans 'Add Item' %}"></a></li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -280,6 +281,7 @@
             });
         });
         {% endif %}
+        
         {% if inline_admin_formset.opts.custom_radio %}
         $("div.{{ inline_admin_formset.opts.custom_radio }} input[type=checkbox]").each(function(){
         	$(this).clone().attr({
@@ -298,5 +300,5 @@
         {% endif %}
         
     });
-})(django.jQuery);
+})(grp.jQuery);
 </script>
