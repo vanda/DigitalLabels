@@ -16,7 +16,7 @@ logger = logging.getLogger('labels')
 
 class BaseScreen(models.Model):
     name = models.CharField(max_length=255, null=False)
-    timeout_images = models.ManyToManyField("Image")
+    timeout_images = models.ManyToManyField("Image", blank=True)
 
     _thumbnail_url = None
 
