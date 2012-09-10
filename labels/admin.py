@@ -19,6 +19,7 @@ class ImageInline(AdminImageMixin, admin.TabularInline):
     inline_classes = ('collapse open',)
     fields = ('caption', 'image_file', 'position')
     extra = 0
+    template = 'admin/image_inline/tabular.html'
     # define the sortable
     sortable_field_name = "position"
 
