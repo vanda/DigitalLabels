@@ -68,12 +68,12 @@ jQuery(document).ready(function() {
     });
 
     $('#img').on('click', '.active', function(e){
-        var pip = (e.target.tagName.toLowerCase()==='img')? e.target : $(this).find('img').get(0),
+        var $pip = (e.target.tagName.toLowerCase()==='img')? $(e.target) : $(this).find('img'),
             l = ($(window).width()-$('#imgpop').outerWidth())/2;
         l = l>0? l:0;
         $('#imgbig').remove();
-        $('#imgbox').prepend('<img id="imgbig" src="'+ $(pip).data('img-l') +'" alt=""/>');
-        $('#imgtxt').html(pip.title);
+        $('#imgbox').prepend('<img id="imgbig" src="'+ $pip.data('img-l') +'" alt=""/>');
+        $('#imgtxt').html($pip.data('caption'));
         $('#imgpop').css('left',l).show().mouseTrap({'mask':1});
     });
 
