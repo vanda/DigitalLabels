@@ -121,8 +121,7 @@ class MuseumObject(BaseLabel):
                                                             blank=True)
     museum_number = models.CharField(max_length=255, null=False, blank=True)
     object_number = models.CharField(max_length=16, null=False, blank=True,
-                                     unique=True,
-                                     help_text="""Unique "O" number, For
+                db_index=True, help_text="""Optional. Unique "O" number, For
                                              example, O9138, as used on
                                          Search the Collections""")
     credit_line = models.CharField(max_length=255, null=False, blank=True)
