@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from labels.models import MuseumObject, Portal, TextLabel
+from labels.models import MuseumObject, DigitalLabel, Portal, TextLabel, Image
 
 
 class SimpleTest(TestCase):
@@ -18,7 +18,7 @@ class SimpleTest(TestCase):
         self.assertEqual(1 + 1, 2)
 
 
-class LabelTest(TestCase):
+class ObjectTest(TestCase):
 
     def setUp(self):
         """
@@ -134,6 +134,52 @@ class LabelTest(TestCase):
                             main text, main text, main text, main text, 
                             main text, main text, main text, main text."""
         mo.save()
+
+
+class DLabelTest(TestCase):
+
+    def setUp(self):
+        #create a portal
+        dl = DigitalLabel()
+        dl.name = 'Turning'
+        dl.save()
+
+    def test_label_object(self):
+        mo = MuseumObject()
+        mo.object_number = 'O73708'
+        mo.digitallabel = DigitalLabel.objects.get(id=1)
+        mo.save()
+
+        response = self.client.get('/digitallabel/1/')
+        self.assertContains(response, '<div class="title"><h2>Washstand</h2></div>', 1, 200)
+
+    def test_gateway_object(self):
+        mo = MuseumObject()
+        mo.object_number = 'O59319'
+        mo.digitallabel = DigitalLabel.objects.get(id=1)
+        mo.gateway_object = True
+        mo.save()
+
+        response = self.client.get('/digitallabel/1/')
+        self.assertContains(response, """<li class="home txt obj">
+                <div class="mask"></div>
+                <div class="title"><h2>Armchair</h2></div>""", 1, 200)
+
+    def test_timeout_images(self):
+        mo = MuseumObject()
+        mo.object_number = 'O321535'
+        mo.digitallabel = DigitalLabel.objects.get(id=1)
+        mo.save()
+
+        response = self.client.get('/digitallabel/1/')
+        self.assertNotContains(response, '<img class="timeout"', 200)
+
+        dl = DigitalLabel.objects.get(id=1)
+        dl.timeout_images.add(Image.objects.get(id=1))
+
+        response = self.client.get('/digitallabel/1/')
+        self.assertContains(response, '<img class="timeout"', 1, 200)
+
 
 class PortalTest(TestCase):
 
