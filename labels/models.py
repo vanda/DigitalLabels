@@ -1,6 +1,7 @@
 import logging
 import os
 import urllib2
+import httplib
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -338,6 +339,10 @@ class Image(models.Model):
         #handle errors
         except urllib2.HTTPError, e:
             logging.error("HTTP Error: %s %s" % (e.code, image_url))
+            self.image_file = None
+            return False
+        except httplib.BadStatusLine, e:
+            logging.error("HTTP Bad Status: %s %s" % (e.reason, image_url))
             self.image_file = None
             return False
         except urllib2.URLError, e:
