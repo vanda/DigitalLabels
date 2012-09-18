@@ -21,6 +21,9 @@ Then populate it with some test data (a fake Chippendale display)
 …or with the included CSV look up (builds portals and digitallabels)
     python manage.py populatedb labels/data/objects_labels.csv  
     
+Run tests by running:
+	python manage.py test labels --settings=labelsite.settings_build
+	 
 You can then create a static build of all digital labels and portals:
     python manage.py build --settings=labelsite.settings_build -o /Output/Directory
 
