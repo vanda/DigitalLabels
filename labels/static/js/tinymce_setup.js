@@ -36,7 +36,7 @@ tinyMCE.init({
     keep_styles: false,
     language: 'en',
     object_resizing: false,
-    plugins: 'advimage,advlink,fullscreen,paste,media,searchreplace,grappelli,template',
+    plugins: 'advimage,advlink,fullscreen,paste,media,searchreplace,template',
     
     // Callbacks
     file_browser_callback: 'CustomFileBrowser',
