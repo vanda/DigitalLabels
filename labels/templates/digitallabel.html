@@ -9,12 +9,12 @@
         
         <ul class="carousel" id="img">
             {% for mo in mobjects %}
-            <li class="{% if mo.gateway_object %}home {% endif %}{% if id and id == mo.pk or pos and forloop.counter == pos %}find {% endif %}img obj">
+            <li class="{% if mo.gateway_object %}home {% endif %}{% if objectid and objectid == mo.pk or pos and forloop.counter == pos %}find {% endif %}img obj">
                 <div class="mask"></div>
                 <div class="case">
                     {% if mo.image_set.all %}
                     {% thumbnail mo.image_set.all.0.image_file "222x222" pad=True as im %}
-                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" data-caption="{{ mo.image_set.all.0.caption }}" data-img-l="{% thumbnail mo.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" data-caption="{{ mo.image_set.all.0.caption|safe }}" data-img-l="{% thumbnail mo.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                     {% endthumbnail %}
                     {% thumbnail mo.image_set.all.0.image_file "128x128" pad=True as im %}
                     <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
@@ -30,7 +30,7 @@
                     {% for img in mo.image_set.all %}
                         {% if forloop.counter > 1 and forloop.counter < 7 %}
                             {% thumbnail img.image_file "48x48" pad=True as im %}
-                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" data-caption="{{ img.caption }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" data-caption="{{ img.caption|safe }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                             {% endthumbnail %}
                         {% endif %}
                     {% endfor %}
@@ -49,13 +49,14 @@
                     <div class="txtl edged col">
                         <div class="pane">
                             <p>
-                                <strong>
-                                {{ mo.date_text }}<br/>
-                                </strong>
+                               <strong>
+                               {{ mo.date_text }}<br/>
+                               {{ mo.artist_maker }}<br/>
+                               {{ mo.restored_altered }}
+                               </strong>
                             </p>
                             <p>
-                                {{ mo.place }}<br/>
-                                {{ mo.artist_maker }}
+                                {{ mo.place|safe }} 
                             </p>
                             <p>{{ mo.materials_techniques|replace:'/-/&#8209;'|safe }}</p>
                             <p>

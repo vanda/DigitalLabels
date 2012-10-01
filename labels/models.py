@@ -116,8 +116,11 @@ class MuseumObject(BaseLabel):
     portal = models.ForeignKey(Portal, null=True, blank=True,
                                                 related_name="museumobjects")
     date_text = models.CharField(max_length=255, null=False, blank=True)
-    artist_maker = models.CharField(max_length=255, null=False, blank=True)
-    place = models.CharField(max_length=255, null=False, blank=True)
+    artist_maker = models.CharField("Designer / Maker",
+                                    max_length=255, null=False, blank=True)
+    restored_altered = models.CharField("Restored / Altered",
+                                    max_length=255, null=False, blank=True)
+    place = models.TextField("Place of Design / Manufacture", blank=True)
     materials_techniques = models.TextField(blank=True)
     museum_number = models.CharField(max_length=255, null=False, blank=True)
     object_number = models.CharField(max_length=16, null=False, blank=True,
@@ -254,7 +257,7 @@ class CMSLabel(models.Model):
 class Image(models.Model):
 
     image_id = models.CharField(max_length=16, null=False, blank=True)
-    caption = models.CharField(max_length=400, null=False, blank=True)
+    caption = models.TextField(blank=True)
     image_file = ImageField(upload_to="labels/images")
     position = models.PositiveIntegerField(null=False, default=1)
     museumobject = models.ForeignKey(MuseumObject, null=True, blank=True)

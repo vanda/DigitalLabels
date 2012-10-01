@@ -44,7 +44,7 @@ tinyMCE.init({
     // Cleanup/Output
     element_format: 'xhtml',
     fix_list_elements: true,
-    forced_root_block: 'p',
+    forced_root_block: false,
     // style formsts overrides theme_advanced_styles
     // see http://www.tinymce.com/wiki.php/Configuration:style_formats
     style_formats: [],
