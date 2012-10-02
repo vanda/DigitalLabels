@@ -60,7 +60,7 @@
                             </p>
                             <p>{{ mo.materials_techniques|replace:'/-/&#8209;'|safe }}</p>
                             <p>
-                                {{ mo.credit_line|replace:'/-/&#8209;'|safe }}{% if mo.credit_line|length > 0 %}<br/>{% endif %}
+                                <em>{{ mo.credit_line|replace:'/-/&#8209;'|safe }}</em>{% if mo.credit_line|length > 0 %}<br/>{% endif %}
                                 <em>Museum no. {{ mo.museum_number }}</em>
                             </p>
                         </div>
