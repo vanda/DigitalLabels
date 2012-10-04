@@ -53,10 +53,8 @@ jQuery(document).ready(function() {
                 if( li.is('.active') ){
                     $('#img, #txt').each(function(){
                         var d = (a<60? 1:-1);
-                        var n = li.index() - d;
-                        if( n>-1 && n<$(this).children('li').length){
-                            this.hit(n);
-                        }
+                        var n = li.index()-d;
+                        if( n>-1 && n<$(this).children('li').length ){ this.hit(n); }
                     });
                 }else{
                     $('#img, #txt').each(function(){ this.hit($(li).index()); });
