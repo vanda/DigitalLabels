@@ -44,6 +44,7 @@ jQuery(document).ready(function() {
     $('#img, #txt').on('click', 'li:not(.active)', function(){
         var i = $(this).index();
         $('#img, #txt').each(function(){ this.hit(i); });
+        _gaq.push(['_trackEvent', 'Digital Labels (Furniture)', $(document).title, "Carousel Choice"]);
     });
     $('#img, #txt').children('li').each(function(){
         $(this).hammer({css_hacks:false, swipe:false, tap_double:false, hold:false}).on('dragstart', function(e){
@@ -59,6 +60,8 @@ jQuery(document).ready(function() {
                 }else{
                     $('#img, #txt').each(function(){ this.hit($(li).index()); });
                 }
+               _gaq.push(['_trackEvent', 'Digital Labels (Furniture)', $(document).title, "Swipe"]);
+               _gaq.push(['_trackEvent', 'Digital Labels (Furniture)', $(document).title, "Carousel Choice"]);
             }
         }).on('transform', function(e){
             if( $(this).is('.active') && e.scale>1 ){ $(this).trigger('click'); }
@@ -66,6 +69,7 @@ jQuery(document).ready(function() {
     });
 
     $('#img').on('click', '.active', function(e){
+        e.stopPropagation();
         var $pip = (e.target.tagName.toLowerCase()==='img')? $(e.target) : $(this).find('img'),
             l = ($(window).width()-$('#imgpop').outerWidth())/2;
         l = l>0? l:0;
@@ -73,6 +77,7 @@ jQuery(document).ready(function() {
         $('#imgbox').prepend('<img id="imgbig" src="'+ $pip.data('img-l') +'" alt=""/>');
         $('#imgtxt').html($pip.data('caption'));
         $('#imgpop').css('left',l).show().mouseTrap({'mask':1});
+        _gaq.push(['_trackEvent', 'Digital Labels', $(document).title, $pip.is('.active')?'Image Pop-up':'Secondary Image Pop-up']);
     });
 
     $('#txt').on('click', '.active', function(){
@@ -80,6 +85,7 @@ jQuery(document).ready(function() {
         l = l>0? l:0;
         $('#txtpop').removeClass('home').html($(this).html()).css('left',l).show().mouseTrap({'mask':1});
         if( $(this).hasClass('home') ){ $('#txtpop').addClass('home'); }
+        _gaq.push(['_trackEvent', 'Digital Labels', $(document).title, 'Text Pop-up']);
     });
 
     $('.pop').hammer({css_hacks:false, swipe:false, tap_double:false, hold:false}).on('click transform', function(e){
