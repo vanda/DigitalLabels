@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import simplejson
+from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import ImageField, get_thumbnail
 # Create your models here.
@@ -95,7 +96,7 @@ class BaseLabel(models.Model):
 
         if self.thumbnail_url:
             return mark_safe('<img alt="%s" src="%s" />' % (
-                                            self.display_text, self.thumbnail_url))
+                            strip_tags(self.display_text), self.thumbnail_url))
         else:
             return mark_safe('<em>No Images</em>')
 
@@ -305,7 +306,7 @@ class Image(models.Model):
                                                     quality=85, pad=True)
 
         return mark_safe('<img alt="%s" src="%s" />' % (
-                                            self.caption, im.url))
+                                            strip_tags(self.caption), im.url))
     thumb.allow_tags = True
 
     @property
