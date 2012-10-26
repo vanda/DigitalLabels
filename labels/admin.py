@@ -28,23 +28,22 @@ class ImageInline(AdminImageMixin, admin.TabularInline):
 class RelationInline(admin.TabularInline):
     inline_classes = ('collapse open',)
     extra = 0
-    ordering = ['position']
     sortable_field_name = "position"
     template = 'admin/objects_labels_inline/tabular.html'
 
 
-class DigitalLabelRelation(RelationInline):
+class DigitalLabelObject(RelationInline):
     model = DigitalLabelObject
     fields = ('museumobject', 'position', 'gateway_object',)
     custom_radio = "gateway_object"
 
 
-class PortalRelation(RelationInline):
+class PortalObject(RelationInline):
     model = PortalObject
     fields = ('museumobject', 'position',)
 
 
-class TextLabelRelation(RelationInline):
+class PortalTextLabel(RelationInline):
     model = PortalTextLabel
     fields = ('textlabel', 'position', 'biography',)
     custom_radio = "biography"
@@ -57,8 +56,8 @@ class PortalAdmin(reversion.VersionAdmin):
     save_on_top = True
     filter_horizontal = ('timeout_images',)
     inlines = [
-        TextLabelRelation,
-        PortalRelation,
+        PortalTextLabel,
+        PortalObject,
     ]
 
 
@@ -69,7 +68,7 @@ class DigitalLabelAdmin(reversion.VersionAdmin):
     save_on_top = True
     filter_horizontal = ('timeout_images',)
     inlines = [
-        DigitalLabelRelation,
+        DigitalLabelObject,
     ]
 
 
