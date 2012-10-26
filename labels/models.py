@@ -327,12 +327,12 @@ class Image(models.Model):
 
 
 class DigitalLabel(BaseScreen):
-    museumobjects = models.ManyToManyField(MuseumObject, through='DigitalLabelRelation')
+    museumobjects = models.ManyToManyField(MuseumObject, through='DigitalLabelObject')
 
 
 class Portal(BaseScreen):
-    museumobjects = models.ManyToManyField(MuseumObject, through='PortalRelation')
-    textlabels = models.ManyToManyField(TextLabel, through='TextLabelRelation')
+    museumobjects = models.ManyToManyField(MuseumObject, through='PortalObject')
+    textlabels = models.ManyToManyField(TextLabel, through='PortalTextLabel')
 
     def _Labels(self):
         return self.textlabels.count()
@@ -358,16 +358,16 @@ class BaseObjectRelation(BaseRelation):
         abstract = True
 
 
-class DigitalLabelRelation(BaseObjectRelation):
+class DigitalLabelObject(BaseObjectRelation):
     digitallabel = models.ForeignKey(DigitalLabel)
     gateway_object = models.BooleanField(default=False)
 
 
-class PortalRelation(BaseObjectRelation):
+class PortalObject(BaseObjectRelation):
     portal = models.ForeignKey(Portal)
 
 
-class TextLabelRelation(BaseRelation):
+class PortalTextLabel(BaseRelation):
     portal = models.ForeignKey(Portal)
     textlabel = models.ForeignKey(TextLabel)
     biography = models.BooleanField(default=False)
