@@ -51,7 +51,7 @@ class TextLabelRelation(RelationInline):
 
 
 class PortalAdmin(reversion.VersionAdmin):
-    list_display = ('id', 'name',)
+    list_display = ('id', 'name', '_Labels', '_Objects')
     list_display_links = ('id', 'name',)
     search_fields = ['name']
     save_on_top = True
