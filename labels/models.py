@@ -118,7 +118,6 @@ class MuseumObject(BaseLabel):
     main_text = models.TextField(blank=True)
     redownload = models.BooleanField(help_text="""WARNING: This may
                                          replace your existing content""")
-    gateway_object = models.BooleanField(default=False)
 
     @property
     def display_text(self):
@@ -209,17 +208,12 @@ class TextLabel(BaseLabel):
 
     main_text = models.TextField(blank=True)
 
-    biography = models.BooleanField(default=False)
-
     @property
     def display_text(self):
         return self.title
 
     def __unicode__(self):
-        if self.portal:
-            return u"%s - %s" % (self.title, self.portal)
-        else:
-            return self.title
+        return self.title
 
 
 class CMSLabel(models.Model):
@@ -350,17 +344,36 @@ class BaseRelation(models.Model):
     class Meta:
         ordering = ['position']
 
-class DigitalLabelRelation(BaseRelation):
-    digitallabel = models.ForeignKey(DigitalLabel)
+    def target(self):
+        raise NotImplementedError()
+
+
+class BaseObjectRelation(BaseRelation):
     museumobject = models.ForeignKey(MuseumObject)
 
-class PortalRelation(BaseRelation):
+    def target(self):
+        return self.museumobject
+
+    class Meta:
+        abstract = True
+
+
+class DigitalLabelRelation(BaseObjectRelation):
+    digitallabel = models.ForeignKey(DigitalLabel)
+    gateway_object = models.BooleanField(default=False)
+
+
+class PortalRelation(BaseObjectRelation):
     portal = models.ForeignKey(Portal)
-    museumobject = models.ForeignKey(MuseumObject)
+
 
 class TextLabelRelation(BaseRelation):
     portal = models.ForeignKey(Portal)
     textlabel = models.ForeignKey(TextLabel)
+    biography = models.BooleanField(default=False)
+
+    def target(self):
+        return self.textlabel
 
 
 from django.db.models.signals import pre_save, post_save
