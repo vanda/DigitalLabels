@@ -4,8 +4,8 @@ from django.db import connection, transaction
 
 class Command(NoArgsCommand):
     """
-    This file handle the database migration from the first release of the DigitalLabel to the newest one
-    which introduce the ManytoMany relation between the MuseumObjects, TextLabels and Portals DigitalLabels
+    This file handle the database migration from the first release of DigitalLabel to the newest one
+    which introduce the ManytoMany relation between the MuseumObjects/TextLabels and DigitalLabels/Portals
     """
     def handle_noargs(self, **options):
         cursor = connection.cursor()
