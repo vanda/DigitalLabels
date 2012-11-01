@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand, NoArgsCommand
+from django.core.management.base import NoArgsCommand
 from django.db import connection, transaction
 
 
