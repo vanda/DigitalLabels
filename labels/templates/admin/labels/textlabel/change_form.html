@@ -120,8 +120,8 @@
             <ul class="grp-object-tools">
                 {% block object-tools-items %}
                     <li><a href="{% url 'labels.views.template' %}" target="_blank">Template</a></li>
-                    {% if original.portal %}
-                    <li><a href="{% url 'labels.views.portal' portal_id=original.portal.pk labelid=original.pk %}" target="_blank">Preview</a></li>
+                    {% if original.portal_set.all %}
+                    <li><a href="{% url 'labels.views.portal' portal_id=original.portal_set.all.0.pk labelid=original.pk %}" target="_blank">Preview</a></li>
                     {% endif %}
                     <li><a href="history/">{% trans "History" %}</a></li>
                     {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="grp-state-focus" target="_blank">{% trans "View on site" %}</a></li>{% endif%}

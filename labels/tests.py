@@ -6,7 +6,8 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from labels.models import MuseumObject, DigitalLabel, Portal, TextLabel, Image
+from labels.models import MuseumObject, DigitalLabel, Portal, TextLabel, Image, \
+                            DigitalLabelObject, PortalObject, PortalTextLabel
 
 
 class SimpleTest(TestCase):
@@ -147,8 +148,11 @@ class DLabelTest(TestCase):
     def test_label_object(self):
         mo = MuseumObject()
         mo.object_number = 'O73708'
-        mo.digitallabel = DigitalLabel.objects.get(id=1)
         mo.save()
+
+        #bind the object to the Digital Label
+        rel = DigitalLabelObject(museumobject=mo, digitallabel=DigitalLabel.objects.get(id=1))
+        rel.save()
 
         response = self.client.get('/digitallabel/1/')
         self.assertContains(response, '<div class="title"><h2>Washstand</h2></div>', 1, 200)
@@ -156,9 +160,12 @@ class DLabelTest(TestCase):
     def test_gateway_object(self):
         mo = MuseumObject()
         mo.object_number = 'O59319'
-        mo.digitallabel = DigitalLabel.objects.get(id=1)
-        mo.gateway_object = True
         mo.save()
+
+        #bind the object to the Digital Label
+        rel = DigitalLabelObject(museumobject=mo, digitallabel=DigitalLabel.objects.get(id=1),
+                                 gateway_object=True)
+        rel.save()
 
         response = self.client.get('/digitallabel/1/')
         self.assertContains(response, """<li class="home txt obj">
@@ -193,8 +200,6 @@ class PortalTest(TestCase):
         #create a Text Label
         tl = TextLabel()
         tl.title = 'Frank Lloyd Wright (Biography)'
-        tl.portal_id = 1
-        tl.biography = True
         tl.main_text = """Frank Lloyd Wright (born Frank Lincoln Wright,
                             June 8, 1867 - April 9, 1959) was an American architect,
                             interior designer, writer and educator, who designed
@@ -210,6 +215,10 @@ class PortalTest(TestCase):
                             vision for urban planning in the United States."""
         tl.save()
 
+        #bind the object to a portal
+        rel = PortalTextLabel(textlabel=tl, portal=Portal.objects.get(id=1), biography=True)
+        rel.save()
+
         #test the text label appear in the HTML of the portal page
         response = self.client.get('/portal/1/')
         self.assertContains(response, """<div class="title"><h2>Frank Lloyd Wright (Biography)</h2></div>""", 1, 200)
@@ -218,7 +227,6 @@ class PortalTest(TestCase):
         #create a Museum Object
         mo = MuseumObject()
         mo.name = 'Armchair'
-        mo.portal = Portal.objects.get(id=1)
         mo.date_text = '1904 (made)'
         mo.artist_maker = 'Wright, Frank Lloyd'
         mo.place = 'America'
@@ -236,6 +244,10 @@ class PortalTest(TestCase):
                             Wright's likely awareness of contemporary Viennese design."""
         mo.save()
 
+        #bind the object to a portal
+        rel = PortalObject(museumobject=mo, portal=Portal.objects.get(id=1))
+        rel.save()
+
         #test the object appear in the Portal
         response = self.client.get('/portal/1/')
         self.assertContains(response, '<div class="title"><h2>Armchair</h2></div>', 1, 200)
@@ -244,7 +256,6 @@ class PortalTest(TestCase):
         #create a new Text Label
         tl = TextLabel()
         tl.title = 'Historical Context 2'
-        tl.portal = Portal.objects.get(id=1)
         tl.biography = False
         tl.main_text = """The massive stained oak table combines forms derived from the
                             Gothic Revival and Arts and Crafts movements of the later
@@ -253,6 +264,10 @@ class PortalTest(TestCase):
                             the house. Wright believed that wood should be cut simply and
                             stained (never varnished) to reveal the 'nature' of the material."""
         tl.save()
+
+        #bind the object to a portal
+        rel = PortalTextLabel(textlabel=tl, portal=Portal.objects.get(id=1))
+        rel.save()
 
         #get the Text Label and set the new title 
         tl = TextLabel.objects.get(id=1)
