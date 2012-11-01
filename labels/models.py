@@ -39,17 +39,6 @@ class BaseScreen(models.Model):
         abstract = True
 
 
-class DigitalLabel(BaseScreen):
-
-    pass
-
-
-class Portal(BaseScreen):
-
-    def _Labels(self):
-        return self.textlabels.count()
-
-
 class BaseLabel(models.Model):
     _thumbnail_url = None
 
@@ -112,10 +101,6 @@ class MuseumObject(BaseLabel):
     A label describing an individual object
     """
     name = models.CharField(max_length=255, null=False, blank=True)
-    digitallabel = models.ForeignKey(DigitalLabel, null=True, blank=True,
-                                                related_name="museumobjects")
-    portal = models.ForeignKey(Portal, null=True, blank=True,
-                                                related_name="museumobjects")
     date_text = models.CharField(max_length=255, null=False, blank=True)
     artist_maker = models.CharField("Designer / Maker",
                                     max_length=255, null=False, blank=True)
@@ -133,9 +118,6 @@ class MuseumObject(BaseLabel):
     main_text = models.TextField(blank=True)
     redownload = models.BooleanField(help_text="""WARNING: This may
                                          replace your existing content""")
-    gateway_object = models.BooleanField(default=False)
-    dl_position = models.PositiveIntegerField(null=False, default=1)
-    pt_position = models.PositiveIntegerField(null=False, default=1)
 
     @property
     def display_text(self):
@@ -223,26 +205,15 @@ class TextLabel(BaseLabel):
     A label describing biography or a historical notes
     """
     title = models.CharField(max_length=255, null=False, blank=True)
-    portal = models.ForeignKey(Portal, null=True, blank=True,
-                                                related_name="textlabels")
 
     main_text = models.TextField(blank=True)
-
-    biography = models.BooleanField(default=False)
-    position = models.PositiveIntegerField(null=False, default=1)
 
     @property
     def display_text(self):
         return self.title
 
     def __unicode__(self):
-        if self.portal:
-            return u"%s - %s" % (self.title, self.portal)
-        else:
-            return self.title
-
-    class Meta:
-        ordering = ['position']
+        return self.title
 
 
 class CMSLabel(models.Model):
@@ -353,6 +324,56 @@ class Image(models.Model):
             logging.error("URL Error: %s %s" % (e.reason, image_url))
             self.image_file = None
             return False
+
+
+class DigitalLabel(BaseScreen):
+    museumobjects = models.ManyToManyField(MuseumObject, through='DigitalLabelObject')
+
+
+class Portal(BaseScreen):
+    museumobjects = models.ManyToManyField(MuseumObject, through='PortalObject')
+    textlabels = models.ManyToManyField(TextLabel, through='PortalTextLabel')
+
+    def _Labels(self):
+        return self.textlabels.count()
+
+
+class BaseRelation(models.Model):
+    position = models.PositiveIntegerField(null=False, default=1)
+
+    class Meta:
+        ordering = ['position']
+
+    def target(self):
+        raise NotImplementedError()
+
+
+class BaseObjectRelation(BaseRelation):
+    museumobject = models.ForeignKey(MuseumObject)
+
+    def target(self):
+        return self.museumobject
+
+    class Meta:
+        abstract = True
+
+
+class DigitalLabelObject(BaseObjectRelation):
+    digitallabel = models.ForeignKey(DigitalLabel)
+    gateway_object = models.BooleanField(default=False)
+
+
+class PortalObject(BaseObjectRelation):
+    portal = models.ForeignKey(Portal)
+
+
+class PortalTextLabel(BaseRelation):
+    portal = models.ForeignKey(Portal)
+    textlabel = models.ForeignKey(TextLabel)
+    biography = models.BooleanField(default=False)
+
+    def target(self):
+        return self.textlabel
 
 
 from django.db.models.signals import pre_save, post_save

@@ -8,26 +8,26 @@
     <div class="clip">
         
         <ul class="carousel" id="img">
-            {% for mo in mobjects %}
-            <li class="{% if mo.gateway_object %}home {% endif %}{% if objectid and objectid == mo.pk or pos and forloop.counter == pos %}find {% endif %}img obj">
+            {% for dlo in dlobjects %}
+            <li class="{% if dlo.gateway_object %}home {% endif %}{% if objectid and objectid == dlo.museumobject.pk or pos and forloop.counter == pos %}find {% endif %}img obj">
                 <div class="mask"></div>
                 <div class="case">
-                    {% if mo.image_set.all %}
-                    {% thumbnail mo.image_set.all.0.image_file "222x222" pad=True as im %}
-                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" data-caption="{{ mo.image_set.all.0.caption }}" data-img-l="{% thumbnail mo.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
+                    {% if dlo.museumobject.image_set.all %}
+                    {% thumbnail dlo.museumobject.image_set.all.0.image_file "222x222" pad=True as im %}
+                    <img class="active" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" data-caption="{{ dlo.museumobject.image_set.all.0.caption }}" data-img-l="{% thumbnail dlo.museumobject.image_set.all.0.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
                     {% endthumbnail %}
-                    {% thumbnail mo.image_set.all.0.image_file "128x128" pad=True as im %}
+                    {% thumbnail dlo.museumobject.image_set.all.0.image_file "128x128" pad=True as im %}
                     <img class="inactive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
                     {% endthumbnail %}
                     {% else %}
-                    <img class="active" src="{{STATIC_URL}}img/logo-va.png" width="222" height="222" data-caption="{{ mo.name }}" data-img-l="{{STATIC_URL}}img/logo-va.png" alt="" />
+                    <img class="active" src="{{STATIC_URL}}img/logo-va.png" width="222" height="222" data-caption="{{ dlo.museumobject.name }}" data-img-l="{{STATIC_URL}}img/logo-va.png" alt="" />
                     <img class="inactive" src="{{STATIC_URL}}img/logo-va.png" width="128" height="128" alt="" />
                     {% endif %}
                     <div class="zoom"></div>
                 </div>
-                {% if mo.image_set.all|length > 1 %}
+                {% if dlo.museumobject.image_set.all|length > 1 %}
                 <div class="thumbs">More images<br />
-                    {% for img in mo.image_set.all %}
+                    {% for img in dlo.museumobject.image_set.all %}
                         {% if forloop.counter > 1 and forloop.counter < 7 %}
                             {% thumbnail img.image_file "48x48" pad=True as im %}
                             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" data-caption="{{ img.caption }}" data-img-l="{% thumbnail img.image_file "540x540" pad=True as im_l %}{{ im_l.url }}{% endthumbnail %}" alt="" />
@@ -41,30 +41,30 @@
         </ul>
         
         <ul class="carousel" id="txt">
-            {% for mo in mobjects %}
-            <li class="{% if mo.gateway_object %}home {% endif %}txt obj">
+            {% for dlo in dlobjects %}
+            <li class="{% if dlo.gateway_object %}home {% endif %}txt obj">
                 <div class="mask"></div>
-                <div class="title"><h2>{{ mo.name }}</h2></div>
+                <div class="title"><h2>{{ dlo.museumobject.name }}</h2></div>
                 <div class="row">
                     <div class="txtl edged col">
                         <div class="pane">
                             <p>
                                <strong>
-                               {{ mo.date_text }}<br/>
-                               {{ mo.artist_maker }}<br/>
-                               {{ mo.restored_altered }}
+                               {{ dlo.museumobject.date_text }}<br/>
+                               {{ dlo.museumobject.artist_maker }}<br/>
+                               {{ dlo.museumobject.restored_altered }}
                                </strong>
                             </p>
                             <p>
-                                {{ mo.place|safe }} 
+                                {{ dlo.museumobject.place|safe }} 
                             </p>
-                            <p>{{ mo.materials_techniques|replace:'/-/&#8209;'|safe }}</p>
+                            <p>{{ dlo.museumobject.materials_techniques|replace:'/-/&#8209;'|safe }}</p>
                             <p>
-                                <em>{{ mo.credit_line|replace:'/-/&#8209;'|safe }}</em>{% if mo.credit_line|length > 0 %}<br/>{% endif %}
-                                <em>Museum no. {{ mo.museum_number }}</em>
+                                <em>{{ dlo.museumobject.credit_line|replace:'/-/&#8209;'|safe }}</em>{% if dlo.museumobject.credit_line|length > 0 %}<br/>{% endif %}
+                                <em>Museum no. {{ dlo.museumobject.museum_number }}</em>
                             </p>
                         </div>
-                        {% if mo.artfund %}
+                        {% if dlo.museumobject.artfund %}
                         <div class="bot col">
                             <div class="pane">
                                 <p class="artfund"><img src="{{STATIC_URL}}img/logo-artfund.png" alt="ArtFund"/></p>
@@ -73,7 +73,7 @@
                         {% endif %}
                     </div>
                     <div class="txtr col">
-                        <div class="pane">{{ mo.main_text|safe }}</div>
+                        <div class="pane">{{ dlo.museumobject.main_text|safe }}</div>
                         <div class="zoom"></div>
                     </div>
                 </div>

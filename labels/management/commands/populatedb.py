@@ -3,7 +3,7 @@ import urllib
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.utils import simplejson
-from labels.models import MuseumObject, DigitalLabel, Portal
+from labels.models import MuseumObject, DigitalLabel, Portal, DigitalLabelObject, PortalObject
 
 RECORDS = "O77488 O9253 O79056 O52823 O79053 O73631 O78977 O34066 O11451"
 
@@ -62,11 +62,15 @@ class Command(BaseCommand):
                                             object_number=object_number)
                 dl = dls[identifier]
                 if dl:
-                    # add object to portal if portal
+                    # create the relation to the Digital Label or the Portal
                     if dl._meta.object_name == 'DigitalLabel':
-                        mo.digitallabel = dl
+                        rel = DigitalLabelObject(museumobject=mo, digitallabel=dl)
                     else:
-                        mo.portal = dl
+                        rel = PortalObject(museumobject=mo, portal=dl)
+
+                    # save the relation
+                    rel.save()
+
                 mo.save()
             else:
                 print 'Unable to find "O" number for %s' % (identifier)
