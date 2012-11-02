@@ -41,7 +41,7 @@ Underneath the __Labels__ heading on the admin homepage are all the types of dat
 
 ## Objects and Digital Labels
 
-As many objects as possible have been ready-imported into the admin system. Portals and Digital Labels have been created in order to group these objects into screens for the gallery. If you click on the `Objects` link under the __Labels__ heading, you will see a list of objects, and columns containing some summary information and a link to which _Digtital Label_ or _Portal_ the object belongs.
+As many objects as possible have been ready-imported into the admin system. Portals and Digital Labels have been created in order to group these objects into screens for the gallery. If you click on the `Objects` link under the __Labels__ heading, you will see a list of objects, and columns containing some summary information and a link to which _Digital Label_ or _Portal_ the object belongs.
 
 Click the object image thumbnail or object number to edit the object details. These details have been pre-populated from the Search the Collections API. We have also downloaded all available images from VADAR and any previous label text that was available. 
 
@@ -88,9 +88,14 @@ We have tried to create as many Digital labels and Portals in advance as possibl
 
 On a Portal or Digital label admin screen,
 
-1. Click __Add another object__, under the _Objects_ heading.
-2. If you know the object to be in Search the Collections, please add the unique `O` number in the Object number box. Otherwise, create a title or name for the object in the _Name_ column
-3. Click `Save and continue editing` at the bottom of the page. You will now see a row under the _Objects_ heading for your new object.
+1. Click __Add another Digital Label Object__, under the _Digital label objects_ heading. A new row will appear.
+2. If you know that the object has already been added to the system, you will be able to find it in the pull-down menu on the new row. This allows you to share the same object record with multiple screens.
+3. Once you have selected the object from the pull-down menu, you can choose to make it the _Gateway object_ by clicking the radio button.
+4. Click `Save and continue editing` at the bottom of the page.
+5. If you would like to add a completely new object record to the system, you should click the blue plus next to the pull-down menu instead. A new window will pop up to allow you to create a new object.
+6. If you know the object to be in Search the Collections, please add the unique `O` number in the Object number box. Otherwise, create a title or name for the object in the _Name_ column
+3. Click `Save` at the bottom of the page. You will now see the new object has been automatically selected in the pull-down on the new row.
+4. Click `Save and continue editing` at the bottom of the page. This object is now part of the digital label or portal screen.
 4. Click the _No images_ link on the left of this row. Your image thumbnail will eventually appear here.
 5. You can now edit the main text and other fields for the label. Click `Save and continue editing` when you are done.
 6. You will also need to upload some images to associate with object using the __Add another image__ link on the page.
