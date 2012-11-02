@@ -100,6 +100,7 @@ class MuseumObjectAdmin(ResponseChange):
     save_on_top = True
     inlines = [
         CMSLabelInline,
+        ImageInline,
     ]
 
     class Media:
