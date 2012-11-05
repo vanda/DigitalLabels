@@ -1,4 +1,5 @@
 from sorl.thumbnail import get_thumbnail
+from labels.models import Image
 
 
 def get_api_data(sender, instance, **kwargs):
@@ -81,3 +82,11 @@ def create_thumbnails(sender, instance, **kwargs):
         im = get_thumbnail(instance.local_filename, '44x44',
                                                     quality=85, pad=True)
         return im
+
+
+def timeout_thumbnails(sender, instance, action, reverse, model, pk_set, **kwargs):
+
+    if action == "post_add":
+        if instance.timeout_images:
+            for image in instance.timeout_images.all():
+                im = get_thumbnail(image.local_filename, '1024x768', quality=85, pad=True)

@@ -376,10 +376,11 @@ class PortalTextLabel(BaseRelation):
         return self.textlabel
 
 
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save, post_save, m2m_changed
 from labels.signals import get_api_data, get_related_api_data, \
-                                                        create_thumbnails
+                            create_thumbnails, timeout_thumbnails
 
 pre_save.connect(get_api_data, MuseumObject)
 post_save.connect(get_related_api_data, MuseumObject)
 post_save.connect(create_thumbnails, Image)
+m2m_changed.connect(timeout_thumbnails, sender=BaseScreen.timeout_images.through)
