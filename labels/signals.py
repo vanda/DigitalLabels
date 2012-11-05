@@ -1,5 +1,4 @@
 from sorl.thumbnail import get_thumbnail
-from labels.models import Image
 
 
 def get_api_data(sender, instance, **kwargs):
