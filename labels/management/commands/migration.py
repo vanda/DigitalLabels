@@ -1,5 +1,7 @@
+import os, shutil
 from django.core.management.base import NoArgsCommand
 from django.db import connection, transaction
+from labels.models import Image
 
 
 class Command(NoArgsCommand):
@@ -62,11 +64,12 @@ class Command(NoArgsCommand):
 
         # handling the museum object duplicates
         numbs = []
+        del_pics = 0
         mos = cursor.execute('SELECT id, museum_number, digitallabel_id, portal_id FROM labels_museumobject')
         for obj in mos.fetchall():
             if obj[1] in numbs:
-                cursor.execute('DELETE FROM labels_museumobject WHERE id = %s;' % (obj[0]))
-                cursor.execute('DELETE FROM labels_image WHERE museumobject_id = %s;' % (obj[0]))
+
+                # updating the id of each duplicate object instance in the database 
                 if obj[2] is not None:
                     cursor.execute("""UPDATE `labels_digitallabelobject`
                     SET museumobject_id = (SELECT `id` FROM `labels_museumobject` WHERE `museum_number` = "%s" LIMIT 1)
@@ -75,9 +78,37 @@ class Command(NoArgsCommand):
                     cursor.execute("""UPDATE `labels_portalobject`
                     SET museumobject_id = (SELECT `id` FROM `labels_museumobject` WHERE `museum_number` = "%s" LIMIT 1)
                     WHERE `museumobject_id` = "%s";""" % (obj[1], obj[0]))
+
+                # deleting duplicate objects unused picture files
+                pics = cursor.execute('SELECT image_file FROM labels_image WHERE museumobject_id = %s;' % (obj[0]))
+                for pic in pics.fetchall():
+                    cursor.execute('SELECT id FROM labels_image WHERE image_file LIKE "%s" AND museumobject_id != %s;' % ("%%" + pic[0] + "%%", obj[0]))
+                    if cursor.fetchone() is None:
+                        os.remove('labelsite/media/%s' % (pic[0]))
+                        del_pics += 1
+
+                # deleting duplicate entries 
+                cursor.execute('DELETE FROM labels_museumobject WHERE id = %s;' % (obj[0]))
+                cursor.execute('DELETE FROM labels_image WHERE museumobject_id = %s;' % (obj[0]))
                 transaction.commit_unless_managed()
             numbs.append(obj[1])
         print "Museum Objects duplicates successfully merged"
+        print "%s unused duplicate objects pictures deleted" % (del_pics)
+
+        # handling the thumbnails re-creation
+        cursor.execute('DROP TABLE "thumbnail_kvstore";')
+        cursor.execute("""CREATE TABLE "thumbnail_kvstore" (
+            "key" varchar(200) NOT NULL PRIMARY KEY,
+            "value" text NOT NULL
+        );""")
+        transaction.commit_unless_managed()
+        shutil.rmtree('labelsite/media/cache/')
+        os.makedirs('labelsite/media/cache/')
+        print "Starting the thumbnail creation..."
+        for i in Image.objects.all():
+            i.save()
+        print "Thumbnails correctly created"
+
 
         # workaround for altering the museum objects table
         cursor.execute("""CREATE TEMPORARY TABLE "labels_museumobject_backup" (
