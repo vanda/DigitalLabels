@@ -59,7 +59,9 @@
     {% if kiosk_mode %}
         <div id="timeout">
             {% for ti in screen.timeout_images.all %}
-            <img class="timeout" src="{{MEDIA_URL}}{{ti.image_file}}" alt=""/>
+            	{% thumbnail ti.image_file "1024x768" pad=True as im %}
+            	<img class="timeout" src="{{ im.url }}" alt=""/>
+            	{% endthumbnail %}
             {% endfor %}
         </div>
     {% endif%}
