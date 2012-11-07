@@ -58,6 +58,10 @@ MEDIA_ROOT = BASE_PATH + '/media/'
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
 
+# Absolute filesystem path to the directory that will hold thumbnail files.
+# Example: "/home/media/media.lawrence.com/media/cache/"
+MEDIA_CACHE_ROOT = BASE_PATH + '/media/cache/'
+
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
