@@ -44,15 +44,16 @@ class Command(BaseCommand):
 
         # COPY FILES
         copy_tree(settings.STATIC_ROOT, static_build_dir)
-        copy_tree(os.path.join(settings.MEDIA_ROOT), media_build_dir)
+        copy_tree(os.path.join(settings.MEDIA_CACHE_ROOT), media_build_dir)
 
     def save_html(self, screen, destination):
         cl = Client()
         page_html = cl.get('/%s/%d/' % (screen.model_name, screen.pk)).content
 
         # make img, css and js links relative
-        page_html = page_html.replace('data-img-l="/', 'data-img-l="./'
+        page_html = page_html.replace('data-img-l="/media/cache/', 'data-img-l="./media/'
                             ).replace('src="/', 'src="./'
+                            ).replace('src="./media/cache/', 'src="./media/'
                             ).replace('href="/', 'href="./')
 
         dest_abspath = os.path.abspath(destination)
