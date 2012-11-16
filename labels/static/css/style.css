@@ -11,6 +11,7 @@
 	-webkit-column-gap: 0.5em;
 	column-count: 2;
 	column-gap: 0.5em;
+	column-fill: auto;
 	-moz-column-rule: 1px solid #b5b5b5;
 	-webkit-column-rule: 1px solid #b5b5b5;
 	column-rule: 1px solid #b5b5b5;
