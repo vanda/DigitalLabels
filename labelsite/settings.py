@@ -129,14 +129,14 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'labels',
-    'reversion',
-    'sorl.thumbnail',
     'grappelli',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'reversion',
+    'labels',
+    'sorl.thumbnail',
 )
 
 INTERNAL_IPS = ('127.0.0.1', '79.125.15.191', '10.58.165.127', '193.62.214.1',)
