@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+import reversion
 from sorl.thumbnail.admin import AdminImageMixin
 from labels.filters import PortalListFilter
 from labels.forms import EditMuseumObjectForm
@@ -48,7 +49,7 @@ class PortalTextLabel(RelationInline):
     custom_radio = "biography"
 
 
-class PortalAdmin(admin.ModelAdmin):
+class PortalAdmin(reversion.VersionAdmin):
     list_display = ('id', 'name', '_Labels', '_Objects')
     list_display_links = ('id', 'name',)
     search_fields = ['name']
@@ -60,7 +61,7 @@ class PortalAdmin(admin.ModelAdmin):
     ]
 
 
-class DigitalLabelAdmin(admin.ModelAdmin):
+class DigitalLabelAdmin(reversion.VersionAdmin):
     list_display = ('id', 'name', '_Objects')
     list_display_links = ('id', 'name',)
     search_fields = ['name']
@@ -71,7 +72,7 @@ class DigitalLabelAdmin(admin.ModelAdmin):
     ]
 
 
-class ResponseChange(admin.ModelAdmin):
+class ResponseChange(reversion.VersionAdmin):
     def response_change(self, request, obj):
         global referrer_model
         referrer_model = request.GET.get('referrer')
@@ -128,7 +129,7 @@ class TextLabelAdmin(ResponseChange):
         ]
 
 
-class ImageAdmin(AdminImageMixin, admin.ModelAdmin):
+class ImageAdmin(AdminImageMixin, reversion.VersionAdmin):
     list_display = ('thumb', 'caption', 'object_link', 'label_link',)
     list_display_links = ('thumb',)
     list_selected_related = True
