@@ -4,27 +4,33 @@ V&A Digital Labels
 
 The Django application currently has the following requirements:
 
-django 1.4 https://github.com/django/django
-django-reversion https://github.com/etianen/django-reversion
-sorl-thumbnail https://github.com/sorl/sorl-thumbnail
-django-grappelli https://github.com/sehmaschine/django-grappelli [branch grappelli_2_4]
+* django 1.4 https://github.com/django/django
+* django-reversion https://github.com/etianen/django-reversion
+* sorl-thumbnail https://github.com/sorl/sorl-thumbnail
+* django-grappelli https://github.com/sehmaschine/django-grappelli [branch grappelli_2_4]
 
 Collate the static files by running:
+
     python manage.py collectstatic
 
 Create the database tables. This will also create superusers for staff.
+
     python manage.py syncdb
 
 Then populate it with some test data (a fake Chippendale display)
+
     python manage.py populatedb
     
 …or with the included CSV look up (builds portals and digitallabels)
+
     python manage.py populatedb labels/data/objects_labels.csv  
     
 Run tests by running:
+
     python manage.py test labels --settings=labelsite.settings_build
 	 
 You can then create a static build of all digital labels and portals:
+
     python manage.py build --settings=labelsite.settings_build -o /Output/Directory
 
 # Digital Labels User Documentation

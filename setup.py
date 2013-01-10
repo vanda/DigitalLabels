@@ -11,5 +11,5 @@ setup(
     url='https://github.com/vanda/DigitalLabels',
     license='BSD licence, see LICENCE.txt',
     description='Provides backend and interface for interactive museum labels',
-    long_description=open('README').read(),
+    long_description=open('README.md').read(),
 )
