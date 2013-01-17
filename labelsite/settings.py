@@ -179,7 +179,7 @@ LOGGING = {
 
 GRAPPELLI_ADMIN_TITLE = "V&A Digital Labels Administration"
 
-MEDIA_COLLECTIONS_API_MEDIA_SERVERSERVER = 'media.vam.ac.uk'
+COLLECTIONS_API_MEDIA_SERVER = 'media.vam.ac.uk'
 COLLECTIONS_API_HOSTNAME = 'indigo.vam.ac.uk'
 KIOSK_MODE = False
 THUMBNAIL_ENGINE = 'labels.thumbs.PadEngine'
