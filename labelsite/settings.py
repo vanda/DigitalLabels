@@ -1,5 +1,6 @@
 # Django settings for V&A Digital Labels project.
 
+# Useful variable for quick local setup
 import os
 BASE_PATH = os.path.dirname(__file__)
 
@@ -178,7 +179,8 @@ LOGGING = {
 
 GRAPPELLI_ADMIN_TITLE = "V&A Digital Labels Administration"
 
-MEDIA_SERVER = 'media.vam.ac.uk'
+MEDIA_COLLECTIONS_API_MEDIA_SERVERSERVER = 'media.vam.ac.uk'
 COLLECTIONS_API_HOSTNAME = 'indigo.vam.ac.uk'
 KIOSK_MODE = False
 THUMBNAIL_ENGINE = 'labels.thumbs.PadEngine'
+

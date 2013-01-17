@@ -12,6 +12,18 @@ from sorl.thumbnail import ImageField, get_thumbnail
 # Create your models here.
 # import the logging library
 
+
+if hasattr(settings, 'COLLECTIONS_API_HOSTNAME'):
+    COLLECTIONS_API_HOSTNAME = settings.COLLECTIONS_API_HOSTNAME
+else:
+    COLLECTIONS_API_HOSTNAME = 'www.vam.ac.uk'
+
+if hasattr(settings, 'MEDIA_SERVER'):
+   COLLECTIONS_API_MEDIA_SERVER = settings.COLLECTIONS_API_MEDIA_SERVER
+else:
+    COLLECTIONS_API_MEDIA_SERVER = 'media.vam.ac.uk'
+
+
 # Get an instance of a logger
 logger = logging.getLogger('labels')
 
@@ -140,7 +152,7 @@ class MuseumObject(BaseLabel):
 
         if self._museumobject_json == None and self.object_number:
             item_url = 'http://%s/api/json/museumobject/%s/' % (
-                                        settings.COLLECTIONS_API_HOSTNAME,
+                                        COLLECTIONS_API_HOSTNAME,
                                         self.object_number)
             try:
                 response = urllib2.urlopen(item_url)
@@ -291,7 +303,7 @@ class Image(models.Model):
             raise Exception('No Image ID set')
 
     def store_vadar_image(self):
-        #create the url and the request
+        # create the url and the request
         image_url = 'http://%s/media/thira/collection_images/%s/%s.jpg' % \
                      (settings.MEDIA_SERVER, self.image_id[:6], self.image_id)
         req = urllib2.Request(image_url)
@@ -304,14 +316,14 @@ class Image(models.Model):
             if meta.type == 'image/jpeg':
                 # Open our local file for writing
                 local_file = open(self.local_vadar_filename, "wb")
-                #Write to our local file
+                # Write to our local file
                 local_file.write(f.read())
                 local_file.close()
                 return True
             else:
                 logging.error("Image Error: Wrong type %s" % (meta.type))
                 return False
-        #handle errors
+        # handle errors
         except urllib2.HTTPError, e:
             logging.error("HTTP Error: %s %s" % (e.code, image_url))
             self.image_file = None
