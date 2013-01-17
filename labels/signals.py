@@ -86,6 +86,6 @@ def create_thumbnails(sender, instance, **kwargs):
 def timeout_thumbnails(sender, instance, action, reverse, model, pk_set, **kwargs):
 
     if action == "post_add":
-        if instance.timeout_images:
+        if hasattr(instance, "timeout_images") and instance.timeout_images:
             for image in instance.timeout_images.all():
                 im = get_thumbnail(image.local_filename, '1024x768', quality=85, pad=True)

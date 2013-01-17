@@ -175,18 +175,26 @@ class DLabelTest(TestCase):
     def test_timeout_images(self):
         mo = MuseumObject()
         mo.object_number = 'O321535'
-        mo.digitallabel = DigitalLabel.objects.get(id=1)
         mo.save()
+        
+        #bind the object to the Digital Label
+        rel = DigitalLabelObject(museumobject=mo, digitallabel=DigitalLabel.objects.get(id=1),
+                                 gateway_object=True)        
+        rel.save()
 
         response = self.client.get('/digitallabel/1/')
         self.assertNotContains(response, '<img class="timeout"', 200)
 
         dl = DigitalLabel.objects.get(id=1)
         dl.timeout_images.add(Image.objects.get(id=1))
-
+        dl.save()
+        from django.conf import settings
         response = self.client.get('/digitallabel/1/')
-        self.assertContains(response, '<img class="timeout"', 1, 200)
 
+        if settings.KIOSK_MODE:
+            self.assertContains(response, '<img class="timeout"', 1, 200)
+        else:
+            self.assertNotContains(response, '<img class="timeout"', 200)
 
 class PortalTest(TestCase):
 
