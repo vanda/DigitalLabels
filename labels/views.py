@@ -5,6 +5,11 @@ from labels.models import DigitalLabel, Portal
 from django.conf import settings
 
 
+if hasattr(settings, "KIOSK_MODE"):
+    KIOSK_MODE = settings.KIOSK_MODE
+else:
+    KIOSK_MODE = False
+
 def digitallabel(request, digitallabel_id, objectid=None, pos=None):
     dl = DigitalLabel.objects.get(id=digitallabel_id)
     dlobjects = dl.digitallabelobject_set.all().order_by('position')
@@ -15,7 +20,7 @@ def digitallabel(request, digitallabel_id, objectid=None, pos=None):
     t = loader.get_template('digitallabel.html')
     c = RequestContext(request, {'dlobjects': dlobjects, 'screen': dl,
                                  'objectid': objectid, 'pos': pos,
-                                 'kiosk_mode': settings.KIOSK_MODE})
+                                 'kiosk_mode': KIOSK_MODE})
     return HttpResponse(t.render(c))
 
 
@@ -33,7 +38,7 @@ def portal(request, portal_id, objectid=None, labelid=None, pos=None):
     c = RequestContext(request, {'ptlabels': ptlabels, 'ptobjects': ptobjects,
                                  'screen': pt, 'labelid': labelid,
                                  'objectid': objectid, 'pos': pos,
-                                 'kiosk_mode': settings.KIOSK_MODE})
+                                 'kiosk_mode': KIOSK_MODE})
     return HttpResponse(t.render(c))
 
 
