@@ -305,7 +305,7 @@ class Image(models.Model):
     def store_vadar_image(self):
         # create the url and the request
         image_url = 'http://%s/media/thira/collection_images/%s/%s.jpg' % \
-                     (settings.MEDIA_SERVER, self.image_id[:6], self.image_id)
+                     (COLLECTIONS_API_MEDIA_SERVER, self.image_id[:6], self.image_id)
         req = urllib2.Request(image_url)
 
         # Open the url
