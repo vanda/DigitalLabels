@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <link rel="apple-touch-icon" href="http://www.vam.ac.uk/__data/assets/image/0008/173609/favicon_130.png" />
     <link rel="apple-touch-startup-image" href="http://www.vam.ac.uk/__data/assets/image/0018/173610/favicon_1024.png" />
+    <link rel="shortcut icon" href="http://www.vam.ac.uk/__data/assets/file/0008/172358/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/reset.css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/base.css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css" media="all" />
@@ -19,8 +20,8 @@
     <script type="text/javascript">
         // add Google tracking code if served on a vam.ac.uk domain
         var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-000000-00']);
-        _gaq.push(['_setDomainName', 'example.com']);
+        _gaq.push(['_setAccount', 'UA-376941-10']);
+        _gaq.push(['_setDomainName', 'vam.ac.uk']);
         _gaq.push(['_trackPageview']);
         (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -28,14 +29,14 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
     </script>
-    <title>{% if screen %}{{screen.name}}{% else %}Digital Labels{% endif %}</title>
+    <title>{% if screen %}{{screen.name}}{% else %}V&amp;A Labels{% endif %}</title>
 </head>
 
 <body{% block body_class %}{% endblock %}>
 
     {% block content %}
     <div id="index">
-        <h1>Digital Labels</h1>
+        <h1>V&amp;A Digital Labels</h1>
         {% if labels %}
         <ul>
             {% for l in labels %}
