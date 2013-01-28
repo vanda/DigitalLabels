@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Digitallabels by vanda</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Digitallabels</h1>
+        <p class="header">Django app to generate an interactive gallery label interface, optimised for touch screens and tablets.</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/vanda/DigitalLabels/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/vanda/DigitalLabels/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/vanda/DigitalLabels">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/vanda">vanda</a></p>
+
+
+      </header>
+      <section>
+        <h1>V&amp;A Digital Labels</h1>
+
+<h2>Installation</h2>
+
+<p>Check out <a href="https://github.com/vanda/DigitalLabels/wiki/Digital-Labels-Installation">these wise words</a></p>
+
+<h2>Requirements</h2>
+
+<p>If you follow the installation instructions above, these requirements should automatically be satifisfied.</p>
+
+<p>The Django application currently has the following requirements:</p>
+
+<ul>
+<li>django 1.4 <a href="https://github.com/django/django">https://github.com/django/django</a>
+</li>
+<li>django-reversion <a href="https://github.com/etianen/django-reversion">https://github.com/etianen/django-reversion</a>
+</li>
+<li>sorl-thumbnail <a href="https://github.com/sorl/sorl-thumbnail">https://github.com/sorl/sorl-thumbnail</a>
+</li>
+<li>django-grappelli <a href="https://github.com/sehmaschine/django-grappelli">https://github.com/sehmaschine/django-grappelli</a> [branch grappelli_2_4]</li>
+</ul><h2>Quick Commands</h2>
+
+<p>Collate the static files by running:</p>
+
+<pre><code>python manage.py collectstatic
+</code></pre>
+
+<p>Create the database tables. This will also create superusers for staff.</p>
+
+<pre><code>python manage.py syncdb
+</code></pre>
+
+<p>Then populate it with some test data (a fake Chippendale display)</p>
+
+<pre><code>python manage.py populatedb
+</code></pre>
+
+<p>…or with the included CSV look up (builds portals and digitallabels)</p>
+
+<pre><code>python manage.py populatedb labels/data/objects_labels.csv  
+</code></pre>
+
+<p>Run tests by running:</p>
+
+<pre><code>python manage.py test labels --settings=labelsite.settings_build
+</code></pre>
+
+<p>You can then create a static build of all digital labels and portals:</p>
+
+<pre><code>python manage.py build --settings=labelsite.settings_build -o /Output/Directory
+</code></pre>
+
+<h1>Digital Labels User Documentation</h1>
+
+<h2>Users</h2>
+
+<p>Admin users can be created by clicking <code>Users</code> under the <strong>Auth</strong> heading on the admin homepage. Click the <strong>Add User</strong> button in the top right, provide a username and password then <strong>Save</strong>.</p>
+
+<p>You will then be prompted to add permissions for this user. This is necessary to enable them to create and edit content. The main tasks here are to grant the user <em>Staff status</em> using the checkbox, so they can log in. The <em>User permissions</em> box lists all the types of data that the user can change, add or delete. Shift-select all those rows beginning with <code>label |</code> and move them to the right box using the arrows provided. Save this page to make this user active.</p>
+
+<h2>Editable Content</h2>
+
+<p>Underneath the <strong>Labels</strong> heading on the admin homepage are all the types of data we can edit and create. The 2 most important items are the <em>Digital labels</em> and the <em>Portals</em>. These represent the screens in the galleries. <em>Digital labels</em> screens are made up of <em>Objects</em>; <em>Portals</em> screens are made up of both <em>Objects</em> and <em>Text labels</em>. The <em>Objects</em> represent a typical label for each physical object; the <em>Text labels</em> perform the role of biographies or historical context for the <em>Portals</em>. <em>Images</em> are shared between <em>Objects</em> and <em>Text labels</em>; whilst also providing time-out screens. Essentially, there is one pool of images.</p>
+
+<h2>Objects and Digital Labels</h2>
+
+<p>As many objects as possible have been ready-imported into the admin system. Portals and Digital Labels have been created in order to group these objects into screens for the gallery. If you click on the <code>Objects</code> link under the <strong>Labels</strong> heading, you will see a list of objects, and columns containing some summary information and a link to which <em>Digital Label</em> or <em>Portal</em> the object belongs.</p>
+
+<p>Click the object image thumbnail or object number to edit the object details. These details have been pre-populated from the Search the Collections API. We have also downloaded all available images from VADAR and any previous label text that was available. </p>
+
+<p>If label texts were available in Search the Collections, the most recent is added to the <em>Main text</em> field. Any other label texts are available lower down the page under the <em>Cms labels</em> heading.</p>
+
+<p><em>Main text</em> is what appears on the right-hand side of the label. The other fields, including <em>Place</em> and <em>Artist maker</em> are arranged on the left-hand side of the label.</p>
+
+<p><em>Gateway object</em>: this check box colours the label blue and the <em>Digital Label</em> screen will start on this object.</p>
+
+<p><em>Artfund</em>: There is a checkbox to display and Artfund logo. </p>
+
+<p><em>Images</em>: These images are collected from VADAR and Search the Collections. They can be deleted and replaced with different and new examples. </p>
+
+<ul>
+<li>The contents of the <strong>Caption</strong> field is displayed underneath the image in their "pop-up" form on the screen.</li>
+<li>To change the order in which object images appear on the label, you can grab hold of the diamond-shaped icon on the right of the image row and drag the image to change its position. The first image in the list is the main image for the object label on the screen.</li>
+<li>To remove an image altogether, click the cross on the right of the image row. The row will turn pink; this image is marked for deletion. The image will be removed when you <em>Save</em> this screen using one of the buttons at the bottom of the page.</li>
+</ul><p><em>Cms labels</em>: These are labels that have been written for previous displays and exhibitions, extracted from CMS. They might assist you in writing the <em>Main text</em>.</p>
+
+<h2>Text labels and Portals</h2>
+
+<p><em>Portals</em> are a mixture of object labels and text labels. Text labels have a <em>Title</em>,  one <em>Image</em> and a some body text. You can mark one <em>Text label</em> as a <strong>Biography</strong>. A <em>Portal</em> screen will start on the <em>Text label</em> marked as <strong>Biography</strong>.  This label will be coloured blue and the text in the label will be arranged in a single column. Other <em>Text labels</em> will have their text arranged in two columns.</p>
+
+<p>You can choose the <strong>Biography</strong> whilst you're on a <em>Portal</em> admin screen.</p>
+
+<h2>Adding new Text labels to a Portal screen</h2>
+
+<p>Whilst you're administrating a Portal, you'll need to create the biographies and historical contexts. To do this,</p>
+
+<ol>
+<li>Click <strong>Add another Text label</strong>, under the <em>Text labels</em> heading.</li>
+<li>Write a title for your Text label, e.g. <em>Frank LLoyd Wright</em> or <em>Historical Context</em>. This text will appear above the image on the screen in the gallery. Use the Preview link at the top of the page to check.</li>
+<li>Click <code>Save and continue editing</code> at the bottom of the page. You will now see a row under the <em>Text labels</em> heading for your new text label.</li>
+<li>Click the <em>No images</em> link on the left of this row. Your image thumbnail will eventually appear here.</li>
+<li>You can now edit the main text for the label in the large text box. Click <code>Save and continue editing</code> when you are done.</li>
+<li>You will also need to upload an image to associate with the label using the <strong>Add another image</strong> link on the page.</li>
+<li>The <em>Caption</em> field is the text that will appear beneath the "zoomed" version when the image is touched in the gallery.</li>
+<li>Click <code>Choose file</code> to upload a picture from you computer. Images should be under 2MB in size and have a <code>.png</code> or <code>.jpg</code> extension.</li>
+<li>To change the order in which these labels appear on the gallery screen, you can grab hold of the diamond-shaped icon on the right of the row and drag the image to change its position in the "carousel".</li>
+<li>You can <code>Preview</code> the whole Portal at any time by using the <code>Preview</code> button at the top of the admin screen.</li>
+</ol><h2> Adding new Object labels to a Portal or Digital label</h2>
+
+<p>We have tried to create as many Digital labels and Portals in advance as possible but there may be objects that are not available to Search the Collections (which is where the data comes from). In these cases, the object information will need to be manually added and images uploaded.</p>
+
+<p>On a Portal or Digital label admin screen,</p>
+
+<ol>
+<li>Click <strong>Add another Digital Label Object</strong>, under the <em>Digital label objects</em> heading. A new row will appear.</li>
+<li>If you know that the object has already been added to the system, you will be able to find it in the pull-down menu on the new row. This allows you to share the same object record with multiple screens.</li>
+<li>Once you have selected the object from the pull-down menu, you can choose to make it the <em>Gateway object</em> by clicking the radio button.</li>
+<li>Click <code>Save and continue editing</code> at the bottom of the page.</li>
+<li>If you would like to add a completely new object record to the system, you should click the blue plus next to the pull-down menu instead. A new window will pop up to allow you to create a new object.</li>
+<li>If you know the object to be in Search the Collections, please add the unique <code>O</code> number in the Object number box. Otherwise, create a title or name for the object in the <em>Name</em> column</li>
+<li>Click <code>Save</code> at the bottom of the page. You will now see the new object has been automatically selected in the pull-down on the new row.</li>
+<li>Click <code>Save and continue editing</code> at the bottom of the page. This object is now part of the digital label or portal screen.</li>
+<li>Click the <em>No images</em> link on the left of this row. Your image thumbnail will eventually appear here.</li>
+<li>You can now edit the main text and other fields for the label. Click <code>Save and continue editing</code> when you are done.</li>
+<li>You will also need to upload some images to associate with object using the <strong>Add another image</strong> link on the page.</li>
+<li>The <em>Caption</em> field is the text that will appear beneath the "zoomed" version when the image is touched in the gallery.</li>
+<li>Click <code>Choose file</code> to upload a picture from you computer. Images should be under 2MB in size and have a <code>.png</code> or <code>.jpg</code> extension.</li>
+<li>To change the order in which objects appear on the gallery screen, you can grab hold of the diamond-shaped icon on the right of the row and drag the image to change its position in the "carousel".</li>
+<li>You can <code>Preview</code> the whole Digital label or  Portal at any time by using the <code>Preview</code> button at the top of the admin screen.</li>
+</ol>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
