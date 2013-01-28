@@ -1,13 +1,13 @@
-body { color:#292728; font:13.5px/1.184 "V&A TheSansLightPlain",arial,helvetica,freesans,sans-serif; }
+body { color:#292728; font:13.5px/1.184 Helvetica,Arial,freesans,sans-serif; }
 body.portal { background-color:#57565b; }
 img { vertical-align:bottom; }
 p, ol, ul { margin-bottom:1em; }
 a { color:#292728; text-decoration:underline; }
 a:active { color:#000; text-decoration:none; }
-h1, h2 { font-family:"V&A TheSansExtraBoldPlain",arial,helvetica,freesans,sans-serif; font-size:171.43%; font-weight:normal; line-height:1.1em; }
-strong { font-family:"V&A TheSansSemiBoldPlain",arial,helvetica,freesans,sans-serif; font-size:121.43%; font-weight:normal; line-height:1.2em;}
+h1, h2 { font-family:Helvetica,Arial,freesans,sans-serif; font-size:171.43%; font-weight:normal; line-height:1.1em; }
+strong { font-family:Helvetica,Arial,freesans,sans-serif; font-size:121.43%; font-weight:normal; line-height:1.2em;}
 abbr, acronym { border-bottom:1px dotted #b5b5b5; } 
-em { font-size:103.57%; font-style:italic; font-family:"V&A TheSansLightItalic",arial,helvetica,freesans,sans-serif; }
+em { font-size:103.57%; font-style:italic; font-family:Helvetica,Arial,freesans,sans-serif; }
 small, sub, sup { font-size:85%; }
 sub, sup { position:relative; vertical-align:baseline; }
 sub { bottom:-0.3em; }
