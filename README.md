@@ -2,12 +2,21 @@
 V&A Digital Labels
 ==================
 
+## Installation
+
+Check out [these wise words](https://github.com/vanda/DigitalLabels/wiki/Digital-Labels-Installation)
+
+## Requirements
+
+If you follow the installation instructions above, these requirements should automatically be satifisfied.
 The Django application currently has the following requirements:
 
 * django 1.4 https://github.com/django/django
 * django-reversion https://github.com/etianen/django-reversion
 * sorl-thumbnail https://github.com/sorl/sorl-thumbnail
 * django-grappelli https://github.com/sehmaschine/django-grappelli [branch grappelli_2_4]
+
+## Quick Commands
 
 Collate the static files by running:
 
