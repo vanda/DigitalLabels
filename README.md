@@ -9,6 +9,7 @@ Check out [these wise words](https://github.com/vanda/DigitalLabels/wiki/Digital
 ## Requirements
 
 If you follow the installation instructions above, these requirements should automatically be satifisfied.
+
 The Django application currently has the following requirements:
 
 * django 1.4 https://github.com/django/django
